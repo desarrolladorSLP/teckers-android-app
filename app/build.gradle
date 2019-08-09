@@ -19,6 +19,12 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', "ApiKey", TeckersAppApiKey
+            resValue 'string', "api_key", TeckersAppApiKey
+        }
+        debug {
+            buildConfigField 'String', "ApiKey", TeckersAppApiKey
+            resValue 'string', "api_key", TeckersAppApiKey
         }
     }
 }
@@ -36,8 +42,6 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:18.1.0'
     implementation 'com.google.android.gms:play-services-auth:17.0.0'
     implementation 'com.google.android.material:material:1.0.0'
-    implementation 'com.firebaseui:firebase-ui-auth:0.4.1'
-
-
+    implementation 'com.firebaseui:firebase-ui-auth:4.3.1'
 }
 apply plugin: 'com.google.gms.google-services'
