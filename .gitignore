@@ -202,4 +202,7 @@ fabric.properties
 # Google services
 app/google-services.json
 
+#Images
+app/src/main/res/drawable/teckerslogo.png
+
 # End of https://www.gitignore.io/api/android,androidstudio
