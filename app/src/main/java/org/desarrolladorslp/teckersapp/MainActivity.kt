@@ -105,9 +105,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     val user = auth.currentUser
+                    setProfileInformation(acct)
                     updateUI(user)
                 } else {
-                    // If sign in fails, display a message to the user.
                     Snackbar.make(main_layout, "Authentication Failed.", Snackbar.LENGTH_SHORT).show()
                     updateUI(null)
                 }
@@ -115,21 +115,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             }
     }
 
-    private fun getProfileInformation(acct: GoogleSignInAccount?){
-        //if account is not null fetch the information
+    private fun setProfileInformation(acct: GoogleSignInAccount?){
 
         if (acct != null) {
-
-            //user.nameUser = acct.displayName
-            //user.givenName = acct.givenName
-            //user.familyName = acct.familyName
-            //user.email = acct.email
-            //user.id= acct.id
-            //user.photoUrl = acct.photoUrl
-
-
+            user = User(acct)
         }
     }
+
+
 
     override fun onClick(v: View) {
         val i = v.id
