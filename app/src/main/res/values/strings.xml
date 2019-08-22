@@ -2,5 +2,6 @@
     <string name="app_name">Teckers App</string>
     <string name="text">Text</string>
     <string name="logOut">Log Out</string>
+    <string name="title_activity_home">home</string>
 
 </resources>
