@@ -3,7 +3,6 @@ package org.desarrolladorslp.teckersapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.util.Log
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -18,14 +17,18 @@ import com.google.android.gms.common.api.ApiException
 import kotlinx.android.synthetic.main.activity_main.main_layout
 import kotlinx.android.synthetic.main.activity_main.signInButton
 import kotlinx.android.synthetic.main.activity_main.signOutButton
+import org.desarrolladorslp.teckersapp.model.User
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
     private var googleSignInButton: SignInButton? = null
+    private var profile:GoogleSignInAccount? = null
 
     val googleAuthClientId: String = BuildConfig.ApiKey
+    private lateinit var user :User
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -35,7 +38,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         googleSignInButton = findViewById(R.id.signInButton);
 
         var gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(googleAuthClientId)
+            .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
         googleSignInClient = GoogleSignIn.getClient(this, gso);
@@ -102,15 +105,24 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     val user = auth.currentUser
+                    setProfileInformation(acct)
                     updateUI(user)
                 } else {
-                    // If sign in fails, display a message to the user.
                     Snackbar.make(main_layout, "Authentication Failed.", Snackbar.LENGTH_SHORT).show()
                     updateUI(null)
                 }
 
             }
     }
+
+    private fun setProfileInformation(acct: GoogleSignInAccount?){
+
+        if (acct != null) {
+            user = User(acct)
+        }
+    }
+
+
 
     override fun onClick(v: View) {
         val i = v.id
