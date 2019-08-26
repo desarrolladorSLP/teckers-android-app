@@ -3,5 +3,9 @@
     <string name="text">Text</string>
     <string name="logOut">Log Out</string>
     <string name="title_activity_home">home</string>
+    <string name="title_activity_homemenu">homemenu</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 
 </resources>
