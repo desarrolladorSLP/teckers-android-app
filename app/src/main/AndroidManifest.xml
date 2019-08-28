@@ -10,10 +10,10 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity
-                android:name=".homemenu"
+                android:name=".HomeMenu"
                 android:label="@string/title_activity_homemenu"></activity>
         <activity
-                android:name=".home"
+                android:name=".Home"
                 android:label="@string/title_activity_home"
                 android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".MainActivity">
