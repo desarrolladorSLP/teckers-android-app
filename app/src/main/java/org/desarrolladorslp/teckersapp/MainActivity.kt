@@ -75,8 +75,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private fun updateUI(user: FirebaseUser?) {
         if(user!=null)
         {
-            signInButton.visibility = View.GONE
-            signOutButton.visibility = View.VISIBLE
+            val intent = Intent(this, NavigationMenu::class.java)
+            startActivity(intent)
         }
         else{
             signInButton.visibility = View.VISIBLE
