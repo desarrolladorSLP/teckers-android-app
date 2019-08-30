@@ -1,13 +1,13 @@
-package org.desarrolladorslp.teckersapp.ui.home
+package org.desarrolladorslp.teckersapp.ui.messages
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class HomeViewModel : ViewModel() {
+class MessageViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
+        value = "This is message Fragment"
     }
     val text: LiveData<String> = _text
 }
