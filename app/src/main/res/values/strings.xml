@@ -3,8 +3,9 @@
     <string name="text">Text</string>
     <string name="logOut">Log Out</string>
     <string name="title_messages">Messages</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_teams">Teams</string>
+    <string name="title_deliverables">Deliverables</string>
+    <string name="title_sessions">Sessions</string>
     <string name="title_activity_navigationmenu">NavigationMenu</string>
 
 </resources>
