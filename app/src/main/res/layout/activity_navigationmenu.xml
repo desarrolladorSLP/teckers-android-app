@@ -5,8 +5,8 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="?attr/actionBarSize">
-
+        android:paddingTop="?attr/actionBarSize"
+        >
 
     <androidx.appcompat.widget.Toolbar
             android:id="@+id/my_toolbar"
@@ -19,10 +19,9 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintVertical_bias="0.11"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             tools:ignore="MissingConstraints">
-
         <ImageView
                 android:id="@+id/logoTeckers"
                 android:layout_width="wrap_content"
@@ -37,6 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="0dp"
             android:layout_marginEnd="0dp"
+            app:labelVisibilityMode="labeled"
             android:background="?android:attr/windowBackground"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -46,15 +46,14 @@
     <fragment
             android:id="@+id/nav_host_fragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
-            android:layout_width="421dp"
-            android:layout_height="487dp"
+            android:layout_width="409dp"
+            android:layout_height="554dp"
             app:defaultNavHost="true"
             app:layout_constraintBottom_toTopOf="@id/nav_view"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"
-            app:navGraph="@navigation/mobile_navigation"
-            tools:layout="@layout/fragment_messages" />
+            app:navGraph="@navigation/mobile_navigation" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
