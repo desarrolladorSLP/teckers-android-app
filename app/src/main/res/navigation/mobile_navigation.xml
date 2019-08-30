@@ -6,13 +6,13 @@
         app:startDestination="@+id/navigation_messages">
 
     <fragment
-            android:id="@+id/navigation_message"
+            android:id="@+id/navigation_messages"
             android:name="org.desarrolladorslp.teckersapp.ui.messages.MessageFragment"
             android:label="@string/title_messages"
             tools:layout="@layout/fragment_messages" />
 
     <fragment
-            android:id="@+id/navigation_dashboard"
+            android:id="@+id/navigation_deliverables"
             android:name="org.desarrolladorslp.teckersapp.ui.deliverables.DeliverableFragment"
             android:label="@string/title_deliverables"
             tools:layout="@layout/fragment_deliverables" />
