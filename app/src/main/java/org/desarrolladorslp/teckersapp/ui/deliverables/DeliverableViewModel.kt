@@ -1,13 +1,13 @@
-package org.desarrolladorslp.teckersapp.ui.notifications
+package org.desarrolladorslp.teckersapp.ui.deliverables
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class NotificationsViewModel : ViewModel() {
+class DeliverableViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is notifications Fragment"
+        value = "This is deliverables Fragment"
     }
     val text: LiveData<String> = _text
 }
