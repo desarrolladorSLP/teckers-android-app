@@ -22,10 +22,7 @@ class SessionFragment : Fragment() {
         sessionViewModel =
             ViewModelProviders.of(this).get(SessionViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_sessions, container, false)
-        val textView: TextView = root.findViewById(R.id.text_sessions)
-        sessionViewModel.text.observe(this, Observer {
-            textView.text = it
-        })
+
         return root
     }
 }

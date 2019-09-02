@@ -22,10 +22,7 @@ class TeamFragment : Fragment() {
         teamViewModel =
             ViewModelProviders.of(this).get(TeamViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_teams, container, false)
-        val textView: TextView = root.findViewById(R.id.text_teams)
-        teamViewModel.text.observe(this, Observer {
-            textView.text = it
-        })
+
         return root
     }
 }
