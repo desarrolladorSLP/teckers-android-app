@@ -7,5 +7,9 @@
     <string name="title_deliverables">Deliverables</string>
     <string name="title_sessions">Sessions</string>
     <string name="title_activity_navigationmenu">NavigationMenu</string>
+    <string name="imageDescription">SenderImage</string>
+    <string name="text_sender">Sender</string>
+    <string name="text_timestamp">Timestamp</string>
+    <string name="text_subject">Subject</string>
 
 </resources>
