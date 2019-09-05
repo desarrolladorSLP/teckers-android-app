@@ -9,7 +9,7 @@
         tools:showIn="@layout/fragment_messages"
         tools:context="org.desarrolladorslp.teckersapp.ui.messages.MessageFragment" >
 
-    <RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/highPriorityList"
             android:layout_width="match_parent"
             android:layout_height="561dp" />
