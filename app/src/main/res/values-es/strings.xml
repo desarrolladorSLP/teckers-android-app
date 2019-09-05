@@ -4,4 +4,6 @@
     <string name="title_teams">Equipos</string>
     <string name="title_deliverables">Entregables</string>
     <string name="title_sessions">Sesiones</string>
+    <string name="tab_text_1">Prioridad Alta</string>
+    <string name="tab_text_2">Prioridad Baja</string>
 </resources>
