@@ -28,16 +28,16 @@
 
     <TextView
             android:id="@+id/text_subject"
-            android:layout_width="310dp"
-            android:layout_height="64dp"
+            android:layout_width="253dp"
+            android:layout_height="63dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
             android:layout_marginTop="36dp"
-            android:layout_marginEnd="0dp"
-            android:layout_marginRight="0dp"
-            android:layout_marginBottom="559dp"
+            android:layout_marginEnd="57dp"
+            android:layout_marginRight="57dp"
+            android:layout_marginBottom="560dp"
             android:text="@string/text_subject"
             android:textSize="18sp" />
 
