@@ -2,5 +2,16 @@
     <string name="app_name">Teckers App</string>
     <string name="text">Text</string>
     <string name="logOut">Log Out</string>
+    <string name="title_messages">Messages</string>
+    <string name="title_teams">Teams</string>
+    <string name="title_deliverables">Deliverables</string>
+    <string name="title_sessions">Sessions</string>
+    <string name="title_activity_navigationmenu">NavigationMenu</string>
+    <string name="imageDescription">SenderImage</string>
+    <string name="text_sender">Sender</string>
+    <string name="text_timestamp">Timestamp</string>
+    <string name="text_subject">Subject</string>
+    <string name="tab_text_1">High Priority</string>
+    <string name="tab_text_2">Low Priority</string>
 
 </resources>

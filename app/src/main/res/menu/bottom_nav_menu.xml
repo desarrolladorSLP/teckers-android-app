@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+            android:id="@+id/navigation_messages"
+            android:icon="@drawable/ic_messages_black_24dp"
+            android:title="@string/title_messages" />
+
+    <item
+            android:id="@+id/navigation_deliverables"
+            android:icon="@drawable/ic_deliverables_black_24dp"
+            android:title="@string/title_deliverables" />
+
+    <item
+            android:id="@+id/navigation_teams"
+            android:icon="@drawable/ic_teams_black_24dp"
+            android:title="@string/title_teams" />
+
+    <item
+            android:id="@+id/navigation_sessions"
+            android:icon="@drawable/ic_sessions_black_24dp"
+            android:title="@string/title_sessions" />
+
+</menu>
