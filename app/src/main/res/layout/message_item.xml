@@ -27,7 +27,7 @@
             app:srcCompat="@android:color/darker_gray" />
 
     <TextView
-            android:id="@+id/text_subject"
+            android:id="@+id/subject"
             android:layout_width="253dp"
             android:layout_height="63dp"
             android:layout_alignParentTop="true"
@@ -42,7 +42,7 @@
             android:textSize="18sp" />
 
     <TextView
-            android:id="@+id/text_timestamp"
+            android:id="@+id/timestamp"
             android:layout_width="wrap_content"
             android:layout_height="33dp"
             android:layout_alignParentEnd="true"
