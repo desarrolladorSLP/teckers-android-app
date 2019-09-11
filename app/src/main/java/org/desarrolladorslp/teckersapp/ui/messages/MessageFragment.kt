@@ -21,11 +21,9 @@ class MessageFragment : Fragment() {
     private lateinit var messageViewModel: MessageViewModel
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var viewAdapter: RecyclerView.Adapter<*>
+    private lateinit var viewAdapter: MessageAdapter
     private lateinit var viewManager: RecyclerView.LayoutManager
 
-
-    //private lateinit var adapter: MessageAdapter
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
