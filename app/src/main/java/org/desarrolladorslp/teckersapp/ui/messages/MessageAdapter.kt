@@ -25,17 +25,17 @@ data class MessageAdapter(private val messagesHeader: ArrayList<MessageHeader>) 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageHeaderHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.message_item, parent, false) as ImageView
+            .inflate(R.layout.message_item, parent, false)
 
         return MessageHeaderHolder(view)
     }
-    class MessageHeaderHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
+    class MessageHeaderHolder(val view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
 
-        private var view: View = v
+
         private var messageheader: MessageHeader? = null
 
         init {
-            v.setOnClickListener(this)
+            view.setOnClickListener(this)
         }
 
         override fun onClick(v: View) {
@@ -44,7 +44,7 @@ data class MessageAdapter(private val messagesHeader: ArrayList<MessageHeader>) 
 
         fun bindMessageHeader(messageheader: MessageHeader) {
             this.messageheader = messageheader
-            Picasso.get().load(messageheader.senderImage).into(view.imageView)
+            //Picasso.get().load(messageheader.senderImage).into(view.imageView)
             view.sender.text = messageheader.sender
             view.subject.text = messageheader.subject
             view.timestamp.text = messageheader.timestamp
