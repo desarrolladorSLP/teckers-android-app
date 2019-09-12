@@ -12,6 +12,9 @@ import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.message_item.view.*
 import org.desarrolladorslp.teckersapp.R
 import org.desarrolladorslp.teckersapp.model.MessageHeader
+import android.graphics.BitmapFactory
+import android.graphics.Bitmap
+import java.net.URL
 
 
 data class MessageAdapter(private val messagesHeader: ArrayList<MessageHeader>) : RecyclerView.Adapter<MessageAdapter.MessageHeaderHolder>()  {
@@ -44,7 +47,20 @@ data class MessageAdapter(private val messagesHeader: ArrayList<MessageHeader>) 
 
         fun bindMessageHeader(messageheader: MessageHeader) {
             this.messageheader = messageheader
-            //Picasso.get().load(messageheader.senderImage).into(view.imageView)
+
+            try {
+                Picasso.get()
+                    .load(messageheader.senderImage)
+                    .centerCrop()
+                    .transform(CircleTransform(50,0))
+                    .fit()
+                    .into(view.imageView)
+
+            }
+            catch (e: Exception) {
+                print("error en mostrar la imagen")
+            }
+
             view.sender.text = messageheader.sender
             view.subject.text = messageheader.subject
             view.timestamp.text = messageheader.timestamp
