@@ -52,13 +52,13 @@ data class MessageAdapter(private val messagesHeader: ArrayList<MessageHeader>) 
                 Picasso.get()
                     .load(messageheader.senderImage)
                     .centerCrop()
-                    .transform(CircleTransform(50,0))
+                    .transform(CircleTransform(125,5))
                     .fit()
                     .into(view.senderImage)
 
             }
             catch (e: Exception) {
-                print("error en mostrar la imagen")
+                print("Error show image")
             }
 
             view.sender.text = messageheader.sender
