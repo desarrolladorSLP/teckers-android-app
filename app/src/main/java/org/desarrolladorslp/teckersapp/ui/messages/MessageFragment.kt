@@ -47,11 +47,11 @@ class MessageFragment : Fragment() {
     fun generateData(): ArrayList<MessageHeader>
     {
         val message1= MessageHeader("Zac",
-            "https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwixw_flpcXkAhWQd98KHZXeBDwQjRx6BAgBEAQ&url=%2Furl%3Fsa%3Di%26source%3Dimages%26cd%3D%26ved%3D%26url%3Dhttps%253A%252F%252Fwww.glamour.es%252Fplaceres%252Fcultura%252Farticulos%252Fzac-efron-entrevista-exclusiva-los-vigilantes-de-la-playa-hugo-man%252F26348%26psig%3DAOvVaw207XGsW_REJvvIVaoVOtEW%26ust%3D1568171805206696&psig=AOvVaw207XGsW_REJvvIVaoVOtEW&ust=1568171805206696",
+            "https://st-listas.20minutos.es/images/2016-01/406254/4881186_640px.jpg",
             "Hi",
             "19-07-2019")
         val message2= MessageHeader("Pete",
-            "https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.nacionrex.com%2F__export%2F1565470813331%2Fsites%2Fdebate%2Fimg%2F2019%2F08%2F10%2Fariana_grande_crop1565470706508.jpg_943222218.jpg&imgrefurl=https%3A%2F%2Fwww.nacionrex.com%2Fmusica%2Fblackpink-ariana-grande-colaboracion-rumores-pistas-foto-2019-20190810-0016.html&docid=Ua1W__JaJ4jTgM&tbnid=KQWMW235ocRoYM%3A&vet=10ahUKEwio5ejJpsXkAhVJS6wKHTp1A4IQMwh-KAIwAg..i&w=360&h=360&bih=706&biw=1536&q=ariana%20grande&ved=0ahUKEwio5ejJpsXkAhVJS6wKHTp1A4IQMwh-KAIwAg&iact=mrc&uact=8","Bye",
+            "https://st-listas.20minutos.es/images/2016-01/406254/4881186_640px.jpg","Bye",
             "19-08-2019")
 
         val messages = arrayListOf(message1,message2)
