@@ -2,19 +2,21 @@
 <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
+        android:orientation="vertical" android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
     <TextView
             android:id="@+id/sender"
-            android:layout_width="255dp"
-            android:layout_height="34dp"
+            android:layout_width="243dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="56dp"
-            android:layout_marginRight="56dp"
+            android:layout_marginStart="99dp"
+            android:layout_marginLeft="99dp"
+            android:layout_marginEnd="69dp"
+            android:layout_marginRight="69dp"
             android:layout_marginBottom="623dp"
             android:text="@string/text_sender"
             android:textSize="22sp"
@@ -24,37 +26,47 @@
             android:id="@+id/senderImage"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:contentDescription="@string/imageDescription"
-            app:srcCompat="@android:color/darker_gray" />
-
-    <TextView
-            android:id="@+id/subject"
-            android:layout_width="253dp"
-            android:layout_height="63dp"
-            android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginTop="36dp"
-            android:layout_marginEnd="57dp"
-            android:layout_marginRight="57dp"
-            android:layout_marginBottom="560dp"
-            android:text="@string/text_subject"
-            android:textSize="18sp" />
+            android:layout_marginEnd="314dp"
+            android:layout_marginRight="314dp"
+            android:contentDescription="@string/imageDescription"
+            app:srcCompat="@android:color/darker_gray" />
 
     <TextView
             android:id="@+id/timestamp"
             android:layout_width="wrap_content"
             android:layout_height="33dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="-4dp"
-            android:layout_marginRight="-4dp"
-            android:layout_marginBottom="623dp"
+            android:layout_marginStart="351dp"
+            android:layout_marginLeft="351dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginBottom="214dp"
             android:text="@string/text_timestamp"
             android:textAllCaps="false"
             android:textSize="12sp" />
+
+    <TextView
+            android:id="@+id/subject"
+            android:layout_width="wrap_content"
+            android:layout_height="71dp"
+            android:layout_alignStart="@+id/timestamp"
+            android:layout_alignLeft="@+id/timestamp"
+            android:layout_alignTop="@+id/sender"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="-253dp"
+            android:layout_marginLeft="-253dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="68dp"
+            android:layout_marginRight="68dp"
+            android:layout_marginBottom="235dp"
+            android:text="@string/text_subject"
+            android:textSize="18sp" />
 
 
 </RelativeLayout>
