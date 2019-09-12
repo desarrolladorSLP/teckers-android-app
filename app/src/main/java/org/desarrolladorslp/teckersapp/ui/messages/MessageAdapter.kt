@@ -54,7 +54,7 @@ data class MessageAdapter(private val messagesHeader: ArrayList<MessageHeader>) 
                     .centerCrop()
                     .transform(CircleTransform(50,0))
                     .fit()
-                    .into(view.imageView)
+                    .into(view.senderImage)
 
             }
             catch (e: Exception) {
