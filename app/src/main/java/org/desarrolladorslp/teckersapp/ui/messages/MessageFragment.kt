@@ -54,10 +54,11 @@ class MessageFragment : Fragment() {
         }
         recyclerView.addItemDecoration(DividerItemDecoration(context,recyclerView.layoutManager!!.layoutDirection))
 
+        var positionDivider =0
 
         val  sections=arrayOf<MessageSectionedRecycleViewAdapter.Section> (
             MessageSectionedRecycleViewAdapter.Section(0, "High Priority"),
-            MessageSectionedRecycleViewAdapter.Section(inbox.highPriority.lastIndex-1, "Low Priority")
+            MessageSectionedRecycleViewAdapter.Section(inbox.highPriority.lastIndex+1, "Low Priority")
         )
         val mSectionedAdapter = MessageSectionedRecycleViewAdapter()
         mSectionedAdapter.MessageSectionedRecycleViewAdapter(context!!,R.layout.section,R.id.section_text,viewAdapter)
