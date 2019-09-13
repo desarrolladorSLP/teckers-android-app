@@ -22,14 +22,14 @@ class MessageSectionedRecycleViewAdapter : RecyclerView.Adapter<RecyclerView.Vie
     var mSectionResourceId: Int = 0
     var mTextResourceId: Int = 0
     var mLayoutInflater: LayoutInflater? = null
-    lateinit var mBaseAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>
+    lateinit var mBaseAdapter: MessageAdapter
     val mSections = SparseArray<Section>()
 
     fun MessageSectionedRecycleViewAdapter(
          context: Context,
          sectionResourceId: Int,
          textResourceId: Int,
-         baseAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>
+         baseAdapter: MessageAdapter
     ) {
         mLayoutInflater =
             context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -92,7 +92,7 @@ class MessageSectionedRecycleViewAdapter : RecyclerView.Adapter<RecyclerView.Vie
 
         } else {
 
-            mBaseAdapter.onBindViewHolder(sectionViewHolder, sectionedPositionToPosition(position))
+            mBaseAdapter.onBindViewHolder(sectionViewHolder as MessageAdapter.MessageHeaderHolder, sectionedPositionToPosition(position))
         }
     }
 
