@@ -23,12 +23,12 @@ class MessageViewModel : ViewModel() {
 
     fun getInbox(): Inbox
     {
-        val inbox = Inbox(_inbox.value!!.highPriority,_inbox.value!!.lowPriority)
+        val inbox = generateInbox()
         return inbox
     }
     fun totalMessages() : ArrayList<MessageHeader>
     {
-        val inbox = Inbox(_inbox.value!!.highPriority,_inbox.value!!.lowPriority)
+        val inbox = generateInbox()
         for (lowMessage in inbox.lowPriority )
         {
             inbox.highPriority.add(lowMessage)
