@@ -56,6 +56,97 @@ From Android Studio you can enable Kotlin like this:
 3. Click on Browse repositories ...
 4. Find the Kotlin plugin and click on the Install button.
 5. We restart Android Studio.
+
+
+### Android configuration
+When you clone the project, you need to make some configurations before you can execute it ... those are:
+
+1. Make sure your Android app satisfies these conditions:
+
+* It is oriented to API level 16 (Jelly Bean) or higher.
+* Use Gradle 4.1 or a more recent version.
+
+2. Configure a device or emulator to run the app.
+* Emulators must use an emulator image with Google Play.
+
+3. Access Firebase with your Google Account. (For this step, you need a google firebase account and this may require asking administrators to give access to the firebase project).
+
+4.  Add the Firebase Android configuration file to your app:
+
+*  Click Download google-services.json to obtain your Firebase Android config file (google-services.json).
+    *  You can download your [Firebase Android config file](https://support.google.com/firebase/answer/7015592) again at any time. 
+    * Make sure the config file is not appended with additional characters, like (2).
+* Move your config file into the module (app-level) directory of your app.
+
+5.  To enable Firebase products in your app, add the [google-services plugin](https://developers.google.com/android/guides/google-services-plugin) to your Gradle files. 
+*  In your root-level (project-level) Gradle file  `(build.gradle)` , add rules to include the Google Services plugin. Check that you have Google's Maven repository, as well.
+ ```javascript
+buildscript {
+
+  repositories {
+    // Check that you have the following line (if not, add it):
+    google()  // Google's Maven repository
+  }
+
+  dependencies {
+    // ...
+
+    // Add the following line:
+    classpath 'com.google.gms:google-services:4.3.2'  // Google Services plugin
+  }
+}
+
+allprojects {
+  // ...
+
+  repositories {
+    // Check that you have the following line (if not, add it):
+    google()  // Google's Maven repository
+    // ...
+  }
+}
+```
+
+* In your module (app-level) Gradle file (usually app/build.gradle), add a line to the bottom of the file.
+
+```javascript
+apply plugin: 'com.android.application'
+
+android {
+  // ...
+}
+
+// Add the following line to the bottom of the file:
+apply plugin: 'com.google.gms.google-services'  // Google Play services Gradle plugin
+
+```
+6. Add Firebase SDKs to your app
+* To your module (app-level) Gradle file `(usually app/build.gradle)`, add the dependencies for the Firebase products that you want to use in your app.
+
+ ```javascript
+dependencies {
+  // ...
+
+  // Add the Firebase SDK for Google Analytics
+  implementation 'com.google.firebase:firebase-analytics:17.2.0'
+
+  // Add the SDKs for any other Firebase products you want to use in your app
+  // For example, to use Firebase Authentication and Cloud Firestore
+  implementation 'com.google.firebase:firebase-auth:19.0.0'
+  implementation 'com.google.firebase:firebase-firestore:21.1.0'
+
+  // Getting a "Could not find" error? Make sure that you've added
+  // Google's Maven repository to your root-level build.gradle file
+}
+```
+* Sync your app to ensure that all dependencies have the necessary versions.
+* If you added Analytics, run your app to send verification to Firebase that you've successfully integrated Firebase. Otherwise, you can skip the verification step.
+* Your device logs will display the Firebase verification that initialization is complete. If you ran your app on an emulator that has network access, the Firebase console notifies you that your app connection is complete.
+
+The following link shows in more detail the steps to follow: 
+ [https://firebase.google.com/docs/android/setup#next_steps]
+ 
+ 
 ## Collaborators
 * Ana I Morales Hunter 
 * Silvia B Castillo Mejia 
