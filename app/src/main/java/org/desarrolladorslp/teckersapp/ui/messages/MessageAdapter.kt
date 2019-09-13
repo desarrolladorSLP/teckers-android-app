@@ -16,9 +16,22 @@ import android.graphics.BitmapFactory
 import android.graphics.Bitmap
 import java.net.URL
 
-
 data class MessageAdapter(private val messagesHeader: ArrayList<MessageHeader>) : RecyclerView.Adapter<MessageAdapter.MessageHeaderHolder>()  {
 
+    fun add(messageHeader: MessageHeader, position: Int) {
+        var position = position
+        position = if (position == -1) itemCount else position
+        messagesHeader.add(position, messageHeader)
+        notifyItemInserted(position)
+    }
+
+    fun remove(position: Int) {
+        if (position < itemCount) {
+            messagesHeader.removeAt(position)
+            notifyItemRemoved(position)
+        }
+
+    }
     override fun getItemCount() = messagesHeader.size
 
     override fun onBindViewHolder(holder: MessageHeaderHolder, position: Int) {
