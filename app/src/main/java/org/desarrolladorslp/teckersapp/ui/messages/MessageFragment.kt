@@ -29,7 +29,9 @@ class MessageFragment : Fragment() {
     private lateinit var viewAdapter: MessageAdapter
     private lateinit var viewManager: RecyclerView.LayoutManager
     private lateinit var  dividerManager: RecyclerView.ItemDecoration
-    private lateinit var inbox: Inbox
+
+    private lateinit var inbox : Inbox
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,10 +41,10 @@ class MessageFragment : Fragment() {
         messageViewModel =
             ViewModelProviders.of(this).get(MessageViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_messages, container, false)
-
+        inbox=messageViewModel.getInbox()
         viewManager = LinearLayoutManager(context)
 
-        viewAdapter = MessageAdapter(generateData())
+        viewAdapter = MessageAdapter(messageViewModel.totalMessages())
 
         recyclerView= root.findViewById<RecyclerView>(R.id.messagesList).apply{
             setHasFixedSize(true)
@@ -51,6 +53,7 @@ class MessageFragment : Fragment() {
             adapter = viewAdapter
         }
         recyclerView.addItemDecoration(DividerItemDecoration(context,recyclerView.layoutManager!!.layoutDirection))
+
 
         val  sections=arrayOf<MessageSectionedRecycleViewAdapter.Section> (
             MessageSectionedRecycleViewAdapter.Section(0, "High Priority"),
@@ -63,36 +66,9 @@ class MessageFragment : Fragment() {
         return root
     }
 
-    fun generateTypes(): ArrayList<String>
-    {
-        val messagesDivider = arrayListOf("High Priority","Low Priority")
-        return messagesDivider
-    }
 
-    fun generateData(): ArrayList<MessageHeader>
-    {
-        val message1= MessageHeader("Zac",
-            "https://st-listas.20minutos.es/images/2016-01/406254/4881186_640px.jpg",
-            "Hi",
-            "19-07-2019")
-        val message2= MessageHeader("Pete",
-            "https://st-listas.20minutos.es/images/2016-01/406254/4881186_640px.jpg","Bye",
-            "19-08-2019")
 
-        val messagesHighPriority = arrayListOf(message1,message2)
-        val messagesLowPriority = arrayListOf(message1,message2)
-        inbox= Inbox(messagesHighPriority,messagesLowPriority)
-        val messagesTotal= totalMessages(messagesHighPriority,messagesLowPriority)
 
-        return messagesTotal
-    }
 
-    fun totalMessages(highPriority:ArrayList<MessageHeader>,lowPriority:ArrayList<MessageHeader>) : ArrayList<MessageHeader>
-    {
-        for (lowMessage in lowPriority)
-        {
-            highPriority.add(lowMessage)
-        }
-        return highPriority
-    }
+
 }
