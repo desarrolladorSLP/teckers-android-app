@@ -24,14 +24,9 @@ import org.desarrolladorslp.teckersapp.model.MessageHeader
 class MessageFragment : Fragment() {
 
     private lateinit var messageViewModel: MessageViewModel
-
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: MessageAdapter
     private lateinit var viewManager: RecyclerView.LayoutManager
-    private lateinit var  dividerManager: RecyclerView.ItemDecoration
-
-    private lateinit var inbox : Inbox
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,34 +36,15 @@ class MessageFragment : Fragment() {
         messageViewModel =
             ViewModelProviders.of(this).get(MessageViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_messages, container, false)
-        inbox=messageViewModel.getInbox()
         viewManager = LinearLayoutManager(context)
-
         viewAdapter = MessageAdapter(messageViewModel.totalMessages())
-
         recyclerView= root.findViewById<RecyclerView>(R.id.messagesList).apply{
             setHasFixedSize(true)
             layoutManager = viewManager
-
             adapter = viewAdapter
         }
-        recyclerView.addItemDecoration(DividerItemDecoration(context,recyclerView.layoutManager!!.layoutDirection))
-
-        var positionDivider =0
-
-        val  sections=arrayOf<MessageSectionedRecycleViewAdapter.Section> (
-            MessageSectionedRecycleViewAdapter.Section(0, "High Priority"),
-            MessageSectionedRecycleViewAdapter.Section(inbox.highPriority.lastIndex+1, "Low Priority")
-        )
-        val mSectionedAdapter = MessageSectionedRecycleViewAdapter()
-        mSectionedAdapter.MessageSectionedRecycleViewAdapter(context!!,R.layout.section,R.id.section_text,viewAdapter)
-        mSectionedAdapter.setSections(sections)
-        recyclerView.adapter=mSectionedAdapter
         return root
     }
-
-
-
 
 
 
