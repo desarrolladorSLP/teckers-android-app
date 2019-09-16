@@ -17,17 +17,24 @@ import com.google.android.gms.common.api.ApiException
 import kotlinx.android.synthetic.main.activity_main.main_layout
 import kotlinx.android.synthetic.main.activity_main.signInButton
 import kotlinx.android.synthetic.main.activity_main.signOutButton
+import org.desarrolladorslp.teckersapp.model.LoggedUser
 import org.desarrolladorslp.teckersapp.model.User
+import org.desarrolladorslp.teckersapp.service.APIEndpoint
+import org.desarrolladorslp.teckersapp.service.LoginService
+import org.desarrolladorslp.teckersapp.service.AuthEndpoint
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
     private var googleSignInButton: SignInButton? = null
-    private var profile:GoogleSignInAccount? = null
+    private var profile: GoogleSignInAccount? = null
 
     val googleAuthClientId: String = BuildConfig.ApiKey
-    private lateinit var user :User
+    private lateinit var user: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +50,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             .build()
         googleSignInClient = GoogleSignIn.getClient(this, gso);
         auth = FirebaseAuth.getInstance()
-
+        signOut()
 
     }
 
@@ -73,12 +80,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun updateUI(user: FirebaseUser?) {
-        if(user!=null)
-        {
+        if (user != null) {
             val intent = Intent(this, NavigationMenu::class.java)
             startActivity(intent)
-        }
-        else{
+        } else {
             signInButton.visibility = View.VISIBLE
             signOutButton.visibility = View.GONE
         }
@@ -105,23 +110,41 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     val user = auth.currentUser
-                    setProfileInformation(acct)
-                    updateUI(user)
+                    val firebaseTokenId = user?.zze()?.zzd()
+
+                    setProfileInformation(acct, firebaseTokenId)
                 } else {
-                    Snackbar.make(main_layout, "Authentication Failed.", Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(main_layout, "Authentication Failed.", Snackbar.LENGTH_SHORT)
+                        .show()
                     updateUI(null)
                 }
 
             }
     }
 
-    private fun setProfileInformation(acct: GoogleSignInAccount?){
+    private fun setProfileInformation(acct: GoogleSignInAccount?, firebaseTokenId: String?) {
 
         if (acct != null) {
-            user = User(acct)
+
+            var loginService = AuthEndpoint.instance()?.create(LoginService::class.java);
+
+            var loginCall = loginService?.login("firebase", firebaseTokenId)
+
+            loginCall?.enqueue(object : Callback<LoggedUser> {
+                override fun onResponse(call: Call<LoggedUser>, response: Response<LoggedUser>) {
+                    if (response.code() == 200) {
+                        APIEndpoint.setAccessToken(response.body()?.accessToken)
+                        user = User(acct)
+                        updateUI(auth.currentUser)
+                    }
+                }
+
+                override fun onFailure(call: Call<LoggedUser>, t: Throwable) {
+                    val m = t.message;
+                }
+            })
         }
     }
-
 
 
     override fun onClick(v: View) {
