@@ -30,7 +30,7 @@
                 android:layout_width="330dp"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/logoteckersnameyellow" />
+                android:src="@drawable/logoteckersnamewhite" />
 
         <ImageView
                 android:id="@+id/iconsearch"
