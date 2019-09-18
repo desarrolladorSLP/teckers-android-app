@@ -1,8 +1,15 @@
 <resources>
+    <string name="app_name">Teckers App</string>
+    <string name="logout">Salir</string>
     <string name="title_messages">Mensajes</string>
     <string name="title_teams">Equipos</string>
     <string name="title_deliverables">Entregables</string>
     <string name="title_sessions">Sesiones</string>
     <string name="tab_text_1">Prioridad Alta</string>
     <string name="tab_text_2">Prioridad Baja</string>
+    <string name="title_activity_navigationmenu">NavigationMenu</string>
+    <string name="imageDescription">SenderImage</string>
+    <string name="text_sender">Sender</string>
+    <string name="text_timestamp">Timestamp</string>
+    <string name="text_subject">Subject</string>
 </resources>
