@@ -23,8 +23,7 @@ class MessageViewModel : ViewModel() {
 
     fun getInbox(): Inbox
     {
-        val inbox = generateInbox()
-        return inbox
+        return generateInbox()
     }
     fun totalMessages() : ArrayList<MessageHeader>
     {
