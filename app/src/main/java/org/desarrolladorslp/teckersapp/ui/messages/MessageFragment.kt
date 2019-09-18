@@ -1,6 +1,8 @@
 package org.desarrolladorslp.teckersapp.ui.messages
 
+import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -32,10 +34,12 @@ class MessageFragment : Fragment() {
     private lateinit var myContext: FragmentActivity
     private  lateinit var  managerFragment: FragmentManager
 
-    override fun onAttach(activity: Activity) {
-        myContext = activity as FragmentActivity
-        super.onAttach(activity)
+    @SuppressLint("MissingSuperCall")
+    override fun onAttach(context: Context) {
+        myContext = context as FragmentActivity
+        super.onAttach(context)
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,7 +49,7 @@ class MessageFragment : Fragment() {
         messageViewModel =
             ViewModelProviders.of(this).get(MessageViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_messages, container, false)
-        managerFragment = myContext.getSupportFragmentManager()
+        managerFragment = myContext.supportFragmentManager
         sectionsPagerAdapter = SectionsPagerAdapter(context!!,managerFragment)
         viewAdapter = MessageAdapter(messageViewModel.totalMessages())
         viewPager = root.findViewById<ViewPager>(R.id.view_pager).apply{
