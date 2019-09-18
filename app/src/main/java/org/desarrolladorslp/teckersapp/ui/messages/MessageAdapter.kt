@@ -78,11 +78,6 @@ data class MessageAdapter(private val messagesHeader: ArrayList<MessageHeader>) 
             view.subject.text = messageheader.subject
             view.timestamp.text = messageheader.timestamp
         }
-
-        companion object {
-            private val senderImage_Key = "SENDERIMAGE"
-        }
-
     }
 
 }
