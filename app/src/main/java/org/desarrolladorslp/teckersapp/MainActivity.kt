@@ -32,9 +32,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var googleSignInClient: GoogleSignInClient
     private var googleSignInButton: SignInButton? = null
     private var profile: GoogleSignInAccount? = null
-    val appCredentials : String = BuildConfig.user +":"+ BuildConfig.password
-    open class Base64
-    val decode: ByteArray = android.util.Base64.decode(appCredentials,0)
+
 
     val googleAuthClientId: String = BuildConfig.ApiKey
     private lateinit var user: User
