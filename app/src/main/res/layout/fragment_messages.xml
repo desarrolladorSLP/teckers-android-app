@@ -17,7 +17,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?attr/colorPrimary"
-                app:tabIndicatorColor="@color/white"
+                app:tabIndicatorColor="@android:color/white"
                 app:tabIndicatorHeight="5dp"/>
     </com.google.android.material.appbar.AppBarLayout>
 
