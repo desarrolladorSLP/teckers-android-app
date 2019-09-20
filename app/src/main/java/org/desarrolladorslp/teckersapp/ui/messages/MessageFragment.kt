@@ -24,6 +24,9 @@ import org.desarrolladorslp.teckersapp.model.Inbox
 import org.desarrolladorslp.teckersapp.model.MessageHeader
 
 
+
+
+
 class MessageFragment : Fragment() {
 
     private lateinit var messageViewModel: MessageViewModel
@@ -32,7 +35,6 @@ class MessageFragment : Fragment() {
     private lateinit var sectionsPagerAdapter: SectionsPagerAdapter
     private lateinit var  tabs: TabLayout
     private lateinit var myContext: FragmentActivity
-    private  lateinit var  managerFragment: FragmentManager
 
     @SuppressLint("MissingSuperCall")
     override fun onAttach(context: Context) {
@@ -49,8 +51,8 @@ class MessageFragment : Fragment() {
         messageViewModel =
             ViewModelProviders.of(this).get(MessageViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_messages, container, false)
-        managerFragment = myContext.supportFragmentManager
-        sectionsPagerAdapter = SectionsPagerAdapter(context!!,managerFragment)
+        sectionsPagerAdapter = SectionsPagerAdapter(context!!,childFragmentManager)
+
         viewAdapter = MessageAdapter(messageViewModel.totalMessages())
         viewPager = root.findViewById<ViewPager>(R.id.view_pager).apply{
             adapter= sectionsPagerAdapter
@@ -59,8 +61,7 @@ class MessageFragment : Fragment() {
             setupWithViewPager(viewPager)
         }
         return root
+
     }
-
-
 
 }
