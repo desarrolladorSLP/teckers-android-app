@@ -21,7 +21,7 @@ import org.desarrolladorslp.teckersapp.model.LoggedUser
 import org.desarrolladorslp.teckersapp.model.User
 import org.desarrolladorslp.teckersapp.service.APIEndpoint
 import org.desarrolladorslp.teckersapp.service.LoginService
-import org.desarrolladorslp.teckersapp.service.AuthEndpoint
+import org.desarrolladorslp.teckersapp.service.RetrofitManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -127,7 +127,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         if (acct != null) {
 
-            var loginService = AuthEndpoint.instance()?.create(LoginService::class.java);
+            var loginService = RetrofitManager.instance()?.create(LoginService::class.java);
 
             var loginCall = loginService?.login("firebase", firebaseTokenId)
 
