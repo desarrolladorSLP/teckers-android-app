@@ -9,7 +9,6 @@ import retrofit2.http.GET
 
 interface MessageService {
 
-    @FormUrlEncoded
     @GET("/api/messages")
     fun getMessages(): Call<Inbox>
 }
