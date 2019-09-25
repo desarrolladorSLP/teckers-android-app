@@ -14,10 +14,11 @@ class AppCredentialsInterceptor() : Interceptor {
         val charset = Charsets.UTF_8
         val byteArray = appCredentials.toByteArray(charset)
         val base64 = Base64.encodeToString(byteArray, Base64.DEFAULT)
+        val value = base64.replaceFirst("\n", "")
         var request = chain.request()
         val headers =
             request.headers().newBuilder()
-                .add("Authorization", "Basic $base64").build()
+                .add("Authorization", "Basic $value").build()
 
         request = request.newBuilder().headers(headers).build()
 
