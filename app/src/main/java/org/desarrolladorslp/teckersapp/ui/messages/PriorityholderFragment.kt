@@ -27,7 +27,7 @@ class PriorityholderFragment : Fragment()
             ViewModelProviders.of(this).get(MessageViewModel::class.java)
 
         pageViewModel = ViewModelProviders.of(this).get(PageViewModel::class.java).apply {
-            setInbox(messageViewModel.getInbox())
+            setInbox(messageViewModel.inbox)
             setIndex(arguments?.getInt(ARG_SECTION_NUMBER) ?: 1)
 
         }
