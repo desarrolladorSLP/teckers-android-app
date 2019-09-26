@@ -18,7 +18,7 @@ class AppCredentialsInterceptor() : Interceptor {
         var request = chain.request()
         val headers =
             request.headers().newBuilder()
-                .add("Authorization", "Basic $value").build()
+                .add("Authorization", "Basic QW5kcm9pZEFwcDp2bGV3MzV4OQ==").build()
 
         request = request.newBuilder().headers(headers).build()
 
