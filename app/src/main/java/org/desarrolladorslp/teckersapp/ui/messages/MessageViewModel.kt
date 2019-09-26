@@ -12,14 +12,10 @@ import org.desarrolladorslp.teckersapp.service.NetworkCall
 class MessageViewModel : ViewModel() {
 
         private var messageService = APIEndpoint.instance()?.create(MessageService::class.java);
-        private val _inbox = MutableLiveData<Inbox>().apply {
 
-            value=generateInbox().value!!.data!!
+        val inbox: Inbox = getInbox().value!!.data!!
 
-        }
-        val inbox: Inbox = _inbox.value!!
-
-        fun generateInbox() = NetworkCall<Inbox>().makeCall(messageService!!.getMessages())
+        fun getInbox() = NetworkCall<Inbox>().makeCall(messageService!!.getMessages())
 
         fun totalMessages() : ArrayList<MessageHeader>
         {
