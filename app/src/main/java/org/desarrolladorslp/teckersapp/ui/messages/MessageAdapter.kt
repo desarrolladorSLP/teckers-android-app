@@ -82,7 +82,7 @@ data class MessageAdapter(private val messagesHeader: ArrayList<MessageHeader>) 
             view.sender.text = messageheader.sender
             view.subject.text = messageheader.subject
 
-            val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+            val simpleDateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm")
             simpleDateFormat.timeZone = TimeZone.getTimeZone("UTC")
             val myDate = simpleDateFormat.parse(messageheader.timestamp)
             view.timestamp.text = myDate.toString()
