@@ -15,6 +15,11 @@ import org.desarrolladorslp.teckersapp.model.MessageHeader
 import android.graphics.BitmapFactory
 import android.graphics.Bitmap
 import java.net.URL
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.util.*
+import kotlin.collections.ArrayList
+
 
 data class MessageAdapter(private val messagesHeader: ArrayList<MessageHeader>) : RecyclerView.Adapter<MessageAdapter.MessageHeaderHolder>()  {
 
@@ -65,7 +70,7 @@ data class MessageAdapter(private val messagesHeader: ArrayList<MessageHeader>) 
                 Picasso.get()
                     .load(messageheader.senderImage)
                     .centerCrop()
-                    .transform(CircleTransform(125,0))
+                    .transform(CircleTransform(30,0))
                     .fit()
                     .into(view.senderImage)
 
@@ -76,8 +81,17 @@ data class MessageAdapter(private val messagesHeader: ArrayList<MessageHeader>) 
 
             view.sender.text = messageheader.sender
             view.subject.text = messageheader.subject
-            view.timestamp.text = messageheader.timestamp
+
+            val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+            simpleDateFormat.timeZone = TimeZone.getTimeZone("UTC")
+            val myDate = simpleDateFormat.parse(messageheader.timestamp)
+            view.timestamp.text = myDate.toString()
         }
+
+
     }
+
+
+
 
 }
