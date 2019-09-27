@@ -2,30 +2,51 @@ package org.desarrolladorslp.teckersapp.ui.messages
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+
 import org.desarrolladorslp.teckersapp.model.Inbox
 import org.desarrolladorslp.teckersapp.model.MessageHeader
 import org.desarrolladorslp.teckersapp.service.APIEndpoint
 import org.desarrolladorslp.teckersapp.service.MessageService
-import org.desarrolladorslp.teckersapp.service.NetworkCall
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
-class MessageViewModel : ViewModel() {
 
-        private var messageService = APIEndpoint.instance()?.create(MessageService::class.java);
+class MessageViewModel() : ViewModel() {
 
-        val inbox: Inbox = getInbox().value!!.data!!
+    private var messageService = APIEndpoint.instance()?.create(MessageService::class.java);
 
-        fun getInbox() = NetworkCall<Inbox>().makeCall(messageService!!.getMessages())
+    val _inbox= MutableLiveData<Inbox>()
 
-        fun totalMessages() : ArrayList<MessageHeader>
+    fun getmessages(priorityIndex : Int) :ArrayList<MessageHeader> {
+        if(priorityIndex==2)
         {
-            val inbox = inbox
-            for (lowMessage in inbox.lowPriority )
-            {
-                inbox.highPriority.add(lowMessage)
-            }
-            return inbox.highPriority
+            return _inbox.value!!.lowPriority
         }
+        return  _inbox.value!!.highPriority
+    }
+
+    fun getInbox()
+    {
+        var messageCall = messageService?.getMessages()
+        messageCall?.enqueue(object :Callback<Inbox> {
+            override fun onResponse(call: Call<Inbox>, response: Response<Inbox>) {
+                if (response.code() == 200) {
+                    _inbox.value = response.body()
+                }
+                if(response.code()==404)
+                {
+
+                }
+            }
+
+            override fun onFailure(call: Call<Inbox>, t: Throwable) {
+                val m = t.message;
+            }
+        })
+    }
+
 
 
 
