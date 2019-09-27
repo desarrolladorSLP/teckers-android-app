@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -14,7 +15,6 @@ import org.desarrolladorslp.teckersapp.R
 
 class PriorityholderFragment : Fragment()
 {
-    private lateinit var pageViewModel: PageViewModel
     private lateinit var messageViewModel: MessageViewModel
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<MessageAdapter.MessageHeaderHolder>
@@ -25,12 +25,6 @@ class PriorityholderFragment : Fragment()
         super.onCreate(savedInstanceState)
         messageViewModel =
             ViewModelProviders.of(this).get(MessageViewModel::class.java)
-
-        pageViewModel = ViewModelProviders.of(this).get(PageViewModel::class.java).apply {
-            setInbox(messageViewModel.inbox)
-            setIndex(arguments?.getInt(ARG_SECTION_NUMBER) ?: 1)
-
-        }
     }
 
     override fun onCreateView(
@@ -39,13 +33,16 @@ class PriorityholderFragment : Fragment()
     ): View? {
         val root = inflater.inflate(R.layout.content_messages, container, false)
         viewManager = LinearLayoutManager(context)
-        viewAdapter = MessageAdapter(pageViewModel.getmessages())
+        messageViewModel._inbox.observe(activity as AppCompatActivity, Observer{ inbox ->
+            viewAdapter = MessageAdapter(messageViewModel.getmessages(arguments?.getInt(ARG_SECTION_NUMBER) ?: 1))
+            recyclerView= root.findViewById<RecyclerView>(R.id.messagesList).apply{
+                setHasFixedSize(true)
+                layoutManager = viewManager
+                adapter = viewAdapter
+            }
+        })
+        messageViewModel.getInbox()
 
-        recyclerView= root.findViewById<RecyclerView>(R.id.messagesList).apply{
-            setHasFixedSize(true)
-            layoutManager = viewManager
-            adapter = viewAdapter
-        }
         return root
     }
 
