@@ -26,20 +26,21 @@
 
     <ImageView
             android:id="@+id/senderImage"
-            android:layout_width="72dp"
-            android:layout_height="66dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_marginStart="15dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="13dp"
+            android:layout_marginStart="14dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="325dp"
+            android:layout_marginRight="325dp"
             android:layout_marginBottom="13dp"
-            android:layout_marginEnd="324dp"
-            android:layout_marginRight="324dp"
             android:contentDescription="@string/imageDescription"
+            android:ratio='1:1'
             app:srcCompat="@android:color/darker_gray" />
 
     <TextView
