@@ -53,7 +53,6 @@ class MessageFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_messages, container, false)
         sectionsPagerAdapter = SectionsPagerAdapter(context!!,childFragmentManager)
 
-        viewAdapter = MessageAdapter(messageViewModel.totalMessages())
         viewPager = root.findViewById<ViewPager>(R.id.view_pager).apply{
             adapter= sectionsPagerAdapter
         }
