@@ -12,4 +12,6 @@
     <string name="text_sender">Sender</string>
     <string name="text_timestamp">Timestamp</string>
     <string name="text_subject">Subject</string>
+    <string name="error_authentication">Error de Autenticación</string>
+
 </resources>
