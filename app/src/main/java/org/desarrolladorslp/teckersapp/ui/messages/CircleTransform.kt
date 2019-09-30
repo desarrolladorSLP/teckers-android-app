@@ -11,7 +11,7 @@ import com.squareup.picasso.Transformation
 
 class CircleTransform
     (
-    private val radius: Int, private val margin: Int // dp
+    private val radius: Int, private val margin: Int
 ) : Transformation {
 
     override fun transform(source: Bitmap): Bitmap {
