@@ -124,7 +124,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private fun setProfileInformation(acct: GoogleSignInAccount?, firebaseTokenId: String?) {
 
         if (acct != null) {
-
+            RetrofitManager.setActivity(main_layout)
             var loginService = RetrofitManager.instance()?.create(LoginService::class.java);
 
             var loginCall = loginService?.login("firebase", firebaseTokenId)
@@ -140,6 +140,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
                 override fun onFailure(call: Call<LoggedUser>, t: Throwable) {
                     val m = t.message;
+                    Snackbar.make(main_layout, "Error de autenticación", Snackbar.LENGTH_SHORT)
+                        .show()
                 }
             })
         }
