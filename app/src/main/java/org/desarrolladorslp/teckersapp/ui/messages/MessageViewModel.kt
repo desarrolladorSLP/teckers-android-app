@@ -11,16 +11,14 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-
-
 class MessageViewModel() : ViewModel() {
 
     private var messageService = APIEndpoint.instance()?.create(MessageService::class.java);
 
     val _inbox= MutableLiveData<Inbox>()
 
-    fun getmessages(priorityIndex : Int) :ArrayList<MessageHeader> {
-        if(priorityIndex==2)
+    fun getmessages(priorityPageIndex : Int) :ArrayList<MessageHeader> {
+        if(priorityPageIndex==2)
         {
             return _inbox.value!!.lowPriority
         }
