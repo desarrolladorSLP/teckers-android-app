@@ -4,19 +4,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.message_item.view.*
 import org.desarrolladorslp.teckersapp.R
 import org.desarrolladorslp.teckersapp.model.MessageHeader
-import android.graphics.BitmapFactory
-import android.graphics.Bitmap
-import java.net.URL
+import org.desarrolladorslp.teckersapp.ui.CircleTransform
 import java.text.SimpleDateFormat
-import java.time.LocalDate
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -60,7 +54,7 @@ data class MessageAdapter(private val messagesHeader: ArrayList<MessageHeader>) 
         }
 
         override fun onClick(v: View) {
-            Log.d("RecyclerView", "CLICK!")
+            Log.d("RecyclerViewMessage", "CLICK!")
         }
 
         fun bindMessageHeader(messageheader: MessageHeader) {
@@ -70,13 +64,13 @@ data class MessageAdapter(private val messagesHeader: ArrayList<MessageHeader>) 
                 Picasso.get()
                     .load(messageheader.senderImage)
                     .centerCrop()
-                    .transform(CircleTransform(30,0))
+                    .transform(CircleTransform(30, 0))
                     .fit()
                     .into(view.senderImage)
 
             }
             catch (e: Exception) {
-                print("Error show image")
+                Log.d("MessageImageException", e.message)
             }
 
             view.sender.text = messageheader.sender
