@@ -22,20 +22,20 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField 'String', "ApiKey", TeckersAppApiKey
             resValue 'string', "api_key", TeckersAppApiKey
-            buildConfigField 'String', "user", usuario
-            resValue 'string', "app_user", usuario
-            buildConfigField 'String', "password", password
-            resValue 'string', "app_password", password
+            buildConfigField 'String', "user", User
+            resValue 'string', "app_user", User
+            buildConfigField 'String', "password", Password
+            resValue 'string', "app_password", Password
             buildConfigField 'String', "BaseUrl", BaseUrl
             resValue 'string', "app_base_url", BaseUrl
         }
         debug {
             buildConfigField 'String', "ApiKey", TeckersAppApiKey
             resValue 'string', "api_key", TeckersAppApiKey
-            buildConfigField 'String', "user", usuario
-            resValue 'string', "app_user", usuario
-            buildConfigField 'String', "password", password
-            resValue 'string', "app_password", password
+            buildConfigField 'String', "user", User
+            resValue 'string', "app_user", User
+            buildConfigField 'String', "password", Password
+            resValue 'string', "app_password", Password
             buildConfigField 'String', "BaseUrl", BaseUrl
             resValue 'string', "app_base_url", BaseUrl
         }
