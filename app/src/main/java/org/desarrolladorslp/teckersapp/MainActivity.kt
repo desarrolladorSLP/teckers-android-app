@@ -51,8 +51,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             .build()
         googleSignInClient = GoogleSignIn.getClient(this, gso);
         auth = FirebaseAuth.getInstance()
-        signOut()
-
     }
 
     override fun onStart() {
