@@ -16,9 +16,9 @@ class MessageViewModel() : ViewModel() {
     private var messageService = APIEndpoint.instance()?.create(MessageService::class.java);
 
     val _inbox= MutableLiveData<Inbox>()
-
-    fun getmessages(priorityPageIndex : Int) :ArrayList<MessageHeader> {
-        if(priorityPageIndex==2)
+    val pageIndex=2
+    fun getmessages(priorityIndex : Int) :ArrayList<MessageHeader> {
+        if(priorityIndex==pageIndex)
         {
             return _inbox.value!!.lowPriority
         }
@@ -33,10 +33,7 @@ class MessageViewModel() : ViewModel() {
                 if (response.code() == 200) {
                     _inbox.value = response.body()
                 }
-                if(response.code()==404)
-                {
 
-                }
             }
 
             override fun onFailure(call: Call<Inbox>, t: Throwable) {
