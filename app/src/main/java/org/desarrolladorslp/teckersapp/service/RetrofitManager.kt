@@ -1,5 +1,10 @@
 package org.desarrolladorslp.teckersapp.service
 
+import android.content.Context
+import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.activity_main.*
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
@@ -11,8 +16,16 @@ import java.io.IOException
 class RetrofitManager {
 
     companion object {
+
         private var authInstance: Retrofit? = null
         private var baseUrl= BuildConfig.BaseUrl
+        private lateinit var applicationLayout :ConstraintLayout
+
+        fun setActivity(constraintLayout: ConstraintLayout)
+        {
+            applicationLayout = constraintLayout
+        }
+
         fun instance(): Retrofit? {
 
             if (authInstance == null) {
@@ -25,7 +38,14 @@ class RetrofitManager {
                             var response = chain.proceed(request)
                             if(response.code() == 500)
                             {
-                                //muestra el toast en el activity
+                                Snackbar.make(applicationLayout, "Error de Servidor", Snackbar.LENGTH_SHORT)
+                                    .show()
+                                return response
+                            }
+                            if(response.code() == 404)
+                            {
+                                Snackbar.make(applicationLayout, "No tienes permiso", Snackbar.LENGTH_SHORT)
+                                    .show()
                                 return response
                             }
                             return response
@@ -44,5 +64,6 @@ class RetrofitManager {
         }
 
     }
+
 }
 
