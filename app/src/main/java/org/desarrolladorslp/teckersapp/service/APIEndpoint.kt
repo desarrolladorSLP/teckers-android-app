@@ -1,6 +1,8 @@
 package org.desarrolladorslp.teckersapp.service
 
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat.startActivity
+import com.google.android.material.snackbar.Snackbar
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
@@ -15,7 +17,12 @@ class APIEndpoint {
         private var interceptor = TokenInterceptor()
         private var apiInstance: Retrofit? = null
         private var baseUrl= BuildConfig.BaseUrl
+        private lateinit var applicationLayout : ConstraintLayout
 
+        fun setActivity(constraintLayout: ConstraintLayout)
+        {
+            applicationLayout = constraintLayout
+        }
         fun instance(): Retrofit? {
             if (apiInstance == null) {
 
@@ -27,7 +34,14 @@ class APIEndpoint {
                             var response = chain.proceed(request)
                             if(response.code() == 500)
                             {
-                                //muestra el toast en el activity
+                                Snackbar.make(applicationLayout, "Error de Servidor", Snackbar.LENGTH_SHORT)
+                                    .show()
+                                return response
+                            }
+                            if(response.code() == 404)
+                            {
+                                Snackbar.make(applicationLayout, "No tienes permiso", Snackbar.LENGTH_SHORT)
+                                    .show()
                                 return response
                             }
                             return response
