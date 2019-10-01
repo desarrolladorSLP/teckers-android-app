@@ -45,7 +45,7 @@ class PriorityholderFragment : Fragment()
         viewManager = LinearLayoutManager(context)
         messageViewModel._inbox.observe(activity as AppCompatActivity, Observer{ inbox ->
             viewAdapter = MessageAdapter(
-                if (arguments?.getInt(ARG_SECTION_NUMBER) == 1) inbox.highPriority
+                if (arguments?.getInt(ARG_SECTION_NUMBER) != MessageViewModel. LOW_PRIORITY_PAGE_INDEX) inbox.highPriority
                 else inbox.lowPriority
             )
             recyclerView= root.findViewById<RecyclerView>(R.id.messagesList).apply{
