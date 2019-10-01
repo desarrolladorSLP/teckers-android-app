@@ -13,6 +13,6 @@
     <string name="tab_text_1">High Priority</string>
     <string name="tab_text_2">Low Priority</string>
     <string name="error_authentication">Invalid user. Please contact your administrator.</string>
-    <string name="error_response_messages">Unable to show the messages</string>
+    <string name="error_response_messages">Unable to show your messages, please try again later.</string>
     <string name="retry">Retry</string>
 </resources>
