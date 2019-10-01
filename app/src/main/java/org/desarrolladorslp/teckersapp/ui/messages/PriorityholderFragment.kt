@@ -57,7 +57,7 @@ class PriorityholderFragment : Fragment()
             if(responseException != null)
             {
                 val snackbar = Snackbar.make(root,R.string.error_response_messages , Snackbar.LENGTH_LONG)
-                snackbar.setAction("Reintentar", View.OnClickListener {
+                snackbar.setAction(R.string.retry, View.OnClickListener {
 
                     Log.d("Messages Reload", "CLICK!")
                 })

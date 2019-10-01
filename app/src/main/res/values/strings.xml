@@ -14,4 +14,5 @@
     <string name="tab_text_2">Low Priority</string>
     <string name="error_authentication">Unvalid user, contact your administrator</string>
     <string name="error_response_messages">Unable to show the messages</string>
+    <string name="retry">Retry</string>
 </resources>
