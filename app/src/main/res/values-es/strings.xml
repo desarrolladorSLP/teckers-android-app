@@ -13,7 +13,7 @@
     <string name="text_timestamp">Timestamp</string>
     <string name="text_subject">Subject</string>
     <string name="error_authentication">Usuario no validado, contacte a su administrador</string>
-    <string name="error_response_messages">No se pudo mostrar los mensajes</string>
+    <string name="error_response_messages">No se pudieron mostrar los mensajes</string>
     <string name="retry">Reintentar</string>
 
 
