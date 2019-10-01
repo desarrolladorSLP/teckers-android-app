@@ -12,5 +12,6 @@
     <string name="text_subject">Subject</string>
     <string name="tab_text_1">High Priority</string>
     <string name="tab_text_2">Low Priority</string>
-    <string name="error_authentication">Authentication Error</string>
+    <string name="error_authentication">Unvalid user, contact your administrator</string>
+    <string name="error_response_messages">Unable to show the messages</string>
 </resources>
