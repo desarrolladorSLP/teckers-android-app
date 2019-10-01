@@ -56,6 +56,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             .build()
         googleSignInClient = GoogleSignIn.getClient(this, gso);
         auth = FirebaseAuth.getInstance()
+
+        val isAuthError = intent.getBooleanExtra(AUTH_ERROR, false)
+        if (isAuthError) {
+            authorizationFailure()
+        }
     }
 
     override fun onStart() {
@@ -154,12 +159,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 }
 
                 override fun onFailure(call: Call<LoggedUser>, t: Throwable) {
-                    val m = t.message;
                     if(t is AuthorizationException)
                     {
                         authorizationFailure()
                     }
-
                 }
             })
         }

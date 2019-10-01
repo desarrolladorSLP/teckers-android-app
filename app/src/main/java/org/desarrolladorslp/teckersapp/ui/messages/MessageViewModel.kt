@@ -28,6 +28,7 @@ class MessageViewModel() : ViewModel() {
 
     val _inbox = MutableLiveData<Inbox>()
     val _responseException = MutableLiveData<ResponseException?>()
+    val _authorizationException = MutableLiveData<AuthorizationException?>()
 
     fun getmessages(priorityIndex: Int): ArrayList<MessageHeader> {
         if (priorityIndex == LOW_PRIORITY_PAGE_INDEX) {
@@ -48,6 +49,9 @@ class MessageViewModel() : ViewModel() {
 
                 if (t is ResponseException) {
                     _responseException.value = t
+                }else if(t is AuthorizationException)
+                {
+                    _authorizationException.value = t
                 }
             }
         })

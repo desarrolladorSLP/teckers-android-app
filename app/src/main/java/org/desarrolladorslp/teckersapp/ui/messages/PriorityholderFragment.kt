@@ -56,6 +56,15 @@ class PriorityholderFragment : Fragment()
 
         })
 
+        messageViewModel._authorizationException.observe(activity as AppCompatActivity, Observer { authorizationException ->
+            if (authorizationException != null) {
+
+                val intent = Intent(activity, MainActivity::class.java)
+                intent.putExtra(AUTH_ERROR, true)
+                startActivity(intent)
+            }
+        })
+
         messageViewModel._responseException.observe(activity as AppCompatActivity, Observer{ responseException ->
             if(responseException != null)
             {
@@ -64,9 +73,9 @@ class PriorityholderFragment : Fragment()
 
                     Log.d("Messages Reload", "CLICK!")
                 })
-                snackbar.setActionTextColor(Color.parseColor("#4444DD"))
+                snackbar.setActionTextColor(Color.parseColor("#ffffff"))
                 val textView = snackbar.view.findViewById(R.id.snackbar_text) as TextView
-                textView.textSize = 28f
+                textView.textSize = 20f
                 snackbar.show()
             }
 
