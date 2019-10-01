@@ -44,7 +44,10 @@ class PriorityholderFragment : Fragment()
         val root = inflater.inflate(R.layout.content_messages, container, false)
         viewManager = LinearLayoutManager(context)
         messageViewModel._inbox.observe(activity as AppCompatActivity, Observer{ inbox ->
-            viewAdapter = MessageAdapter(messageViewModel.getmessages(arguments?.getInt(ARG_SECTION_NUMBER) ?: 1))
+            viewAdapter = MessageAdapter(
+                if (arguments?.getInt(ARG_SECTION_NUMBER) == 1) inbox.highPriority
+                else inbox.lowPriority
+            )
             recyclerView= root.findViewById<RecyclerView>(R.id.messagesList).apply{
                 setHasFixedSize(true)
                 layoutManager = viewManager
