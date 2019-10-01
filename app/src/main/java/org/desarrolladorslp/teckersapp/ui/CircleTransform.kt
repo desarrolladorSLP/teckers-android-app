@@ -1,4 +1,4 @@
-package org.desarrolladorslp.teckersapp.ui.messages
+package org.desarrolladorslp.teckersapp.ui
 
 import android.graphics.Bitmap
 import android.graphics.BitmapShader

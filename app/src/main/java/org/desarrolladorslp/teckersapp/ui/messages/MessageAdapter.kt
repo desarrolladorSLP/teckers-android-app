@@ -14,7 +14,6 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-
 data class MessageAdapter(private val messagesHeader: ArrayList<MessageHeader>) : RecyclerView.Adapter<MessageAdapter.MessageHeaderHolder>()  {
 
     fun add(messageHeader: MessageHeader, position: Int) {
@@ -82,10 +81,6 @@ data class MessageAdapter(private val messagesHeader: ArrayList<MessageHeader>) 
             view.timestamp.text = myDate.toString()
         }
 
-
     }
-
-
-
 
 }
