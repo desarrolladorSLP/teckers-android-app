@@ -27,26 +27,8 @@ class APIEndpoint {
             if (apiInstance == null) {
 
                 var client = OkHttpClient.Builder()
-                    .addInterceptor(object : TokenInterceptor() {
-                        @Throws(IOException::class)
-                        override fun intercept(chain: Interceptor.Chain): Response {
-                            var request = chain.request()
-                            var response = chain.proceed(request)
-                            if(response.code() == 500)
-                            {
-                                Snackbar.make(applicationLayout, "Error de Servidor", Snackbar.LENGTH_SHORT)
-                                    .show()
-                                return response
-                            }
-                            if(response.code() == 404)
-                            {
-                                Snackbar.make(applicationLayout, "No tienes permiso", Snackbar.LENGTH_SHORT)
-                                    .show()
-                                return response
-                            }
-                            return response
-                        }
-                    })
+                    .addInterceptor(interceptor)
+                    .addInterceptor(ResponseHandlerInterceptor())
                     .build()
 
                 apiInstance = Retrofit.Builder()

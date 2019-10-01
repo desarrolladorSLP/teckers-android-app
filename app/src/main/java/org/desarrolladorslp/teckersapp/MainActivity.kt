@@ -13,15 +13,20 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.android.material.snackbar.Snackbar
 import android.content.Intent
+import android.graphics.Color
+import android.util.Log
+import android.widget.TextView
 import com.google.android.gms.common.api.ApiException
 import kotlinx.android.synthetic.main.activity_main.main_layout
 import kotlinx.android.synthetic.main.activity_main.signInButton
 import kotlinx.android.synthetic.main.activity_main.signOutButton
+import org.desarrolladorslp.teckersapp.exception.AuthorizationException
 import org.desarrolladorslp.teckersapp.model.LoggedUser
 import org.desarrolladorslp.teckersapp.model.User
 import org.desarrolladorslp.teckersapp.service.APIEndpoint
 import org.desarrolladorslp.teckersapp.service.LoginService
 import org.desarrolladorslp.teckersapp.service.RetrofitManager
+import org.desarrolladorslp.teckersapp.ui.messages.PriorityholderFragment.Companion.AUTH_ERROR
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -78,6 +83,19 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+     private fun authorizationFailure()
+    {
+
+        auth.signOut()
+        googleSignInClient.revokeAccess().addOnCompleteListener(this){
+            val snackbar= Snackbar.make(main_layout,R.string.error_authentication , Snackbar.LENGTH_LONG)
+            val textView = snackbar.view.findViewById(R.id.snackbar_text) as TextView
+            textView.textSize = 20f
+            snackbar.show()
+        }
+
+    }
+
     private fun updateUI(user: FirebaseUser?) {
         if (user != null) {
             val intent = Intent(this, NavigationMenu::class.java)
@@ -103,15 +121,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
-        val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
+    private fun firebaseAuthWithGoogle(googleSignInAccount: GoogleSignInAccount) {
+        val credential = GoogleAuthProvider.getCredential(googleSignInAccount.idToken, null)
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     val user = auth.currentUser
                     val firebaseTokenId = user?.zze()?.zzd()
 
-                    setProfileInformation(acct, firebaseTokenId)
+                    setProfileInformation(googleSignInAccount, firebaseTokenId)
                 } else {
                     Snackbar.make(main_layout, "Authentication Failed.", Snackbar.LENGTH_SHORT)
                         .show()
@@ -121,27 +139,27 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             }
     }
 
-    private fun setProfileInformation(acct: GoogleSignInAccount?, firebaseTokenId: String?) {
+    private fun setProfileInformation(googleSignInAccount: GoogleSignInAccount, firebaseTokenId: String?) {
 
-        if (acct != null) {
-            RetrofitManager.setActivity(main_layout)
+        if (googleSignInAccount != null) {
             var loginService = RetrofitManager.instance()?.create(LoginService::class.java);
 
             var loginCall = loginService?.login("firebase", firebaseTokenId)
 
             loginCall?.enqueue(object : Callback<LoggedUser> {
                 override fun onResponse(call: Call<LoggedUser>, response: Response<LoggedUser>) {
-                    if (response.code() == 200) {
-                        APIEndpoint.setAccessToken(response.body()?.accessToken)
-                        user = User(acct)
-                        updateUI(auth.currentUser)
-                    }
+                    APIEndpoint.setAccessToken(response.body()?.accessToken)
+                    user = User(googleSignInAccount)
+                    updateUI(auth.currentUser)
                 }
 
                 override fun onFailure(call: Call<LoggedUser>, t: Throwable) {
                     val m = t.message;
-                    Snackbar.make(main_layout, "Error de autenticación", Snackbar.LENGTH_SHORT)
-                        .show()
+                    if(t is AuthorizationException)
+                    {
+                        authorizationFailure()
+                    }
+
                 }
             })
         }

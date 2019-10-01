@@ -1,6 +1,9 @@
 package org.desarrolladorslp.teckersapp.ui.messages
 
+import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +14,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.content_messages.*
+import org.desarrolladorslp.teckersapp.MainActivity
+
 import org.desarrolladorslp.teckersapp.R
+
 
 class PriorityholderFragment : Fragment()
 {
@@ -19,6 +28,7 @@ class PriorityholderFragment : Fragment()
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<MessageAdapter.MessageHeaderHolder>
     private lateinit var viewManager: RecyclerView.LayoutManager
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,16 +50,33 @@ class PriorityholderFragment : Fragment()
                 layoutManager = viewManager
                 adapter = viewAdapter
             }
-        })
-        messageViewModel.getInbox()
 
+        })
+
+        messageViewModel._responseException.observe(activity as AppCompatActivity, Observer{ responseException ->
+            if(responseException != null)
+            {
+                val snackbar = Snackbar.make(root,R.string.error_response_messages , Snackbar.LENGTH_LONG)
+                snackbar.setAction("Reintentar", View.OnClickListener {
+
+                    Log.d("Messages Reload", "CLICK!")
+                })
+                snackbar.setActionTextColor(Color.parseColor("#4444DD"))
+                val textView = snackbar.view.findViewById(R.id.snackbar_text) as TextView
+                textView.textSize = 28f
+                snackbar.show()
+            }
+
+        })
+
+        messageViewModel.getInbox()
         return root
     }
 
     companion object {
 
         private const val ARG_SECTION_NUMBER = "section_number"
-
+        val AUTH_ERROR = "AUTH_ERROR"
         @JvmStatic
         fun newInstance(sectionNumber: Int): PriorityholderFragment {
             return PriorityholderFragment().apply {
