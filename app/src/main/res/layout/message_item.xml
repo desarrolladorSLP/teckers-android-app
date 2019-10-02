@@ -2,58 +2,80 @@
 <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:orientation="vertical" android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <TextView
             android:id="@+id/sender"
-            android:layout_width="255dp"
-            android:layout_height="34dp"
+            android:layout_width="216dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="56dp"
-            android:layout_marginRight="56dp"
-            android:layout_marginBottom="623dp"
+            android:layout_marginStart="94dp"
+            android:layout_marginLeft="94dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="101dp"
+            android:layout_marginRight="101dp"
             android:text="@string/text_sender"
-            android:textSize="22sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
     <ImageView
             android:id="@+id/senderImage"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="14dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="325dp"
+            android:layout_marginRight="325dp"
+            android:layout_marginBottom="13dp"
             android:contentDescription="@string/imageDescription"
             app:srcCompat="@android:color/darker_gray" />
 
     <TextView
-            android:id="@+id/text_subject"
-            android:layout_width="253dp"
-            android:layout_height="63dp"
+            android:id="@+id/timestamp"
+            android:layout_width="wrap_content"
+            android:layout_height="31dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginTop="36dp"
-            android:layout_marginEnd="57dp"
-            android:layout_marginRight="57dp"
-            android:layout_marginBottom="560dp"
-            android:text="@string/text_subject"
-            android:textSize="18sp" />
-
-    <TextView
-            android:id="@+id/text_timestamp"
-            android:layout_width="wrap_content"
-            android:layout_height="33dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="-4dp"
-            android:layout_marginRight="-4dp"
-            android:layout_marginBottom="623dp"
+            android:layout_marginStart="312dp"
+            android:layout_marginLeft="312dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="1dp"
+            android:layout_marginRight="1dp"
             android:text="@string/text_timestamp"
             android:textAllCaps="false"
             android:textSize="12sp" />
+
+    <TextView
+            android:id="@+id/subject"
+            android:layout_width="wrap_content"
+            android:layout_height="33dp"
+            android:layout_alignTop="@+id/sender"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="94dp"
+            android:layout_marginLeft="94dp"
+            android:layout_marginTop="31dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:text="@string/text_subject"
+            android:textSize="18sp" />
 
 
 </RelativeLayout>

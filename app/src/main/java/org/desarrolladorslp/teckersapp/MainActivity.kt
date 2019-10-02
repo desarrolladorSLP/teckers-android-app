@@ -13,21 +13,34 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.android.material.snackbar.Snackbar
 import android.content.Intent
+import android.graphics.Color
+import android.util.Log
+import android.widget.TextView
 import com.google.android.gms.common.api.ApiException
 import kotlinx.android.synthetic.main.activity_main.main_layout
 import kotlinx.android.synthetic.main.activity_main.signInButton
 import kotlinx.android.synthetic.main.activity_main.signOutButton
+import org.desarrolladorslp.teckersapp.exception.AuthorizationException
+import org.desarrolladorslp.teckersapp.model.LoggedUser
 import org.desarrolladorslp.teckersapp.model.User
+import org.desarrolladorslp.teckersapp.service.APIEndpoint
+import org.desarrolladorslp.teckersapp.service.LoginService
+import org.desarrolladorslp.teckersapp.service.RetrofitManager
+import org.desarrolladorslp.teckersapp.ui.messages.PriorityholderFragment.Companion.AUTH_ERROR
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
     private var googleSignInButton: SignInButton? = null
-    private var profile:GoogleSignInAccount? = null
+    private var profile: GoogleSignInAccount? = null
+
 
     val googleAuthClientId: String = BuildConfig.ApiKey
-    private lateinit var user :User
+    private lateinit var user: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +57,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         googleSignInClient = GoogleSignIn.getClient(this, gso);
         auth = FirebaseAuth.getInstance()
 
-
+        val isAuthError = intent.getBooleanExtra(AUTH_ERROR, false)
+        if (isAuthError) {
+            authorizationFailure()
+        }
     }
 
     override fun onStart() {
@@ -72,13 +88,24 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+     private fun authorizationFailure()
+    {
+
+        auth.signOut()
+        googleSignInClient.revokeAccess().addOnCompleteListener(this){
+            val snackbar= Snackbar.make(main_layout,R.string.error_authentication , Snackbar.LENGTH_LONG)
+            val textView = snackbar.view.findViewById(R.id.snackbar_text) as TextView
+            textView.textSize = 20f
+            snackbar.show()
+        }
+
+    }
+
     private fun updateUI(user: FirebaseUser?) {
-        if(user!=null)
-        {
+        if (user != null) {
             val intent = Intent(this, NavigationMenu::class.java)
             startActivity(intent)
-        }
-        else{
+        } else {
             signInButton.visibility = View.VISIBLE
             signOutButton.visibility = View.GONE
         }
@@ -99,29 +126,44 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
-        val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
+    private fun firebaseAuthWithGoogle(googleSignInAccount: GoogleSignInAccount) {
+        val credential = GoogleAuthProvider.getCredential(googleSignInAccount.idToken, null)
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     val user = auth.currentUser
-                    setProfileInformation(acct)
-                    updateUI(user)
+                    val firebaseTokenId = user?.zze()?.zzd()
+
+                    setProfileInformation(googleSignInAccount, firebaseTokenId)
                 } else {
-                    Snackbar.make(main_layout, "Authentication Failed.", Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(main_layout, "Authentication Failed.", Snackbar.LENGTH_SHORT)
+                        .show()
                     updateUI(null)
                 }
 
             }
     }
 
-    private fun setProfileInformation(acct: GoogleSignInAccount?){
+    private fun setProfileInformation(googleSignInAccount: GoogleSignInAccount, firebaseTokenId: String?) {
 
-        if (acct != null) {
-            user = User(acct)
+        if (googleSignInAccount != null) {
+            var loginService = RetrofitManager.instance()?.create(LoginService::class.java);
+
+            var loginCall = loginService?.login("firebase", firebaseTokenId)
+
+            loginCall?.enqueue(object : Callback<LoggedUser> {
+                override fun onResponse(call: Call<LoggedUser>, response: Response<LoggedUser>) {
+                    APIEndpoint.setAccessToken(response.body()?.accessToken)
+                    user = User(googleSignInAccount)
+                    updateUI(auth.currentUser)
+                }
+
+                override fun onFailure(call: Call<LoggedUser>, t: Throwable) {
+                    authorizationFailure()
+                }
+            })
         }
     }
-
 
 
     override fun onClick(v: View) {

@@ -201,4 +201,6 @@ fabric.properties
 
 # Google services
 app/google-services.json
+
+.idea/codeStyles/Project.xml
 # End of https://www.gitignore.io/api/android,androidstudio
