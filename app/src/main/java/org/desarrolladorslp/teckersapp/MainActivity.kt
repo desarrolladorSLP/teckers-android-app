@@ -159,10 +159,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 }
 
                 override fun onFailure(call: Call<LoggedUser>, t: Throwable) {
-                    if(t is AuthorizationException)
-                    {
-                        authorizationFailure()
-                    }
+                    authorizationFailure()
                 }
             })
         }
