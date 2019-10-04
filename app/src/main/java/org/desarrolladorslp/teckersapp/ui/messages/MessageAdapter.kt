@@ -72,7 +72,7 @@ data class MessageAdapter(private val messagesHeader: ArrayList<MessageHeader>) 
                 Picasso.get()
                     .load(messageheader.senderImage)
                     .centerCrop()
-                    .transform(CircleTransform(30, 0))
+                    .transform(CircleTransform(120, 0))
                     .fit()
                     .into(view.senderImage)
 
