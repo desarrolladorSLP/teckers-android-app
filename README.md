@@ -143,6 +143,44 @@ dependencies {
 * If you added Analytics, run your app to send verification to Firebase that you've successfully integrated Firebase. Otherwise, you can skip the verification step.
 * Your device logs will display the Firebase verification that initialization is complete. If you ran your app on an emulator that has network access, the Firebase console notifies you that your app connection is complete.
 
+7.  Gradle properties
+By default, Gradle uses a file called `(gradle.properties)` in the root directory for Android Projects. This extension file is widely used in Java projects, so it is also used for Android projects. 
+The file has a simple key — value data structure.
+ `(KEY_1=VALUE_1)`
+ `(KEY_2=VALUE_2)` 
+By default, there is a properties file in Gradle Home where Gradle system lives in your environment, they are loaded automatically by Gradle, if the filename is `(gradle.properties)`, we can use these variables `(inapp/build.gradle)` just writing their names.
+Below a default Gradle properties file created by Android Studio:
+```javascript
+# Project-wide Gradle settings.
+
+# IDE (e.g. Android Studio) users:
+# Gradle settings configured through the IDE *will override*
+# any settings specified in this file.
+
+# For more details on how to configure your build environment visit
+# http://www.gradle.org/docs/current/userguide/build_environment.html
+
+# Specifies the JVM arguments used for the daemon process.
+# The setting is particularly useful for tweaking memory settings.
+org.gradle.jvmargs=-Xmx1536m
+
+# When configured, Gradle will run in incubating parallel mode.
+# This option should only be used with decoupled projects. More details, visit
+# http://www.gradle.org/docs/current/userguide/multi_project_builds.html#sec:decoupled_projects
+# org.gradle.parallel=true
+```
+
+And the following is an example of `(app/gradle.properties)`:
+
+```javascript
+# Gradle properties for module app
+API_BASE_URL="http://example.com"
+DB_FILEPATH="/common/filepath/db"
+API_KEY="2FA43FADFaw432dfa"
+```
+
+
+
 The following link shows in more detail the steps to follow: 
  [https://firebase.google.com/docs/android/setup#next_steps]
  
