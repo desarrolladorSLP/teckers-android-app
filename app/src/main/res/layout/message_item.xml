@@ -25,22 +25,20 @@
             android:textStyle="bold" />
 
     <ImageView
-            android:id="@+id/senderImage"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginStart="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="334dp"
-            android:layout_marginRight="334dp"
-            android:layout_marginBottom="13dp"
-            android:contentDescription="@string/imageDescription"
-            app:srcCompat="@android:color/darker_gray" />
+
+        android:id="@+id/senderImage"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="325dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="13dp"
+        android:contentDescription="@string/imageDescription"
+        app:srcCompat="@android:color/darker_gray" />
+
 
     <TextView
             android:id="@+id/timestamp"
