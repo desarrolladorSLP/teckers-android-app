@@ -15,4 +15,7 @@
     <string name="error_authentication">Invalid user. Please contact your administrator.</string>
     <string name="error_response_messages">Unable to show your messages, please try again later.</string>
     <string name="retry">Retry</string>
+    <string name="text_description">Description</string>
+    <string name="text_date">Date</string>
+    <string name="image_description">ImageStatus</string>
 </resources>
