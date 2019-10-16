@@ -67,12 +67,13 @@ data class MessageAdapter(private val messagesHeader: ArrayList<MessageHeader>) 
         @RequiresApi(Build.VERSION_CODES.O)
         fun bindMessageHeader(messageheader: MessageHeader) {
             this.messageheader = messageheader
-
+            val screenDensity = view.senderImage.context.resources.displayMetrics.density.toInt()
+            val radius = 40 * screenDensity
             try {
                 Picasso.get()
                     .load(messageheader.senderImage)
                     .centerCrop()
-                    .transform(CircleTransform(30, 0))
+                    .transform(CircleTransform(radius, 0))
                     .fit()
                     .into(view.senderImage)
 
