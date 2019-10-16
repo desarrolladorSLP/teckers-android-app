@@ -67,7 +67,7 @@ data class DeliverableAdapter(private val deliverablesHeader: ArrayList<Delivera
         @RequiresApi(Build.VERSION_CODES.O)
         fun bindDeliverableHeader(deliverableHeader: DeliverableHeader) {
             this.deliverableHeader = deliverableHeader
-            var imageStatus=""
+            var imageStatus="https://cdn2.glamour.es/uploads/images/thumbs/es/glam/4/s/2017/15/zac_efron_7917_620x698.jpg"
             when(deliverableHeader.status)
             {
                 "Accepted" -> imageStatus="https://cdn2.glamour.es/uploads/images/thumbs/es/glam/4/s/2017/15/zac_efron_7917_620x698.jpg"
@@ -78,7 +78,7 @@ data class DeliverableAdapter(private val deliverablesHeader: ArrayList<Delivera
                 Picasso.get()
                     .load(imageStatus)
                     .centerCrop()
-                    .transform(CircleTransform(20*view.imageStatus.context.resources.displayMetrics.density.toInt(), 0))
+                    .transform(CircleTransform(40*view.imageStatus.context.resources.displayMetrics.density.toInt(), 0))
                     .fit()
                     .into(view.imageStatus)
 
