@@ -7,10 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.deliverable_item.view.*
 import org.desarrolladorslp.teckersapp.R
-import org.desarrolladorslp.teckersapp.ui.CircleTransform
+import org.desarrolladorslp.teckersapp.model.DeliverableHeader
 
 
 data class DeliverableAdapter(private val deliverablesHeader: ArrayList<DeliverableHeader>) :
