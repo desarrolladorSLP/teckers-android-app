@@ -1,6 +1,5 @@
 package org.desarrolladorslp.teckersapp.ui.deliverables
 
-
 import android.os.Build
 import android.util.Log
 import android.view.LayoutInflater
@@ -67,24 +66,20 @@ data class DeliverableAdapter(private val deliverablesHeader: ArrayList<Delivera
         @RequiresApi(Build.VERSION_CODES.O)
         fun bindDeliverableHeader(deliverableHeader: DeliverableHeader) {
             this.deliverableHeader = deliverableHeader
-            var imageStatus="https://cdn2.glamour.es/uploads/images/thumbs/es/glam/4/s/2017/15/zac_efron_7917_620x698.jpg"
+            var imageStatus=0
             when(deliverableHeader.status)
             {
-                "Accepted" -> imageStatus="https://cdn2.glamour.es/uploads/images/thumbs/es/glam/4/s/2017/15/zac_efron_7917_620x698.jpg"
+                "ToDo" -> imageStatus = 0
+                "In Progress" -> imageStatus = 0
+                "Ready for review" -> imageStatus =0
+                "Accepted" -> imageStatus =R.drawable.ic_deliverable_accepted
+                "Rejected" -> imageStatus =0
+                "Blocked" -> imageStatus = R.drawable.ic_deliverable_blocked
+                "Overdue" -> imageStatus =0
             }
 
 
-            try {
-                Picasso.get()
-                    .load(imageStatus)
-                    .centerCrop()
-                    .transform(CircleTransform(40*view.imageStatus.context.resources.displayMetrics.density.toInt(), 0))
-                    .fit()
-                    .into(view.imageStatus)
-
-            } catch (e: Exception) {
-                Log.d("DeliverImageException", e.message!!)
-            }
+            view.imageStatus.setImageResource(imageStatus)
             if(deliverableCount % 2 !=0 ) {
                 view.description_column1.text = deliverableHeader.description
                 view.date_column1.text = deliverableHeader.date
@@ -97,7 +92,6 @@ data class DeliverableAdapter(private val deliverablesHeader: ArrayList<Delivera
                 view.description_column2.text = deliverableHeader.description
                 view.date_column2.text = deliverableHeader.date
             }
-
 
         }
 

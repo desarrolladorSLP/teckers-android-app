@@ -45,7 +45,7 @@ class DeliverableFragment : Fragment() {
 
         })
 
-        deliverablesViewModel.createDeliverables()
+        deliverablesViewModel.getDeliverables()
         return root
     }
 
