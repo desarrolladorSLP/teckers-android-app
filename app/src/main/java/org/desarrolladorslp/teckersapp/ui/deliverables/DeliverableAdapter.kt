@@ -10,6 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.deliverable_item.view.*
 import org.desarrolladorslp.teckersapp.R
 import org.desarrolladorslp.teckersapp.model.DeliverableHeader
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
+import java.time.format.FormatStyle
 
 
 data class DeliverableAdapter(private val deliverablesHeader: ArrayList<DeliverableHeader>) :
@@ -68,28 +71,30 @@ data class DeliverableAdapter(private val deliverablesHeader: ArrayList<Delivera
             var imageStatus=0
             when(deliverableHeader.status)
             {
-                "ToDo" -> imageStatus = 0
-                "In Progress" -> imageStatus = 0
-                "Ready for review" -> imageStatus =0
-                "Accepted" -> imageStatus =R.drawable.ic_deliverable_accepted
-                "Rejected" -> imageStatus =0
-                "Blocked" -> imageStatus = R.drawable.ic_deliverable_blocked
-                "Overdue" -> imageStatus =0
+                "TO_DO" -> imageStatus = R.drawable.ic_deliverable_to_do
+                "IN_PROGRESS" -> imageStatus = R.drawable.ic_deliverable_in_progress
+                "READY_FOR_REVIEW" -> imageStatus =R.drawable.ic_deliverable_ready_for_review
+                "ACCEPTED" -> imageStatus =R.drawable.ic_deliverable_accepted
+                "REJECTED" -> imageStatus =R.drawable.ic_deliverable_rejected
+                "BLOCKED" -> imageStatus = R.drawable.ic_deliverable_blocked
+                "OVERDUE" -> imageStatus =R.drawable.ic_deliverable_overdue
             }
 
 
             view.imageStatus.setImageResource(imageStatus)
             if(deliverableCount % 2 !=0 ) {
-                view.description_column1.text = deliverableHeader.description
-                view.date_column1.text = deliverableHeader.date
+                view.description_column1.text = deliverableHeader.title
+                view.date_column1.text = ZonedDateTime.parse(deliverableHeader.dueDate).format(
+                    DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT))
                 view.description_column2.text = ""
                 view.date_column2.text = ""
             }
             else{
                 view.description_column1.text = ""
                 view.date_column1.text = ""
-                view.description_column2.text = deliverableHeader.description
-                view.date_column2.text = deliverableHeader.date
+                view.description_column2.text = deliverableHeader.title
+                view.date_column2.text = ZonedDateTime.parse(deliverableHeader.dueDate).format(
+                    DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT))
             }
 
         }
