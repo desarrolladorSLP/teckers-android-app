@@ -19,7 +19,7 @@ data class DeliverableAdapter(private val deliverablesHeader: ArrayList<Delivera
     RecyclerView.Adapter<DeliverableAdapter.DeliverableHeaderHolder>() {
 
 
-    fun add(deliverableHeader: DeliverableHeader, position: Int) {
+    fun add(deliverableHeader: DeliverableHeader, position: Int = -1) {
         var position = position
         position = if (position == -1) itemCount else position
         deliverablesHeader.add(position, deliverableHeader)
