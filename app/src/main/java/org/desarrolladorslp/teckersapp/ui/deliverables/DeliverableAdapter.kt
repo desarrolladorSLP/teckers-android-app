@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.deliverable_item.view.*
 import org.desarrolladorslp.teckersapp.R
 import org.desarrolladorslp.teckersapp.model.DeliverableHeader
-import java.time.ZonedDateTime
+import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 
@@ -82,10 +82,12 @@ data class DeliverableAdapter(private val deliverablesHeader: ArrayList<Delivera
 
 
             view.imageStatus.setImageResource(imageStatus)
+            val date = LocalDate.parse(deliverableHeader.dueDate).format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT))
             if(deliverableCount % 2 !=0 ) {
                 view.description_column1.text = deliverableHeader.title
-                view.date_column1.text = ZonedDateTime.parse(deliverableHeader.dueDate).format(
-                    DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT))
+
+
+                view.date_column1.text = date
                 view.description_column2.text = ""
                 view.date_column2.text = ""
             }
@@ -93,11 +95,11 @@ data class DeliverableAdapter(private val deliverablesHeader: ArrayList<Delivera
                 view.description_column1.text = ""
                 view.date_column1.text = ""
                 view.description_column2.text = deliverableHeader.title
-                view.date_column2.text = ZonedDateTime.parse(deliverableHeader.dueDate).format(
-                    DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT))
+                view.date_column2.text = date
             }
 
         }
+
 
     }
 
