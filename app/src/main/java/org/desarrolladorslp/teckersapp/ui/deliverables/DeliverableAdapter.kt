@@ -17,7 +17,7 @@ import java.time.format.FormatStyle
 
 data class DeliverableAdapter(private val deliverablesHeader: ArrayList<DeliverableHeader>) :
     RecyclerView.Adapter<DeliverableAdapter.DeliverableHeaderHolder>() {
-    private var deliverableCount =0
+
 
     fun add(deliverableHeader: DeliverableHeader, position: Int) {
         var position = position
@@ -27,10 +27,17 @@ data class DeliverableAdapter(private val deliverablesHeader: ArrayList<Delivera
     }
 
     fun remove(position: Int) {
-        if (position < itemCount) {
-            deliverablesHeader.removeAt(position)
-            notifyItemRemoved(position)
+        try{
+            if (position < itemCount) {
+                deliverablesHeader.removeAt(position)
+                notifyItemRemoved(position)
+            }
         }
+        catch(e:Exception)
+        {
+            Log.d("RemoveDeliverable", "Invalid Position")
+        }
+
 
     }
 
@@ -46,12 +53,12 @@ data class DeliverableAdapter(private val deliverablesHeader: ArrayList<Delivera
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeliverableHeaderHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.deliverable_item, parent, false)
-        deliverableCount ++
+        deliverableCount = deliverablesHeader.size
 
-        return DeliverableHeaderHolder(view,deliverableCount)
+        return DeliverableHeaderHolder(view)
     }
 
-    class DeliverableHeaderHolder(val view: View, val deliverableCount : Int ) : RecyclerView.ViewHolder(view),
+    class DeliverableHeaderHolder(val view: View) : RecyclerView.ViewHolder(view),
         View.OnClickListener {
 
 
@@ -68,16 +75,17 @@ data class DeliverableAdapter(private val deliverablesHeader: ArrayList<Delivera
         @RequiresApi(Build.VERSION_CODES.O)
         fun bindDeliverableHeader(deliverableHeader: DeliverableHeader) {
             this.deliverableHeader = deliverableHeader
-            var imageStatus=0
-            when(deliverableHeader.status)
+
+            var imageStatus= when(deliverableHeader.status)
             {
-                "TO_DO" -> imageStatus = R.drawable.ic_deliverable_to_do
-                "IN_PROGRESS" -> imageStatus = R.drawable.ic_deliverable_in_progress
-                "READY_FOR_REVIEW" -> imageStatus =R.drawable.ic_deliverable_ready_for_review
-                "ACCEPTED" -> imageStatus =R.drawable.ic_deliverable_accepted
-                "REJECTED" -> imageStatus =R.drawable.ic_deliverable_rejected
-                "BLOCKED" -> imageStatus = R.drawable.ic_deliverable_blocked
-                "OVERDUE" -> imageStatus =R.drawable.ic_deliverable_overdue
+                "TO_DO" ->  R.drawable.ic_deliverable_to_do
+                "IN_PROGRESS" -> R.drawable.ic_deliverable_in_progress
+                "READY_FOR_REVIEW" -> R.drawable.ic_deliverable_ready_for_review
+                "ACCEPTED" -> R.drawable.ic_deliverable_accepted
+                "REJECTED" -> R.drawable.ic_deliverable_rejected
+                "BLOCKED" -> R.drawable.ic_deliverable_blocked
+                "OVERDUE" -> R.drawable.ic_deliverable_overdue
+                else -> R.drawable.ic_deliverable_nonstatus
             }
 
 
@@ -101,6 +109,9 @@ data class DeliverableAdapter(private val deliverablesHeader: ArrayList<Delivera
         }
 
 
+    }
+    companion object{
+        var deliverableCount=0
     }
 
 }

@@ -18,9 +18,6 @@ class DeliverableFragment : Fragment() {
     private lateinit var deliverablesViewModel: DeliverableViewModel
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<DeliverableAdapter.DeliverableHeaderHolder>
-    private lateinit var viewManager: RecyclerView.LayoutManager
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,13 +30,12 @@ class DeliverableFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_deliverables, container, false)
-        viewManager = LinearLayoutManager(context)
         deliverablesViewModel._deliverables.observe(activity as AppCompatActivity, Observer{ deliverables ->
 
             viewAdapter = DeliverableAdapter(deliverables)
             recyclerView= root.findViewById<RecyclerView>(R.id.deliverablesList).apply{
                 setHasFixedSize(true)
-                layoutManager = viewManager
+                layoutManager = LinearLayoutManager(context)
                 adapter = viewAdapter
             }
 
