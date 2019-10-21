@@ -53,7 +53,7 @@ data class DeliverableAdapter(private val deliverablesHeader: ArrayList<Delivera
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeliverableHeaderHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.deliverable_item, parent, false)
-        deliverableCount = deliverablesHeader.size
+        deliverableCount ++
 
         return DeliverableHeaderHolder(view)
     }
