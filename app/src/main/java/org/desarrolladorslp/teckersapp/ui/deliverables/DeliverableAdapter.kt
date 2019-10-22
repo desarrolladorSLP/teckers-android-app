@@ -27,18 +27,12 @@ data class DeliverableAdapter(private val deliverablesHeader: ArrayList<Delivera
     }
 
     fun remove(position: Int) {
-        try{
-            if (position < itemCount) {
-                deliverablesHeader.removeAt(position)
-                notifyItemRemoved(position)
-            }
+        if (position < itemCount) {
+            deliverablesHeader.removeAt(position)
+            notifyItemRemoved(position)
+        }else {
+            throw Exception("Invalid Position")
         }
-        catch(e:Exception)
-        {
-            Log.d("RemoveDeliverable", "Invalid Position")
-        }
-
-
     }
 
     override fun getItemCount() = deliverablesHeader.size
@@ -47,13 +41,12 @@ data class DeliverableAdapter(private val deliverablesHeader: ArrayList<Delivera
 
     override fun onBindViewHolder(holder: DeliverableHeaderHolder, position: Int) {
         val itemDeliverableHeader = deliverablesHeader[position]
-        holder.bindDeliverableHeader(itemDeliverableHeader)
+        holder.bindDeliverableHeader(itemDeliverableHeader,position)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeliverableHeaderHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.deliverable_item, parent, false)
-        deliverableCount ++
 
         return DeliverableHeaderHolder(view)
     }
@@ -73,7 +66,7 @@ data class DeliverableAdapter(private val deliverablesHeader: ArrayList<Delivera
         }
 
         @RequiresApi(Build.VERSION_CODES.O)
-        fun bindDeliverableHeader(deliverableHeader: DeliverableHeader) {
+        fun bindDeliverableHeader(deliverableHeader: DeliverableHeader,position:Int) {
             this.deliverableHeader = deliverableHeader
 
             var imageStatus= when(deliverableHeader.status)
@@ -91,7 +84,7 @@ data class DeliverableAdapter(private val deliverablesHeader: ArrayList<Delivera
 
             view.imageStatus.setImageResource(imageStatus)
             val date = LocalDate.parse(deliverableHeader.dueDate).format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT))
-            if(deliverableCount % 2 !=0 ) {
+            if(position % 2 !=0 ) {
                 view.description_column1.text = deliverableHeader.title
 
 
@@ -108,10 +101,7 @@ data class DeliverableAdapter(private val deliverablesHeader: ArrayList<Delivera
 
         }
 
+    }
 
-    }
-    companion object{
-        var deliverableCount=0
-    }
 
 }
