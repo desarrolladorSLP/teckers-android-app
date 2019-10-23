@@ -2,21 +2,36 @@ package org.desarrolladorslp.teckersapp.ui.teckers
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import org.desarrolladorslp.teckersapp.exception.AuthorizationException
+import org.desarrolladorslp.teckersapp.exception.ResponseException
 import org.desarrolladorslp.teckersapp.model.Tecker
+import org.desarrolladorslp.teckersapp.service.APIEndpoint
+import org.desarrolladorslp.teckersapp.service.ParentTeckersService
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class TeckerViewModel : ViewModel() {
     var _teckers = MutableLiveData<ArrayList<Tecker>>()
+    private var parentTeckersService = APIEndpoint.instance()?.create(ParentTeckersService::class.java)
+    val _responseException = MutableLiveData<ResponseException?>()
+    val _authorizationException = MutableLiveData<AuthorizationException?>()
 
     fun getParentTeckers() {
 
-        val tecker1 = Tecker("24","https://cdn2.glamour.es/uploads/images/thumbs/es/glam/4/s/2017/15/zac_efron_7917_620x698.jpg","Juan")
-        val tecker2 = Tecker("25","https://cdn2.glamour.es/uploads/images/thumbs/es/glam/4/s/2017/15/zac_efron_7917_620x698.jpg","Pedro")
+        var parentTeckersCall = parentTeckersService?.getTeckers()
+        parentTeckersCall?.enqueue(object : Callback<ArrayList<Tecker>> {
+            override fun onResponse(call: Call<ArrayList<Tecker>>, response: Response<ArrayList<Tecker>>) {
+                _teckers.value = response.body()
+            }
 
-        var teckers = ArrayList<Tecker>()
-
-        teckers.add(tecker1)
-        teckers.add(tecker2)
-
-        _teckers.value=teckers
+            override fun onFailure(call: Call<ArrayList<Tecker>>, t: Throwable) {
+                if (t is ResponseException) {
+                    _responseException.value = t
+                }else if(t is AuthorizationException) {
+                    _authorizationException.value = t
+                }
+            }
+        })
     }
 }
