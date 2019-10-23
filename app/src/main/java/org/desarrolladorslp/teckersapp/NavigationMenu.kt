@@ -19,9 +19,21 @@ class NavigationMenu : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
+        var role = "parent"
+        var navigationOption=0
+        if(role=="parent")
+        {
+            navView.menu.removeItem(R.id.navigation_deliverables)
+            navigationOption=R.id.navigation_parent_teckers
+
+        }
+        else{
+            navView.menu.removeItem(R.id.navigation_parent_teckers)
+            navigationOption=R.id.navigation_deliverables
+        }
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_messages, R.id.navigation_deliverables, R.id.navigation_teams, R.id.navigation_sessions
+                R.id.navigation_messages, navigationOption, R.id.navigation_teams, R.id.navigation_sessions
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
