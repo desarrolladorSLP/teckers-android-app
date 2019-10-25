@@ -24,7 +24,7 @@ import retrofit2.Response
 
 class MessageViewModel() : ViewModel() {
 
-    private var messageService = APIEndpoint.instance()?.create(MessageService::class.java);
+    private var messageService = APIEndpoint.instance().create(MessageService::class.java);
 
     val _inbox = MutableLiveData<Inbox>()
     val _responseException = MutableLiveData<ResponseException?>()

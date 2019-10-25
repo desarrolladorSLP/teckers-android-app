@@ -23,10 +23,10 @@ class APIEndpoint {
         {
             applicationLayout = constraintLayout
         }
-        fun instance(): Retrofit? {
+        fun instance(): Retrofit {
             if (apiInstance == null) {
 
-                var client = OkHttpClient.Builder()
+                val client = OkHttpClient.Builder()
                     .addInterceptor(interceptor)
                     .addInterceptor(ResponseHandlerInterceptor())
                     .build()
@@ -38,7 +38,7 @@ class APIEndpoint {
                     .build()
             }
 
-            return apiInstance;
+            return apiInstance!!
         }
 
         fun setAccessToken(accessToken: String?) {

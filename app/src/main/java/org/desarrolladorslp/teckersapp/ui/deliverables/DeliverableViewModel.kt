@@ -13,21 +13,21 @@ import retrofit2.Response
 
 class DeliverableViewModel : ViewModel() {
 
-    private var deliverablesService = APIEndpoint.instance()?.create(DeliverableService::class.java)
+    private var deliverablesService = APIEndpoint.instance().create(DeliverableService::class.java)
     val _responseException = MutableLiveData<ResponseException?>()
     val _authorizationException = MutableLiveData<AuthorizationException?>()
     var _deliverables = MutableLiveData<ArrayList<DeliverableHeader>>()
 
     fun getDeliverables(){
 
-        var deliverableCall = deliverablesService?.getDeliverables()
-        deliverableCall?.enqueue(object : Callback<ArrayList<DeliverableHeader>> {
+        val deliverableCall = deliverablesService.getDeliverables()
+        deliverableCall.enqueue(object : Callback<ArrayList<DeliverableHeader>> {
             override fun onResponse(call: Call<ArrayList<DeliverableHeader>>, response: Response<ArrayList<DeliverableHeader>>) {
                 _deliverables.value = response.body()
             }
 
             override fun onFailure(call: Call<ArrayList<DeliverableHeader>>, t: Throwable) {
-                val m = t.message;
+                val m = t.message
 
                 if (t is ResponseException) {
                     _responseException.value = t
