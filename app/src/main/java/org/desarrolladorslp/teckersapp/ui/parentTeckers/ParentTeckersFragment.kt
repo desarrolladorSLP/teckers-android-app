@@ -35,7 +35,7 @@ class ParentTeckersFragment : Fragment() {
 
         teckersViewModel._teckers.observe(activity as AppCompatActivity, Observer{ teckers ->
 
-            viewAdapter = ParentTeckerAdapter(teckers)
+            viewAdapter = ParentTeckerAdapter(teckers,this,activity as AppCompatActivity)
             recyclerView= root.findViewById<RecyclerView>(R.id.parentTeckersList).apply{
                 setHasFixedSize(true)
                 layoutManager = viewManager

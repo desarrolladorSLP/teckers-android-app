@@ -4,15 +4,18 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.parent_tecker_item.view.*
-import org.desarrolladorslp.teckersapp.model.Tecker
 import org.desarrolladorslp.teckersapp.R
+import org.desarrolladorslp.teckersapp.model.Tecker
 import org.desarrolladorslp.teckersapp.ui.CircleTransform
+import org.desarrolladorslp.teckersapp.ui.deliverables.DeliverableFragment
 
 
-data class ParentTeckerAdapter(private val teckers: ArrayList<Tecker>) :
+data class ParentTeckerAdapter(private val teckers: ArrayList<Tecker>, private val fragment: Fragment,private val activity :AppCompatActivity) :
     RecyclerView.Adapter<ParentTeckerAdapter.TeckerHolder>() {
 
 
@@ -47,12 +50,11 @@ data class ParentTeckerAdapter(private val teckers: ArrayList<Tecker>) :
             .inflate(R.layout.parent_tecker_item, parent, false)
 
 
-        return TeckerHolder(view)
+        return TeckerHolder(view,fragment,activity)
     }
 
-    class TeckerHolder(val view: View) : RecyclerView.ViewHolder(view),
+    class TeckerHolder(val view: View,val fragment: Fragment, val activity: AppCompatActivity) : RecyclerView.ViewHolder(view),
         View.OnClickListener {
-
 
         private var tecker: Tecker? = null
 
@@ -61,8 +63,14 @@ data class ParentTeckerAdapter(private val teckers: ArrayList<Tecker>) :
         }
 
         override fun onClick(v: View) {
-            Log.d("RecyclerViewChild", "CLICK!")
+            val deliverables = DeliverableFragment()
+
+            activity.supportFragmentManager.beginTransaction()
+                .replace(R.id.content_teckers_layout,deliverables)
+                .commit()
         }
+
+
 
         fun bindChild(tecker: Tecker) {
             this.tecker = tecker

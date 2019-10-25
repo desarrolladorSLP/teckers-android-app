@@ -36,8 +36,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
     private var googleSignInButton: SignInButton? = null
-    private var profile: GoogleSignInAccount? = null
-
 
     val googleAuthClientId: String = BuildConfig.ApiKey
     private lateinit var user: User
@@ -155,6 +153,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 override fun onResponse(call: Call<LoggedUser>, response: Response<LoggedUser>) {
                     APIEndpoint.setAccessToken(response.body()?.accessToken)
                     user = User(googleSignInAccount)
+                    ROLE_PARENT=response.body()?.hasRole("ROLE_PARENT")!!
                     updateUI(auth.currentUser)
                 }
 
@@ -178,5 +177,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     companion object {
         private const val TAG = "GoogleActivity"
         private const val RC_SIGN_IN = 9001
+        var ROLE_PARENT = false
     }
 }

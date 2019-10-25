@@ -13,10 +13,10 @@ import retrofit2.Response
 
 class TeckerViewModel : ViewModel() {
     var _teckers = MutableLiveData<ArrayList<Tecker>>()
-    private var parentTeckersService = APIEndpoint.instance()?.create(ParentTeckersService::class.java)
+    var parentTeckersService = APIEndpoint.instance()?.create(ParentTeckersService::class.java)
     val _responseException = MutableLiveData<ResponseException?>()
     val _authorizationException = MutableLiveData<AuthorizationException?>()
-
+    
     fun getParentTeckers() {
 
         var parentTeckersCall = parentTeckersService?.getTeckers()
@@ -26,9 +26,12 @@ class TeckerViewModel : ViewModel() {
             }
 
             override fun onFailure(call: Call<ArrayList<Tecker>>, t: Throwable) {
+                val m = t.message
+
                 if (t is ResponseException) {
                     _responseException.value = t
-                }else if(t is AuthorizationException) {
+                }else if(t is AuthorizationException)
+                {
                     _authorizationException.value = t
                 }
             }
