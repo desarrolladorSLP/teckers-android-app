@@ -7,10 +7,6 @@
             android:title="@string/title_messages" />
 
     <item
-            android:id="@+id/navigation_parent_teckers"
-            android:icon="@drawable/ic_deliverables_black_24dp"
-            android:title="@string/title_deliverables" />
-    <item
         android:id="@+id/navigation_deliverables"
         android:icon="@drawable/ic_deliverables_black_24dp"
         android:title="@string/title_deliverables" />

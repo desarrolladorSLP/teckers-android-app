@@ -12,16 +12,10 @@
             tools:layout="@layout/fragment_messages" />
 
     <fragment
-    android:id="@+id/navigation_deliverables"
-    android:name="org.desarrolladorslp.teckersapp.ui.deliverables.DeliverableFragment"
-    android:label="@string/title_deliverables"
-    tools:layout="@layout/fragment_deliverables" />
-
-    <fragment
-        android:id="@+id/navigation_parent_teckers"
-        android:name="org.desarrolladorslp.teckersapp.ui.parentTeckers.ParentTeckersFragment"
-        android:label="Teckers"
-        tools:layout="@layout/fragment_parent_teckers" />
+        android:id="@+id/navigation_deliverables"
+        android:name="org.desarrolladorslp.teckersapp.ui.ContainerFragment"
+        android:label="@string/title_deliverables"
+        tools:layout="@layout/fragment_container" />
 
     <fragment
             android:id="@+id/navigation_teams"
