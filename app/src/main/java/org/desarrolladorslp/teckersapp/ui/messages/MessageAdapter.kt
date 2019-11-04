@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.message_item.view.*
 import org.desarrolladorslp.teckersapp.R
 import org.desarrolladorslp.teckersapp.model.MessageHeader
 import org.desarrolladorslp.teckersapp.ui.CircleTransform
+
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
@@ -19,6 +20,7 @@ import kotlin.collections.ArrayList
 
 data class MessageAdapter(private val messagesHeader: ArrayList<MessageHeader>) :
     RecyclerView.Adapter<MessageAdapter.MessageHeaderHolder>() {
+
 
     fun add(messageHeader: MessageHeader, position: Int) {
         var position = position
@@ -73,6 +75,7 @@ data class MessageAdapter(private val messagesHeader: ArrayList<MessageHeader>) 
                 Picasso.get()
                     .load(messageheader.senderImage)
                     .centerCrop()
+
                     .transform(CircleTransform(radius, 0))
                     .fit()
                     .into(view.senderImage)
@@ -83,10 +86,12 @@ data class MessageAdapter(private val messagesHeader: ArrayList<MessageHeader>) 
 
             view.sender.text = messageheader.sender
             view.subject.text = messageheader.subject
+            view.timestamp.text = messageheader.timestamp
 
             view.timestamp.text = ZonedDateTime.parse(messageheader.timestamp).format(
                 DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT)
             )
+
         }
 
     }
