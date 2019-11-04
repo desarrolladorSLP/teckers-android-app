@@ -15,7 +15,7 @@ import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 
 
-data class DeliverableAdapter(private val deliverablesHeader: ArrayList<DeliverableHeader>) :
+data class DeliverableAdapter(private val deliverableHeaders: ArrayList<DeliverableHeader>) :
     RecyclerView.Adapter<DeliverableAdapter.DeliverableHeaderHolder>() {
 
 
