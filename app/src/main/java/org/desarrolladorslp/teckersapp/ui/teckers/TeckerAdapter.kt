@@ -1,4 +1,4 @@
-package org.desarrolladorslp.teckersapp.ui.parentTeckers
+package org.desarrolladorslp.teckersapp.ui.teckers
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,8 +11,8 @@ import org.desarrolladorslp.teckersapp.R
 import org.desarrolladorslp.teckersapp.model.Tecker
 import org.desarrolladorslp.teckersapp.ui.CircleTransform
 
-data class ParentTeckerAdapter(private val teckers: ArrayList<Tecker>) :
-    RecyclerView.Adapter<ParentTeckerAdapter.TeckerHolder>() {
+data class TeckerAdapter(private val teckers: ArrayList<Tecker>) :
+    RecyclerView.Adapter<TeckerAdapter.TeckerHolder>() {
     internal lateinit var callback: OnHeadlineSelectedListener
     var position=0
     fun add(tecker: Tecker, position: Int = -1) {
@@ -47,7 +47,10 @@ data class ParentTeckerAdapter(private val teckers: ArrayList<Tecker>) :
             .inflate(R.layout.parent_tecker_item, parent, false)
 
 
-        return TeckerHolder(view,callback)
+        return TeckerHolder(
+            view,
+            callback
+        )
     }
 
     fun setOnHeadlineSelectedListener(callback: OnHeadlineSelectedListener) {

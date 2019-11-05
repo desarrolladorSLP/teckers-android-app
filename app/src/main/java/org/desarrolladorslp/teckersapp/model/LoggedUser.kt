@@ -11,12 +11,12 @@ class LoggedUser {
     var name: String? = null
     var email: String? = null
     var isEnabled: Boolean = false
-    var roles: Array<String>? = null
+    var roles: Array<String> = arrayOf()
 
     fun hasRole(role:String):Boolean
     {
         var isRole=false
-        roles!!.forEach {
+        roles.forEach {
             if(it == role)
             {
                 isRole=true

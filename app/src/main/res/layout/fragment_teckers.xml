@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id ="@+id/content_teckers_layout"
-    tools:context=".ui.parentTeckers.ParentTeckersFragment">
+    tools:context=".ui.teckers.TeckerFragment">
 
 
     <androidx.recyclerview.widget.RecyclerView
