@@ -1,22 +1,24 @@
 package org.desarrolladorslp.teckersapp.ui.deliverables
 
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.fragment_teckers.view.*
 import org.desarrolladorslp.teckersapp.R
 
-class DeliverableFragment : Fragment() {
+
+class DeliverableFragment : Fragment(),DeliverableAdapter.DeliverableHeaderClickListener {
 
     private lateinit var deliverablesViewModel: DeliverableViewModel
-    private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<DeliverableAdapter.DeliverableHeaderHolder>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,7 +35,8 @@ class DeliverableFragment : Fragment() {
         deliverablesViewModel._deliverables.observe(activity as AppCompatActivity, Observer{ deliverables ->
 
             viewAdapter = DeliverableAdapter(deliverables)
-            recyclerView= root.findViewById<RecyclerView>(R.id.deliverablesList).apply{
+            (viewAdapter as DeliverableAdapter).setOnItemClickListener(this)
+            root.teckersList.apply{
                 setHasFixedSize(true)
                 layoutManager = LinearLayoutManager(context)
                 adapter = viewAdapter
@@ -43,6 +46,9 @@ class DeliverableFragment : Fragment() {
 
         deliverablesViewModel.getDeliverables()
         return root
+    }
+    override fun onItemClick(position: Int) {
+        (viewAdapter as DeliverableAdapter).selected(position)
     }
 
 

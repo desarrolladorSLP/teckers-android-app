@@ -11,7 +11,7 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/parentTeckersList"
+        android:id="@+id/teckersList"
         android:layout_width="match_parent"
         android:layout_height="693dp"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
