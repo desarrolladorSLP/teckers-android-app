@@ -17,6 +17,7 @@ import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 
 
+
 data class DeliverableAdapter(private var deliverablesHeader: ArrayList<DeliverableHeader>) :
     RecyclerView.Adapter<DeliverableAdapter.DeliverableHeaderHolder>() {
     private val MULTIPLE =0
