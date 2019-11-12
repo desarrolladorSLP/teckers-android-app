@@ -7,8 +7,6 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import org.desarrolladorslp.teckersapp.MainActivity.Companion.ROLE_PARENT
-
 
 class NavigationMenu : AppCompatActivity(){
 

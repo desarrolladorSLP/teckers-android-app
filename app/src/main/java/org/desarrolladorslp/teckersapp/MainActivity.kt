@@ -144,24 +144,22 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun setProfileInformation(googleSignInAccount: GoogleSignInAccount, firebaseTokenId: String?) {
 
-        if (googleSignInAccount != null) {
-            var loginService = RetrofitManager.instance()?.create(LoginService::class.java);
+        val loginService = RetrofitManager.instance()?.create(LoginService::class.java)
 
-            var loginCall = loginService?.login("firebase", firebaseTokenId)
+        val loginCall = loginService?.login("firebase", firebaseTokenId)
 
-            loginCall?.enqueue(object : Callback<LoggedUser> {
-                override fun onResponse(call: Call<LoggedUser>, response: Response<LoggedUser>) {
-                    APIEndpoint.setAccessToken(response.body()?.accessToken)
-                    user = User(googleSignInAccount)
-                    ROLE_PARENT=response.body()?.hasRole("ROLE_PARENT")!!
-                    updateUI(auth.currentUser)
-                }
+        loginCall?.enqueue(object : Callback<LoggedUser> {
+            override fun onResponse(call: Call<LoggedUser>, response: Response<LoggedUser>) {
+                APIEndpoint.setAccessToken(response.body()?.accessToken)
+                user = User(googleSignInAccount)
+                ROLE_PARENT=response.body()?.hasRole("ROLE_PARENT")!!
+                updateUI(auth.currentUser)
+            }
 
-                override fun onFailure(call: Call<LoggedUser>, t: Throwable) {
-                    authorizationFailure()
-                }
-            })
-        }
+            override fun onFailure(call: Call<LoggedUser>, t: Throwable) {
+                authorizationFailure()
+            }
+        })
     }
 
 

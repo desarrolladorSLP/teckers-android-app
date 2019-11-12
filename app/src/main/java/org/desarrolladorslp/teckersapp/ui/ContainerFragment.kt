@@ -25,23 +25,27 @@ class ContainerFragment:Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_container, container, false)
+         var root = inflater.inflate(R.layout.fragment_container, container, false)
         teckersViewModel =
             ViewModelProviders.of(this).get(TeckerViewModel::class.java)
         var teckersSize=2
         //teckersViewModel.getParentTeckers()
         //teckersSize= teckersViewModel._teckers.value!!.size
+
         if(!ROLE_PARENT && teckersSize>1)
         {
-            val deliverables = DeliverableFragment()
-
+            val teckers  = TeckerFragment()
             this.childFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container_layout,deliverables)
+                .add(R.id.fragment_container_layout,teckers)
                 .commit()
+            teckers.onCreateView(inflater,container,savedInstanceState)
+            root= teckers.view
+
         }
         else{
+            val deliverables  = DeliverableFragment()
             this.childFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container_layout,DeliverableFragment())
+                .replace(R.id.content_deliverables_layout,deliverables)
                 .commit()
         }
         return root
