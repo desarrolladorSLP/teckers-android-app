@@ -2,34 +2,39 @@ package org.desarrolladorslp.teckersapp.ui.programs
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import org.desarrolladorslp.teckersapp.exception.AuthorizationException
+import org.desarrolladorslp.teckersapp.exception.ResponseException
 import org.desarrolladorslp.teckersapp.model.Program
+import org.desarrolladorslp.teckersapp.service.APIEndpoint
+import org.desarrolladorslp.teckersapp.service.ProgramService
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class ProgramViewModel : ViewModel() {
 
-    var _programs = MutableLiveData<ArrayList<Program>>().apply {
-        value = getPrograms()
-    }
+    private var programService = APIEndpoint.instance().create(ProgramService::class.java)
+    var _programs = MutableLiveData<ArrayList<Program>>()
+    val _responseException = MutableLiveData<ResponseException?>()
+    val _authorizationException = MutableLiveData<AuthorizationException?>()
 
-    fun getPrograms() :ArrayList<Program>{
-        val programs :ArrayList<Program> = arrayListOf()
-        val program1 = Program("1","TECKERS","JAVA WORKSHOP","ELOY")
-        programs.add(program1)
-        val program2 = Program("2","TECKERS2","JAVA WORKSHOP","ELOY")
-        programs.add(program2)
-        val program3 = Program("3","TECKERS3","JAVA WORKSHOP","ELOY")
-        programs.add(program3)
-        val program4 = Program("4","TECKERS4","JAVA WORKSHOP","ELOY")
-        programs.add(program4)
-        val program5 = Program("5","TECKERS5","JAVA WORKSHOP","ELOY")
-        programs.add(program5)
-        val program6 = Program("6","TECKERS6","JAVA WORKSHOP","ELOY")
-        programs.add(program6)
-        val program7 = Program("7","TECKERS7","JAVA WORKSHOP","ELOY")
-        programs.add(program7)
-        val program8 = Program("8","TECKERS8","JAVA WORKSHOP","ELOY")
-        programs.add(program8)
+    fun getPrograms(){
+        var programCall = programService?.getPrograms()
+        programCall?.enqueue(object : Callback<ArrayList<Program>> {
+            override fun onResponse(call: Call<ArrayList<Program>>, response: Response<ArrayList<Program>>) {
+                _programs.value = response.body()
+            }
 
-        return programs
+            override fun onFailure(call: Call<ArrayList<Program>>, t: Throwable) {
+                if (t is ResponseException) {
+                    _responseException.value = t
+                }else if(t is AuthorizationException)
+                {
+                    _authorizationException.value = t
+                }
+            }
+        })
+
 
     }
 }

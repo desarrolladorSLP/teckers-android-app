@@ -58,6 +58,7 @@ class ProgramBatchFragment: Fragment() {
                 )
                 {
                     selectedProgram= programs[position]
+                    batchesViewModel.getProgramBatches(selectedProgram!!.id)
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -97,11 +98,6 @@ class ProgramBatchFragment: Fragment() {
 
         })
         programsViewModel.getPrograms()
-        batchesViewModel.getBatches()
-
-
-
-
         return root
 
     }
