@@ -13,17 +13,7 @@ class LoggedUser {
     var isEnabled: Boolean = false
     var roles: Array<String> = arrayOf()
 
-    fun hasRole(role:String):Boolean
-    {
-        var isRole=false
-        roles.forEach {
-            if(it == role)
-            {
-                isRole=true
-            }
-        }
-        return isRole
-    }
+    fun hasRole(role:String) = roles.any { role.equals(it) }
 }
 
 
