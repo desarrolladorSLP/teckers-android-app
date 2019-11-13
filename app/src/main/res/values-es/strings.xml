@@ -19,6 +19,10 @@
     <string name="text_date">Fecha</string>
     <string name="image_status_description">Indicador de estado de la entrega</string>
     <string name="image_tecker_description">Imagen del tecker</string>
+    <string name="text_programs">Programas</string>
+    <string name="not_selected_program">Porfavor selecciona un programa</string>
+    <string name="text_batches">Batches</string>
+    <string name="not_selected_batch">Porfavor selecciona un batch</string>
 
 
 </resources>
