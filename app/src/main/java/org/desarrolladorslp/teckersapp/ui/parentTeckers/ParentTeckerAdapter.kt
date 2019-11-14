@@ -14,7 +14,6 @@ import org.desarrolladorslp.teckersapp.model.Tecker
 import org.desarrolladorslp.teckersapp.ui.CircleTransform
 import org.desarrolladorslp.teckersapp.ui.deliverables.DeliverableFragment
 
-
 data class ParentTeckerAdapter(private val teckers: ArrayList<Tecker>,
                                val listener: TeckerListener) :
     RecyclerView.Adapter<ParentTeckerAdapter.TeckerHolder>() {

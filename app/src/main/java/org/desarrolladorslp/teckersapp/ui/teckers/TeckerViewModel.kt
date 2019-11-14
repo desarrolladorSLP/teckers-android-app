@@ -17,7 +17,7 @@ class TeckerViewModel : ViewModel() {
     val _responseException = MutableLiveData<ResponseException?>()
     val _authorizationException = MutableLiveData<AuthorizationException?>()
     val selectedTecker = MutableLiveData<Tecker>()
-    
+
     fun getParentTeckers() {
 
         var parentTeckersCall = parentTeckersService?.getTeckers()

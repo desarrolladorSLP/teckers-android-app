@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         signInButton.setOnClickListener(this)
         signOutButton.setOnClickListener(this)
-        googleSignInButton = findViewById(R.id.signInButton);
+        googleSignInButton = findViewById(R.id.signInButton)
 
         var gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))

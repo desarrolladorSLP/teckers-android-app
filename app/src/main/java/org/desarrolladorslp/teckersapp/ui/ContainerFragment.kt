@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProviders
 import org.desarrolladorslp.teckersapp.MainActivity.Companion.ROLE_PARENT
 import org.desarrolladorslp.teckersapp.R
 import org.desarrolladorslp.teckersapp.ui.deliverables.DeliverableFragment
-import org.desarrolladorslp.teckersapp.ui.teckers.TeckerFragment
+import org.desarrolladorslp.teckersapp.ui.parentTeckers.ParentTeckersFragment
 import org.desarrolladorslp.teckersapp.ui.teckers.TeckerViewModel
 
 class ContainerFragment:Fragment() {
@@ -34,12 +34,9 @@ class ContainerFragment:Fragment() {
 
         if(!ROLE_PARENT && teckersSize>1)
         {
-            val teckers  = TeckerFragment()
             this.childFragmentManager.beginTransaction()
-                .add(R.id.fragment_container_layout,teckers)
+                .replace(R.id.content_teckers_layout,ParentTeckersFragment())
                 .commit()
-            teckers.onCreateView(inflater,container,savedInstanceState)
-            root= teckers.view
 
         }
         else{
