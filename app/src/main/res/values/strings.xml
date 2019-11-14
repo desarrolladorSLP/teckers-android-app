@@ -20,8 +20,8 @@
     <string name="image_status_description">Deliverable Status Indicator</string>
     <string name="image_tecker_description">Tecker Image</string>
     <string name="text_programs">Programs</string>
-    <string name="not_selected_program">Please select a program</string>
+    <string name="not_selected_program">Select a program</string>
     <string name="text_batches">Batches</string>
-    <string name="not_selected_batch">Please select a batch</string>
+    <string name="not_selected_batch">Select a batch</string>
 
 </resources>

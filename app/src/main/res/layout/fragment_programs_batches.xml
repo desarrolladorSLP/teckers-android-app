@@ -9,60 +9,42 @@
     android:id ="@+id/content_programs_batches_layout"
     tools:context=".ui.programs.ProgramBatchFragment">
 
-    <TextView
-        android:id="@+id/text_programs"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingStart="20dp"
-        android:paddingLeft="20dp"
-        android:paddingTop="25dp"
-        android:paddingEnd="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="15dp"
-        android:text="@string/text_programs"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:visibility="visible"
-        tools:text="@string/text_programs"
-        tools:visibility="visible" />
 
     <androidx.appcompat.widget.AppCompatSpinner
         android:id="@+id/spinner_programs"
         android:layout_width="match_parent"
-        android:layout_height="58dp"
+        android:layout_height="85dp"
         android:padding="20dp"
+        android:paddingTop="20dp"
         android:paddingBottom="20dp">
 
     </androidx.appcompat.widget.AppCompatSpinner>
 
-    <TextView
-        android:id="@+id/text_batches"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top"
-        android:paddingStart="20dp"
-        android:paddingLeft="20dp"
-        android:paddingTop="25dp"
-        android:paddingEnd="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="15dp"
-        android:text="@string/text_batches"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:visibility="visible"
-        tools:text="@string/text_batches"
-        tools:visibility="visible" />
-
     <androidx.appcompat.widget.AppCompatSpinner
         android:id="@+id/spinner_batches"
         android:layout_width="match_parent"
-        android:layout_height="58dp"
+        android:layout_height="83dp"
         android:padding="20dp"
-        android:paddingBottom="20dp"/>
+        android:paddingBottom="20dp" />
+
+    <TextView
+        android:id="@+id/selected_program"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_gravity="center" />
 
     <TextView
         android:id="@+id/selected_batch"
         android:layout_width="match_parent"
         android:layout_height="207dp"
         android:layout_gravity="center" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_approval"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:backgroundTint="@color/purple"
+        app:srcCompat="@drawable/ic_check_bold" />
 </LinearLayout>
