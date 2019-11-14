@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/navigation_deliverables"
-        android:name="org.desarrolladorslp.teckersapp.ui.ContainerFragment"
+        android:name="org.desarrolladorslp.teckersapp.ui.programs.ProgramBatchFragment"
         android:label="@string/title_deliverables"
         tools:layout="@layout/fragment_container" />
 

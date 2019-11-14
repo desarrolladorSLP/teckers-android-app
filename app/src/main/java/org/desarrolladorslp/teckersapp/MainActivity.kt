@@ -13,14 +13,11 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.android.material.snackbar.Snackbar
 import android.content.Intent
-import android.graphics.Color
-import android.util.Log
 import android.widget.TextView
 import com.google.android.gms.common.api.ApiException
 import kotlinx.android.synthetic.main.activity_main.main_layout
 import kotlinx.android.synthetic.main.activity_main.signInButton
 import kotlinx.android.synthetic.main.activity_main.signOutButton
-import org.desarrolladorslp.teckersapp.exception.AuthorizationException
 import org.desarrolladorslp.teckersapp.model.LoggedUser
 import org.desarrolladorslp.teckersapp.model.User
 import org.desarrolladorslp.teckersapp.service.APIEndpoint
@@ -101,7 +98,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun updateUI(user: FirebaseUser?) {
         if (user != null) {
-            val intent = Intent(this, NavigationMenu::class.java)
+            val intent = Intent(this, NavigationMenuActivity::class.java)
             startActivity(intent)
         } else {
             signInButton.visibility = View.VISIBLE
