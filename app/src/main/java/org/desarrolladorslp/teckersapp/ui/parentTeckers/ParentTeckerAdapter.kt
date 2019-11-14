@@ -15,7 +15,8 @@ import org.desarrolladorslp.teckersapp.ui.CircleTransform
 import org.desarrolladorslp.teckersapp.ui.deliverables.DeliverableFragment
 
 
-data class ParentTeckerAdapter(private val teckers: ArrayList<Tecker>, private val fragment: Fragment,private val activity :AppCompatActivity) :
+data class ParentTeckerAdapter(private val teckers: ArrayList<Tecker>,
+                               val listener: TeckerListener) :
     RecyclerView.Adapter<ParentTeckerAdapter.TeckerHolder>() {
 
 
@@ -50,25 +51,12 @@ data class ParentTeckerAdapter(private val teckers: ArrayList<Tecker>, private v
             .inflate(R.layout.parent_tecker_item, parent, false)
 
 
-        return TeckerHolder(view,fragment,activity)
+        return TeckerHolder(view)
     }
 
-    class TeckerHolder(val view: View,val fragment: Fragment, val activity: AppCompatActivity) : RecyclerView.ViewHolder(view),
-        View.OnClickListener {
+    inner class TeckerHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
         private var tecker: Tecker? = null
-
-        init {
-            view.setOnClickListener(this)
-        }
-
-        override fun onClick(v: View) {
-            val deliverables = DeliverableFragment()
-
-            activity.supportFragmentManager.beginTransaction()
-                .replace(R.id.content_teckers_layout,deliverables)
-                .commit()
-        }
 
 
 
@@ -89,8 +77,14 @@ data class ParentTeckerAdapter(private val teckers: ArrayList<Tecker>, private v
                 Log.d("MessageImageException", e.message!!)
             }
             view.name.text = tecker.name
-
+            view.setOnClickListener {
+                listener.onTeckerSelected(tecker)
+            }
         }
 
+    }
+
+    interface TeckerListener {
+        fun onTeckerSelected(tecker: Tecker)
     }
 }

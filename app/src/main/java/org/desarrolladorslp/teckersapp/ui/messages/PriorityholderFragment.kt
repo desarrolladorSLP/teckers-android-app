@@ -27,7 +27,6 @@ class PriorityholderFragment : Fragment()
     private lateinit var messageViewModel: MessageViewModel
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<MessageAdapter.MessageHeaderHolder>
-    private lateinit var viewManager: RecyclerView.LayoutManager
 
 
 
@@ -42,7 +41,6 @@ class PriorityholderFragment : Fragment()
         savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.content_messages, container, false)
-        viewManager = LinearLayoutManager(context)
         messageViewModel._inbox.observe(activity as AppCompatActivity, Observer{ inbox ->
             viewAdapter = MessageAdapter(
                 if (arguments?.getInt(ARG_SECTION_NUMBER) != MessageViewModel. LOW_PRIORITY_PAGE_INDEX) inbox.highPriority
@@ -50,7 +48,7 @@ class PriorityholderFragment : Fragment()
             )
             recyclerView= root.findViewById<RecyclerView>(R.id.messagesList).apply{
                 setHasFixedSize(true)
-                layoutManager = viewManager
+                layoutManager = LinearLayoutManager(context)
                 adapter = viewAdapter
             }
 

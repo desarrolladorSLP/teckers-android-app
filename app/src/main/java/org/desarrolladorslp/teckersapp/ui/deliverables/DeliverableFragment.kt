@@ -31,20 +31,14 @@ class DeliverableFragment : Fragment() {
     ): View? {
         val root = inflater.inflate(R.layout.fragment_deliverables, container, false)
         deliverablesViewModel._deliverables.observe(activity as AppCompatActivity, Observer{ deliverables ->
-
             viewAdapter = DeliverableAdapter(deliverables)
             recyclerView= root.findViewById<RecyclerView>(R.id.deliverablesList).apply{
                 setHasFixedSize(true)
                 layoutManager = LinearLayoutManager(context)
                 adapter = viewAdapter
             }
-
         })
-
         deliverablesViewModel.getDeliverables()
         return root
     }
-
-
-
 }

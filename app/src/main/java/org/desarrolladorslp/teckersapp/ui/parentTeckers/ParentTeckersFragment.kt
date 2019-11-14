@@ -11,9 +11,12 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import org.desarrolladorslp.teckersapp.R
+import org.desarrolladorslp.teckersapp.model.Tecker
+import org.desarrolladorslp.teckersapp.ui.deliverables.DeliverableFragment
+import org.desarrolladorslp.teckersapp.ui.deliverables.TeckerListFragment
 import org.desarrolladorslp.teckersapp.ui.teckers.TeckerViewModel
 
-class ParentTeckersFragment : Fragment() {
+class ParentTeckersFragment : Fragment(), TeckerListFragment.TeckerListListener {
     private lateinit var recyclerView: RecyclerView
 
     private lateinit var viewManager: RecyclerView.LayoutManager
@@ -22,8 +25,10 @@ class ParentTeckersFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        teckersViewModel =
-            ViewModelProviders.of(this).get(TeckerViewModel::class.java)
+//        teckersViewModel =
+//            ViewModelProviders.of(this).get(TeckerViewModel::class.java)
+//        teckersViewModel.selectedTecker.observe(this, Observer {
+//        })
     }
 
     override fun onCreateView(
@@ -31,21 +36,15 @@ class ParentTeckersFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         var  root= inflater.inflate(R.layout.fragment_parent_teckers, container, false)
-        viewManager = GridLayoutManager(context,2)
-
-        teckersViewModel._teckers.observe(activity as AppCompatActivity, Observer{ teckers ->
-
-            viewAdapter = ParentTeckerAdapter(teckers,this,activity as AppCompatActivity)
-            recyclerView= root.findViewById<RecyclerView>(R.id.parentTeckersList).apply{
-                setHasFixedSize(true)
-                layoutManager = viewManager
-                adapter = viewAdapter
-            }
-
-
-        })
-        teckersViewModel.getParentTeckers()
-
+        childFragmentManager.beginTransaction()
+            .replace(R.id.content_teckers_layout, TeckerListFragment())
+            .commit()
         return root
+    }
+
+    override fun onTeckerSelected(tecker: Tecker) {
+        childFragmentManager.beginTransaction()
+            .replace(R.id.content_teckers_layout,DeliverableFragment())
+            .commit()
     }
 }

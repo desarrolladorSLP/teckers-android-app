@@ -20,4 +20,7 @@
     <string name="image_status_description">Deliverable Status Indicator</string>
     <string name="image_tecker_description">Tecker Image</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
