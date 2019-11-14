@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id ="@+id/content_programs_batches_layout"
+    tools:context=".ui.programs.ProgramBatchFragment">
+
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/spinner_programs"
+        android:layout_width="match_parent"
+        android:layout_height="85dp"
+        android:padding="20dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp">
+
+    </androidx.appcompat.widget.AppCompatSpinner>
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/spinner_batches"
+        android:layout_width="match_parent"
+        android:layout_height="83dp"
+        android:padding="20dp"
+        android:paddingBottom="20dp" />
+
+    <TextView
+        android:id="@+id/selected_program"
+        android:layout_width="match_parent"
+        android:layout_height="113dp"
+        android:layout_gravity="center" />
+
+    <TextView
+        android:id="@+id/selected_batch"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:layout_gravity="center" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_approval"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:visibility="visible"
+        app:backgroundTint="@color/purple"
+        app:srcCompat="@drawable/ic_check_bold"
+        tools:visibility="visible" />
+
+
+</LinearLayout>

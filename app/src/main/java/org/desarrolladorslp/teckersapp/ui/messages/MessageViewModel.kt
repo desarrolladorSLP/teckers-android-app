@@ -1,16 +1,7 @@
 package org.desarrolladorslp.teckersapp.ui.messages
 
-import android.app.Activity
-import android.content.Context
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.android.gms.auth.api.Auth
-import org.desarrolladorslp.teckersapp.MainActivity
-import org.desarrolladorslp.teckersapp.NavigationMenu
 import org.desarrolladorslp.teckersapp.exception.AuthorizationException
 import org.desarrolladorslp.teckersapp.exception.ResponseException
 
