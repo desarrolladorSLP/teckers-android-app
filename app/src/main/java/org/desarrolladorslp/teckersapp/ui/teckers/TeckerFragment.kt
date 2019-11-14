@@ -1,4 +1,4 @@
-package org.desarrolladorslp.teckersapp.ui.teckers
+package org.desarrolladorslp.teckersapp.ui.parentTeckers
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,56 +10,41 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.fragment_teckers.view.*
 import org.desarrolladorslp.teckersapp.R
 import org.desarrolladorslp.teckersapp.model.Tecker
 import org.desarrolladorslp.teckersapp.ui.deliverables.DeliverableFragment
+import org.desarrolladorslp.teckersapp.ui.deliverables.TeckerListFragment
+import org.desarrolladorslp.teckersapp.ui.teckers.TeckerViewModel
 
-class TeckerFragment : Fragment(),
-    TeckerAdapter.OnHeadlineSelectedListener{
+class ParentTeckersFragment : Fragment(), TeckerListFragment.TeckerListListener {
+    private lateinit var recyclerView: RecyclerView
+
+    private lateinit var viewManager: RecyclerView.LayoutManager
     private lateinit var teckersViewModel: TeckerViewModel
+    private lateinit var viewAdapter: RecyclerView.Adapter<ParentTeckerAdapter.TeckerHolder>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        teckersViewModel =
-            ViewModelProviders.of(this).get(TeckerViewModel::class.java)
+//        teckersViewModel =
+//            ViewModelProviders.of(this).get(TeckerViewModel::class.java)
+//        teckersViewModel.selectedTecker.observe(this, Observer {
+//        })
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        lateinit var viewManager: RecyclerView.LayoutManager
-        lateinit var viewAdapter: RecyclerView.Adapter<TeckerAdapter.TeckerHolder>
-        val root= inflater.inflate(R.layout.fragment_teckers, container, false)
-        viewManager = GridLayoutManager(context,2)
-        teckersViewModel._teckers.observe(activity as AppCompatActivity, Observer{ teckers ->
-
-            viewAdapter = TeckerAdapter(teckers)
-            (viewAdapter as TeckerAdapter).setOnHeadlineSelectedListener(this)
-            root.teckersList.apply{
-                setHasFixedSize(true)
-                layoutManager = viewManager
-                adapter = viewAdapter
-            }
-
-
-        })
-        teckersViewModel.getParentTeckers()
-
+        var  root= inflater.inflate(R.layout.fragment_parent_teckers, container, false)
+        childFragmentManager.beginTransaction()
+            .replace(R.id.content_teckers_layout, TeckerListFragment())
+            .commit()
         return root
     }
 
     override fun onTeckerSelected(tecker: Tecker) {
-
-        val deliverables = DeliverableFragment()
-
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container_layout,deliverables)
+        childFragmentManager.beginTransaction()
+            .replace(R.id.content_teckers_layout,DeliverableFragment())
             .commit()
     }
-
-
-
-
 }

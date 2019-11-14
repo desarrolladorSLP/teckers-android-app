@@ -1,20 +1,25 @@
-package org.desarrolladorslp.teckersapp.ui.teckers
+package org.desarrolladorslp.teckersapp.ui.parentTeckers
 
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.parent_tecker_item.view.*
 import org.desarrolladorslp.teckersapp.R
 import org.desarrolladorslp.teckersapp.model.Tecker
 import org.desarrolladorslp.teckersapp.ui.CircleTransform
+import org.desarrolladorslp.teckersapp.ui.deliverables.DeliverableFragment
 
-data class TeckerAdapter(private val teckers: ArrayList<Tecker>) :
-    RecyclerView.Adapter<TeckerAdapter.TeckerHolder>() {
-    internal lateinit var callback: OnHeadlineSelectedListener
-    var position=0
+
+data class ParentTeckerAdapter(private val teckers: ArrayList<Tecker>,
+                               val listener: TeckerListener) :
+    RecyclerView.Adapter<ParentTeckerAdapter.TeckerHolder>() {
+
+
     fun add(tecker: Tecker, position: Int = -1) {
         var position = position
         position = if (position == -1) itemCount else position
@@ -38,7 +43,6 @@ data class TeckerAdapter(private val teckers: ArrayList<Tecker>) :
 
     override fun onBindViewHolder(holder: TeckerHolder, position: Int) {
         var itemTecker = teckers[position]
-        this.position=position
         holder.bindChild(itemTecker)
     }
 
@@ -47,29 +51,14 @@ data class TeckerAdapter(private val teckers: ArrayList<Tecker>) :
             .inflate(R.layout.parent_tecker_item, parent, false)
 
 
-        return TeckerHolder(
-            view,
-            callback
-        )
+        return TeckerHolder(view)
     }
 
-    fun setOnHeadlineSelectedListener(callback: OnHeadlineSelectedListener) {
-        this.callback = callback
-    }
-
-    interface OnHeadlineSelectedListener {
-        fun onTeckerSelected(tecker: Tecker)
-    }
-
-    class TeckerHolder(val view: View, val callback: OnHeadlineSelectedListener) : RecyclerView.ViewHolder(view),
-        View.OnClickListener {
-
+    inner class TeckerHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
         private var tecker: Tecker? = null
 
-        init {
-            view.setOnClickListener(this)
-        }
+
 
         fun bindChild(tecker: Tecker) {
             this.tecker = tecker
@@ -88,14 +77,14 @@ data class TeckerAdapter(private val teckers: ArrayList<Tecker>) :
                 Log.d("MessageImageException", e.message!!)
             }
             view.name.text = tecker.name
-
+            view.setOnClickListener {
+                listener.onTeckerSelected(tecker)
+            }
         }
 
-        override fun onClick(v: View) {
-            callback.onTeckerSelected(tecker!!)
-        }
+    }
 
-
-
+    interface TeckerListener {
+        fun onTeckerSelected(tecker: Tecker)
     }
 }

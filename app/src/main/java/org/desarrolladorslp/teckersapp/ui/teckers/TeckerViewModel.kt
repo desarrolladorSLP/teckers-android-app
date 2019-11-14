@@ -16,6 +16,7 @@ class TeckerViewModel : ViewModel() {
     var parentTeckersService = APIEndpoint.instance().create(ParentTeckersService::class.java)
     val _responseException = MutableLiveData<ResponseException?>()
     val _authorizationException = MutableLiveData<AuthorizationException?>()
+    val selectedTecker = MutableLiveData<Tecker>()
     
     fun getParentTeckers() {
 
@@ -36,5 +37,9 @@ class TeckerViewModel : ViewModel() {
                 }
             }
         })
+    }
+
+    fun setSelectedTecker(tecker: Tecker) {
+        selectedTecker.postValue(tecker)
     }
 }
