@@ -30,13 +30,13 @@
     <TextView
         android:id="@+id/selected_program"
         android:layout_width="match_parent"
-        android:layout_height="220dp"
+        android:layout_height="113dp"
         android:layout_gravity="center" />
 
     <TextView
         android:id="@+id/selected_batch"
         android:layout_width="match_parent"
-        android:layout_height="207dp"
+        android:layout_height="110dp"
         android:layout_gravity="center" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -45,6 +45,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
+        android:visibility="visible"
         app:backgroundTint="@color/purple"
-        app:srcCompat="@drawable/ic_check_bold" />
+        app:srcCompat="@drawable/ic_check_bold"
+        tools:visibility="visible" />
+
+
 </LinearLayout>

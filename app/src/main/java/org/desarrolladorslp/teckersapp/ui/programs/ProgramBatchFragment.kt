@@ -6,13 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Button
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import org.desarrolladorslp.teckersapp.R
 import org.desarrolladorslp.teckersapp.model.Batch
 import org.desarrolladorslp.teckersapp.model.Program
@@ -25,7 +26,7 @@ class ProgramBatchFragment: Fragment() {
     lateinit var programsViewModel:ProgramViewModel
     lateinit var batchSpinner: Spinner
     lateinit var batchesViewModel: BatchViewModel
-    lateinit var approvalButton :Button
+    lateinit var approvalButton : FloatingActionButton
     var selectedProgram: Program? = null
     var selectedBatch: Batch?=null
 
@@ -45,7 +46,9 @@ class ProgramBatchFragment: Fragment() {
         val  root= inflater.inflate(R.layout.fragment_programs_batches, container, false)
         programSpinner = root.findViewById(R.id.spinner_programs) as Spinner
         batchSpinner = root.findViewById(R.id.spinner_batches) as Spinner
-       // approvalButton  = root.findViewById(R.id.btn_approval)as Button
+        approvalButton  = root.findViewById(R.id.btn_approval)as FloatingActionButton
+        approvalButton.isVisible=false
+        batchSpinner.isVisible=false
         programsViewModel._programs.observe(activity as AppCompatActivity, Observer{ programs ->
             var programsArray = arrayOfNulls<String>(programs.size)
             for((i, program) in programs.withIndex())
@@ -72,7 +75,11 @@ class ProgramBatchFragment: Fragment() {
                     if(position!=0)
                     {
                         selectedProgram= programs[position]
+                        batchSpinner.isVisible=true
                         batchesViewModel.getProgramBatches(selectedProgram!!.id)
+                    }else{
+                        batchSpinner.isVisible=false
+                        approvalButton.isVisible=false
                     }
 
                 }
@@ -107,6 +114,9 @@ class ProgramBatchFragment: Fragment() {
                     if(position!=0)
                     {
                         selectedBatch =batches[position]
+                        approvalButton.isVisible=true
+                    }else{
+                        approvalButton.isVisible=false
                     }
 
                 }
@@ -118,6 +128,10 @@ class ProgramBatchFragment: Fragment() {
 
 
         })
+
+        approvalButton.setOnClickListener {
+            Toast.makeText(context,"Approval click",Toast.LENGTH_LONG).show()
+        }
         programsViewModel.getPrograms()
         return root
 
