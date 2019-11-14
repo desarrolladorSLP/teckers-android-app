@@ -1,13 +1,11 @@
 package org.desarrolladorslp.teckersapp.ui.deliverables
 
 import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
@@ -15,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 import org.desarrolladorslp.teckersapp.R
 import org.desarrolladorslp.teckersapp.model.Tecker
-import org.desarrolladorslp.teckersapp.ui.parentTeckers.ParentTeckerAdapter
+import org.desarrolladorslp.teckersapp.ui.teckers.TeckersAdapter
 import org.desarrolladorslp.teckersapp.ui.teckers.TeckerViewModel
 import java.lang.IllegalStateException
 
@@ -24,7 +22,7 @@ class TeckerListFragment : Fragment() {
 
     private lateinit var viewManager: RecyclerView.LayoutManager
     private lateinit var teckersViewModel: TeckerViewModel
-    private lateinit var viewAdapter: RecyclerView.Adapter<ParentTeckerAdapter.TeckerHolder>
+    private lateinit var viewAdapter: RecyclerView.Adapter<TeckersAdapter.TeckerHolder>
     private var listener: TeckerListListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,11 +41,13 @@ class TeckerListFragment : Fragment() {
 
         teckersViewModel._teckers.observe(this, Observer { teckers ->
 
-            viewAdapter = ParentTeckerAdapter(teckers, object : ParentTeckerAdapter.TeckerListener {
-                override fun onTeckerSelected(tecker: Tecker) {
-                    listener?.onTeckerSelected(tecker)
-                }
-            })
+            viewAdapter = TeckersAdapter(
+                teckers,
+                object : TeckersAdapter.TeckerListener {
+                    override fun onTeckerSelected(tecker: Tecker) {
+                        listener?.onTeckerSelected(tecker)
+                    }
+                })
             recyclerView = root.findViewById<RecyclerView>(R.id.teckerList).apply {
                 setHasFixedSize(true)
                 layoutManager = viewManager

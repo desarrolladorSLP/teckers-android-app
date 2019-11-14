@@ -1,22 +1,20 @@
-package org.desarrolladorslp.teckersapp.ui.parentTeckers
+package org.desarrolladorslp.teckersapp.ui.teckers
 
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.parent_tecker_item.view.*
 import org.desarrolladorslp.teckersapp.R
 import org.desarrolladorslp.teckersapp.model.Tecker
 import org.desarrolladorslp.teckersapp.ui.CircleTransform
-import org.desarrolladorslp.teckersapp.ui.deliverables.DeliverableFragment
 
-data class ParentTeckerAdapter(private val teckers: ArrayList<Tecker>,
-                               val listener: TeckerListener) :
-    RecyclerView.Adapter<ParentTeckerAdapter.TeckerHolder>() {
+data class TeckersAdapter(private val teckers: ArrayList<Tecker>,
+                          val listener: TeckerListener
+) :
+    RecyclerView.Adapter<TeckersAdapter.TeckerHolder>() {
 
 
     fun add(tecker: Tecker, position: Int = -1) {
