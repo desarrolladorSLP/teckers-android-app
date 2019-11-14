@@ -17,6 +17,7 @@ class BatchViewModel : ViewModel() {
     var _batches = MutableLiveData<ArrayList<Batch>>()
     val _responseException = MutableLiveData<ResponseException?>()
     val _authorizationException = MutableLiveData<AuthorizationException?>()
+    var _selectedBatch= MutableLiveData<Batch>()
 
     fun getProgramBatches(programId:String)
     {
@@ -37,4 +38,5 @@ class BatchViewModel : ViewModel() {
         })
 
     }
+
 }

@@ -6,6 +6,7 @@ import org.desarrolladorslp.teckersapp.exception.AuthorizationException
 import org.desarrolladorslp.teckersapp.exception.ResponseException
 import org.desarrolladorslp.teckersapp.model.Tecker
 import org.desarrolladorslp.teckersapp.service.APIEndpoint
+import org.desarrolladorslp.teckersapp.service.BatchTeckersService
 import org.desarrolladorslp.teckersapp.service.ParentTeckersService
 import retrofit2.Call
 import retrofit2.Callback
@@ -14,18 +15,17 @@ import retrofit2.Response
 class TeckerViewModel : ViewModel() {
     var _teckers = MutableLiveData<ArrayList<Tecker>>()
     var parentTeckersService = APIEndpoint.instance().create(ParentTeckersService::class.java)
+    var batchTeckersService = APIEndpoint.instance().create(BatchTeckersService::class.java)
     val _responseException = MutableLiveData<ResponseException?>()
     val _authorizationException = MutableLiveData<AuthorizationException?>()
     val selectedTecker = MutableLiveData<Tecker>()
 
-    fun getParentTeckers() {
-
-        var parentTeckersCall = parentTeckersService?.getTeckers()
-        parentTeckersCall?.enqueue(object : Callback<ArrayList<Tecker>> {
+    fun getTeckersList(call : Call<ArrayList<Tecker>>?)
+    {
+        call?.enqueue(object : Callback<ArrayList<Tecker>> {
             override fun onResponse(call: Call<ArrayList<Tecker>>, response: Response<ArrayList<Tecker>>) {
                 _teckers.value = response.body()
             }
-
             override fun onFailure(call: Call<ArrayList<Tecker>>, t: Throwable) {
                 val m = t.message
 
@@ -37,6 +37,16 @@ class TeckerViewModel : ViewModel() {
                 }
             }
         })
+    }
+
+    fun getParentTeckers() {
+        val parentTeckersCall = parentTeckersService.getTeckers()
+        getTeckersList(parentTeckersCall)
+    }
+
+    fun getBatchTeckers(batchId:String) {
+        val batchTeckersCall = batchTeckersService.getTeckers(batchId)
+        getTeckersList(batchTeckersCall)
     }
 
     fun setSelectedTecker(tecker: Tecker) {

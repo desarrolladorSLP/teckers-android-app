@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import org.desarrolladorslp.teckersapp.MainActivity.Companion.ROLE_ADMINISTRATOR
 import org.desarrolladorslp.teckersapp.MainActivity.Companion.ROLE_PARENT
 import org.desarrolladorslp.teckersapp.R
 import org.desarrolladorslp.teckersapp.ui.deliverables.DeliverableFragment
+import org.desarrolladorslp.teckersapp.ui.programs.ProgramBatchFragment
 import org.desarrolladorslp.teckersapp.ui.teckers.TeckersFragment
 import org.desarrolladorslp.teckersapp.ui.teckers.TeckerViewModel
 
@@ -32,19 +34,27 @@ class ContainerFragment:Fragment() {
         //teckersViewModel.getParentTeckers()
         //teckersSize= teckersViewModel._teckers.value!!.size
 
-        if(!ROLE_PARENT && teckersSize>1)
+        if(ROLE_PARENT)
         {
-            this.childFragmentManager.beginTransaction()
-                .replace(R.id.content_teckers_layout,
-                    TeckersFragment()
-                )
-                .commit()
+            if(teckersSize>1) {
+                this.childFragmentManager.beginTransaction()
+                    .replace(
+                        R.id.content_teckers_layout,
+                        TeckersFragment()
+                    )
+                    .commit()
+            }
+            else{
+                this.childFragmentManager.beginTransaction()
+                    .replace(R.id.content_deliverables_layout,DeliverableFragment())
+                    .commit()
+            }
 
         }
-        else{
-            val deliverables  = DeliverableFragment()
+        else if(!ROLE_ADMINISTRATOR)
+        {
             this.childFragmentManager.beginTransaction()
-                .replace(R.id.content_deliverables_layout,deliverables)
+                .replace(R.id.content_programs_batches_layout,ProgramBatchFragment())
                 .commit()
         }
         return root

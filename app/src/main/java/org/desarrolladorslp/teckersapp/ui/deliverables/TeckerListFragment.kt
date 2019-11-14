@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 import org.desarrolladorslp.teckersapp.R
 import org.desarrolladorslp.teckersapp.model.Tecker
+import org.desarrolladorslp.teckersapp.ui.batches.BatchViewModel
 import org.desarrolladorslp.teckersapp.ui.teckers.TeckersAdapter
 import org.desarrolladorslp.teckersapp.ui.teckers.TeckerViewModel
 import java.lang.IllegalStateException
@@ -24,11 +25,15 @@ class TeckerListFragment : Fragment() {
     private lateinit var teckersViewModel: TeckerViewModel
     private lateinit var viewAdapter: RecyclerView.Adapter<TeckersAdapter.TeckerHolder>
     private var listener: TeckerListListener? = null
+    private lateinit var batchViewModel: BatchViewModel
+    private var selectedBatchId: String =""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         teckersViewModel =
             ViewModelProviders.of(this).get(TeckerViewModel::class.java)
+        batchViewModel=
+            ViewModelProviders.of(this).get(BatchViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -56,8 +61,16 @@ class TeckerListFragment : Fragment() {
 
 
         })
-        teckersViewModel.getParentTeckers()
 
+        batchViewModel._selectedBatch.observe(this,Observer{selectedBatch ->
+            selectedBatchId=selectedBatch.id
+        })
+        if(selectedBatchId!="")
+        {
+            teckersViewModel.getBatchTeckers(selectedBatchId)
+        }else{
+            teckersViewModel.getParentTeckers()
+        }
         return root
     }
 

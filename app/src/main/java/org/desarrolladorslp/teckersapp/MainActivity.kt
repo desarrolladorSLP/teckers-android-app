@@ -173,5 +173,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         private const val TAG = "GoogleActivity"
         private const val RC_SIGN_IN = 9001
         var ROLE_PARENT = false
+        var ROLE_ADMINISTRATOR=false
     }
 }
