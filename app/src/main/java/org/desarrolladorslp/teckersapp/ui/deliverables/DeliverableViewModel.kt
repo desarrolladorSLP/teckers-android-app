@@ -7,6 +7,7 @@ import org.desarrolladorslp.teckersapp.exception.ResponseException
 import org.desarrolladorslp.teckersapp.model.DeliverableHeader
 import org.desarrolladorslp.teckersapp.service.APIEndpoint
 import org.desarrolladorslp.teckersapp.service.DeliverableService
+import org.desarrolladorslp.teckersapp.service.DeliverablesTeckerService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -14,14 +15,14 @@ import retrofit2.Response
 class DeliverableViewModel : ViewModel() {
 
     private var deliverablesService = APIEndpoint.instance().create(DeliverableService::class.java)
+    private var deliverablesTeckerService = APIEndpoint.instance().create(DeliverablesTeckerService::class.java)
     val _responseException = MutableLiveData<ResponseException?>()
     val _authorizationException = MutableLiveData<AuthorizationException?>()
     var _deliverables = MutableLiveData<ArrayList<DeliverableHeader>>()
 
-    fun getDeliverables(){
-
-        val deliverableCall = deliverablesService.getDeliverables()
-        deliverableCall.enqueue(object : Callback<ArrayList<DeliverableHeader>> {
+    fun getDleiverablesList(call: Call<ArrayList<DeliverableHeader>>)
+    {
+        call.enqueue(object : Callback<ArrayList<DeliverableHeader>> {
             override fun onResponse(call: Call<ArrayList<DeliverableHeader>>, response: Response<ArrayList<DeliverableHeader>>) {
                 _deliverables.value = response.body()
             }
@@ -37,8 +38,17 @@ class DeliverableViewModel : ViewModel() {
                 }
             }
         })
+    }
+    fun getDeliverables(){
 
+        val deliverableCall = deliverablesService.getDeliverables()
+        getDleiverablesList(deliverableCall)
 
+    }
+    fun getTeckerDeliverables(teckerId:String)
+    {
+        val deliverableCall = deliverablesTeckerService.getDeliverables(teckerId)
+        getDleiverablesList(deliverableCall)
     }
 
 }

@@ -33,7 +33,6 @@ class ContainerFragment:Fragment() {
         var teckersSize=2
         //teckersViewModel.getParentTeckers()
         //teckersSize= teckersViewModel._teckers.value!!.size
-
         if(ROLE_PARENT)
         {
             if(teckersSize>1) {
@@ -49,9 +48,11 @@ class ContainerFragment:Fragment() {
                     .replace(R.id.content_deliverables_layout,DeliverableFragment())
                     .commit()
             }
-
+gi
         }
+
         else if(!ROLE_ADMINISTRATOR)
+
         {
             this.childFragmentManager.beginTransaction()
                 .replace(R.id.content_programs_batches_layout,ProgramBatchFragment())

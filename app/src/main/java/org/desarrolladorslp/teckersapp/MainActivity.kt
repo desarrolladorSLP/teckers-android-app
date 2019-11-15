@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        signInButton.setOnClickListener(this)
+        /*signInButton.setOnClickListener(this)
         signOutButton.setOnClickListener(this)
         googleSignInButton = findViewById(R.id.signInButton)
 
@@ -55,7 +55,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         val isAuthError = intent.getBooleanExtra(AUTH_ERROR, false)
         if (isAuthError) {
             authorizationFailure()
-        }
+        }*/
+        val intent = Intent(this, NavigationMenuActivity::class.java)
+        startActivity(intent)
     }
 
     override fun onStart() {
@@ -172,7 +174,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     companion object {
         private const val TAG = "GoogleActivity"
         private const val RC_SIGN_IN = 9001
-        var ROLE_PARENT = false
+
+        var ROLE_PARENT = true
         var ROLE_ADMINISTRATOR=false
     }
 }

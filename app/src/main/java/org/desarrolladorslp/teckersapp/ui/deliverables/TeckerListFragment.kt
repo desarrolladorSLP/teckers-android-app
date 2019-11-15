@@ -25,15 +25,13 @@ class TeckerListFragment : Fragment() {
     private lateinit var teckersViewModel: TeckerViewModel
     private lateinit var viewAdapter: RecyclerView.Adapter<TeckersAdapter.TeckerHolder>
     private var listener: TeckerListListener? = null
-    private lateinit var batchViewModel: BatchViewModel
-    private var selectedBatchId: String =""
+    private var batchId: String =""
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         teckersViewModel =
             ViewModelProviders.of(this).get(TeckerViewModel::class.java)
-        batchViewModel=
-            ViewModelProviders.of(this).get(BatchViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -59,15 +57,12 @@ class TeckerListFragment : Fragment() {
                 adapter = viewAdapter
             }
 
-
         })
 
-        batchViewModel._selectedBatch.observe(this,Observer{selectedBatch ->
-            selectedBatchId=selectedBatch.id
-        })
-        if(selectedBatchId!="")
+
+        if(batchId!="")
         {
-            teckersViewModel.getBatchTeckers(selectedBatchId)
+            teckersViewModel.getBatchTeckers(batchId)
         }else{
             teckersViewModel.getParentTeckers()
         }

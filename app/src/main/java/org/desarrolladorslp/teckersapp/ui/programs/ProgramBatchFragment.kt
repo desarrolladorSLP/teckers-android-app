@@ -28,7 +28,7 @@ class ProgramBatchFragment: Fragment() {
     lateinit var batchesViewModel: BatchViewModel
     lateinit var approvalButton : FloatingActionButton
     var selectedProgram: Program? = null
-
+    var selectedBatch: Batch? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -112,7 +112,8 @@ class ProgramBatchFragment: Fragment() {
                 {
                     if(position!=0)
                     {
-                        batchesViewModel._selectedBatch.value =batches[position]
+
+                        selectedBatch =batches[position]
                         approvalButton.isVisible=true
                     }else{
                         approvalButton.isVisible=false
@@ -130,10 +131,8 @@ class ProgramBatchFragment: Fragment() {
         approvalButton.setOnClickListener {
             Toast.makeText(context,"Approval click",Toast.LENGTH_LONG)
                 .show()
-            childFragmentManager.beginTransaction()
-                .replace(R.id.content_teckers_layout,TeckersFragment())
-                .commit()
-        }
+
+                    }
         programsViewModel.getPrograms()
         return root
 

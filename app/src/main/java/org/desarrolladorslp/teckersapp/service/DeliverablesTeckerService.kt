@@ -7,5 +7,6 @@ import retrofit2.http.Path
 
 interface DeliverablesTeckerService {
     @GET("api/tecker/{teckerId}/deliverables")
-    fun getDeliverables(@Path("teckerId") id:Int): Call<ArrayList<DeliverableHeader>>
+    fun getDeliverables(@Path("teckerId") id:String): Call<ArrayList<DeliverableHeader>>
+
 }
