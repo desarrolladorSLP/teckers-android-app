@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProviders
 import org.desarrolladorslp.teckersapp.MainActivity.Companion.ROLE_ADMINISTRATOR
 import org.desarrolladorslp.teckersapp.MainActivity.Companion.ROLE_PARENT
 import org.desarrolladorslp.teckersapp.R
+import org.desarrolladorslp.teckersapp.ui.batches.BatchesFragment
 import org.desarrolladorslp.teckersapp.ui.deliverables.DeliverableFragment
 import org.desarrolladorslp.teckersapp.ui.programs.ProgramBatchFragment
 import org.desarrolladorslp.teckersapp.ui.teckers.TeckersFragment
@@ -38,24 +39,23 @@ class ContainerFragment:Fragment() {
             if(teckersSize>1) {
                 this.childFragmentManager.beginTransaction()
                     .replace(
-                        R.id.content_teckers_layout,
+                        R.id.fragment_container_layout,
                         TeckersFragment()
                     )
                     .commit()
             }
             else{
                 this.childFragmentManager.beginTransaction()
-                    .replace(R.id.content_deliverables_layout,DeliverableFragment())
+                    .replace(R.id.fragment_container_layout,DeliverableFragment())
                     .commit()
             }
-gi
         }
 
-        else if(!ROLE_ADMINISTRATOR)
+        else if(ROLE_ADMINISTRATOR)
 
         {
             this.childFragmentManager.beginTransaction()
-                .replace(R.id.content_programs_batches_layout,ProgramBatchFragment())
+                .replace(R.id.fragment_container_layout, BatchesFragment())
                 .commit()
         }
         return root

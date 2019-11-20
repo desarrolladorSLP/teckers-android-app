@@ -26,6 +26,8 @@ class TeckerListFragment : Fragment() {
     private lateinit var viewAdapter: RecyclerView.Adapter<TeckersAdapter.TeckerHolder>
     private var listener: TeckerListListener? = null
     private var batchId: String =""
+    private lateinit var batchViewModel:BatchViewModel
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,9 +40,17 @@ class TeckerListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        batchViewModel = activity?.run {
+            ViewModelProviders.of(this).get(BatchViewModel::class.java)
+        } ?: throw Exception("Invalid Activity")
+
         // Inflate the layout for this fragment
-        var root = inflater.inflate(R.layout.fragment_tecker_list, container, false)
+        var root = inflater.inflate(R.layout.fragment_tecker_list, container, git false)
         viewManager = GridLayoutManager(context, 2)
+
+        batchViewModel._batchId.observe(this, Observer { selectedBatchId ->
+            this.batchId = selectedBatchId
+        })
 
         teckersViewModel._teckers.observe(this, Observer { teckers ->
 
@@ -58,7 +68,6 @@ class TeckerListFragment : Fragment() {
             }
 
         })
-
 
         if(batchId!="")
         {

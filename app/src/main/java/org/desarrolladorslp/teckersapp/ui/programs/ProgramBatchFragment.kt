@@ -1,5 +1,6 @@
 package org.desarrolladorslp.teckersapp.ui.programs
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +20,7 @@ import org.desarrolladorslp.teckersapp.model.Batch
 import org.desarrolladorslp.teckersapp.model.Program
 import org.desarrolladorslp.teckersapp.ui.batches.BatchViewModel
 import org.desarrolladorslp.teckersapp.ui.teckers.TeckersFragment
+import java.lang.IllegalStateException
 
 class ProgramBatchFragment: Fragment() {
 
@@ -29,6 +31,8 @@ class ProgramBatchFragment: Fragment() {
     lateinit var approvalButton : FloatingActionButton
     var selectedProgram: Program? = null
     var selectedBatch: Batch? = null
+    var listener: BatchListListener? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +46,9 @@ class ProgramBatchFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        batchesViewModel = activity?.run {
+            ViewModelProviders.of(this).get(BatchViewModel::class.java)
+        } ?: throw Exception("Invalid Activity")
         val  root= inflater.inflate(R.layout.fragment_programs_batches, container, false)
         programSpinner = root.findViewById(R.id.spinner_programs) as Spinner
         batchSpinner = root.findViewById(R.id.spinner_batches) as Spinner
@@ -113,8 +120,10 @@ class ProgramBatchFragment: Fragment() {
                     if(position!=0)
                     {
 
-                        selectedBatch =batches[position]
+                        selectedBatch=batches[position]
+                        batchesViewModel.setBatchId(selectedBatch!!.id)
                         approvalButton.isVisible=true
+
                     }else{
                         approvalButton.isVisible=false
                     }
@@ -131,10 +140,24 @@ class ProgramBatchFragment: Fragment() {
         approvalButton.setOnClickListener {
             Toast.makeText(context,"Approval click",Toast.LENGTH_LONG)
                 .show()
-
+            listener?.onBatchSelected(selectedBatch!!)
                     }
         programsViewModel.getPrograms()
         return root
 
     }
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        listener = when {
+            parentFragment is BatchListListener -> parentFragment as BatchListListener
+            context is BatchListListener -> context
+            else -> throw IllegalStateException("Container of ProgramBatchesFragment must implement BatchListListener")
+        }
+    }
+    interface BatchListListener : AdapterView.OnItemSelectedListener
+    {
+        fun onBatchSelected(batch:Batch)
+    }
+
 }
