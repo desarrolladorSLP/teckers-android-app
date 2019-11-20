@@ -45,7 +45,7 @@ class TeckerListFragment : Fragment() {
         } ?: throw Exception("Invalid Activity")
 
         // Inflate the layout for this fragment
-        var root = inflater.inflate(R.layout.fragment_tecker_list, container, git false)
+        var root = inflater.inflate(R.layout.fragment_tecker_list, container, false)
         viewManager = GridLayoutManager(context, 2)
 
         batchViewModel._batchId.observe(this, Observer { selectedBatchId ->
