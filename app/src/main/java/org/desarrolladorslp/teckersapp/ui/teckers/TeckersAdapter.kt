@@ -64,7 +64,7 @@ data class TeckersAdapter(private val teckers: ArrayList<Tecker>,
             val radius = 40 * screenDensity
             try {
                 Picasso.get()
-                    .load(tecker.imageUrl)
+                    .load(tecker.pictureUrl)
                     .centerCrop()
                     .transform(CircleTransform(radius, 0))
                     .fit()

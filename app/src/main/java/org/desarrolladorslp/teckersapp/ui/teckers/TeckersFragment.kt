@@ -44,7 +44,7 @@ class TeckersFragment : Fragment(), TeckerListFragment.TeckerListListener {
     }
 
     override fun onTeckerSelected(tecker: Tecker) {
-        teckerId =tecker.id
+        teckerId =tecker.teckerId
         var deliverables =DeliverableFragment()
         childFragmentManager.beginTransaction()
             .replace(R.id.content_teckers_layout, deliverables)
