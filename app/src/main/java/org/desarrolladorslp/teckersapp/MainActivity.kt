@@ -40,7 +40,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         signInButton.setOnClickListener(this)
         signOutButton.setOnClickListener(this)
         googleSignInButton = findViewById(R.id.signInButton)
@@ -124,21 +123,23 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun firebaseAuthWithGoogle(googleSignInAccount: GoogleSignInAccount) {
-        val credential = GoogleAuthProvider.getCredential(googleSignInAccount.idToken, null)
-        auth.signInWithCredential(credential)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    val user = auth.currentUser
-                    val firebaseTokenId = user?.zze()?.zzd()
+        if(googleSignInAccount!=null) {
+            val credential = GoogleAuthProvider.getCredential(googleSignInAccount.idToken, null)
+            auth.signInWithCredential(credential)
+                .addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful) {
+                        val user = auth.currentUser
+                        val firebaseTokenId = user?.zze()?.zzd()
 
-                    setProfileInformation(googleSignInAccount, firebaseTokenId)
-                } else {
-                    Snackbar.make(main_layout, "Authentication Failed.", Snackbar.LENGTH_SHORT)
-                        .show()
-                    updateUI(null)
+                        setProfileInformation(googleSignInAccount, firebaseTokenId)
+                    } else {
+                        Snackbar.make(main_layout, "Authentication Failed.", Snackbar.LENGTH_SHORT)
+                            .show()
+                        updateUI(null)
+                    }
+
                 }
-
-            }
+        }
     }
 
     private fun setProfileInformation(googleSignInAccount: GoogleSignInAccount, firebaseTokenId: String?) {

@@ -5,20 +5,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Spinner
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.android.synthetic.main.fragment_programs_batches.*
 import org.desarrolladorslp.teckersapp.R
 import org.desarrolladorslp.teckersapp.model.Batch
 import org.desarrolladorslp.teckersapp.model.Program
 import org.desarrolladorslp.teckersapp.ui.batches.BatchViewModel
+import org.desarrolladorslp.teckersapp.ui.batches.BatchesFragment
 import org.desarrolladorslp.teckersapp.ui.teckers.TeckersFragment
 import java.lang.IllegalStateException
 
@@ -27,34 +26,39 @@ class ProgramBatchFragment: Fragment() {
     lateinit var programSpinner: Spinner
     lateinit var programsViewModel:ProgramViewModel
     lateinit var batchSpinner: Spinner
+    lateinit var programTextView:TextView
+    lateinit var batchTextView: TextView
     lateinit var batchesViewModel: BatchViewModel
     lateinit var approvalButton : FloatingActionButton
     var selectedProgram: Program? = null
     var selectedBatch: Batch? = null
-    var listener: BatchListListener? = null
+    lateinit var listener :BatchSelectedListener
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         programsViewModel =
-            ViewModelProviders.of(this).get(ProgramViewModel::class.java)
+            ViewModelProviders.of(parentFragment!!).get(ProgramViewModel::class.java)
         batchesViewModel =
-            ViewModelProviders.of(this).get(BatchViewModel::class.java)
+            ViewModelProviders.of(parentFragment!!).get(BatchViewModel::class.java)
     }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        batchesViewModel = activity?.run {
-            ViewModelProviders.of(this).get(BatchViewModel::class.java)
-        } ?: throw Exception("Invalid Activity")
+
         val  root= inflater.inflate(R.layout.fragment_programs_batches, container, false)
         programSpinner = root.findViewById(R.id.spinner_programs) as Spinner
         batchSpinner = root.findViewById(R.id.spinner_batches) as Spinner
+        programTextView = root.findViewById(R.id.text_programs) as TextView
+        batchTextView = root.findViewById(R.id.text_batches) as TextView
         approvalButton  = root.findViewById(R.id.btn_approval)as FloatingActionButton
         approvalButton.isVisible=false
         batchSpinner.isVisible=false
+        programTextView.isVisible=false
+        batchTextView.isVisible=false
+
         programsViewModel._programs.observe(activity as AppCompatActivity, Observer{ programs ->
             var programsArray = arrayOfNulls<String>(programs.size)
             for((i, program) in programs.withIndex())
@@ -83,9 +87,13 @@ class ProgramBatchFragment: Fragment() {
                         selectedProgram= programs[position]
                         batchSpinner.isVisible=true
                         batchesViewModel.getProgramBatches(selectedProgram!!.id)
+                        programTextView.isVisible=true
+
                     }else{
                         batchSpinner.isVisible=false
                         approvalButton.isVisible=false
+                        programTextView.isVisible=false
+                        batchTextView.isVisible=false
                     }
 
                 }
@@ -123,9 +131,12 @@ class ProgramBatchFragment: Fragment() {
                         selectedBatch=batches[position]
                         batchesViewModel.setBatchId(selectedBatch!!.id)
                         approvalButton.isVisible=true
+                        batchTextView.isVisible=true
 
                     }else{
                         approvalButton.isVisible=false
+                        programTextView.isVisible=true
+                        batchTextView.isVisible=false
                     }
 
                 }
@@ -138,10 +149,11 @@ class ProgramBatchFragment: Fragment() {
 
         })
         approvalButton.setOnClickListener {
-            Toast.makeText(context,"Approval click",Toast.LENGTH_LONG)
-                .show()
-            listener?.onBatchSelected(selectedBatch!!)
-                    }
+            batchesViewModel.onBatchSelected()
+            listener.onBatchSelected(selectedBatch!!)
+        }
+
+
         programsViewModel.getPrograms()
         return root
 
@@ -150,14 +162,13 @@ class ProgramBatchFragment: Fragment() {
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         listener = when {
-            parentFragment is BatchListListener -> parentFragment as BatchListListener
-            context is BatchListListener -> context
-            else -> throw IllegalStateException("Container of ProgramBatchesFragment must implement BatchListListener")
+            parentFragment is  BatchSelectedListener -> parentFragment as  BatchSelectedListener
+            context is  BatchSelectedListener -> context
+            else -> throw IllegalStateException("Container of TeckerListFragment must implement TeckerListListener")
         }
     }
-    interface BatchListListener : AdapterView.OnItemSelectedListener
-    {
-        fun onBatchSelected(batch:Batch)
+    interface BatchSelectedListener : AdapterView.OnItemSelectedListener{
+      fun onBatchSelected(batch:Batch)
     }
 
 }

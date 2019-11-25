@@ -18,10 +18,22 @@ class BatchViewModel : ViewModel() {
     val _responseException = MutableLiveData<ResponseException?>()
     val _authorizationException = MutableLiveData<AuthorizationException?>()
     var _batchId = MutableLiveData<String>()
+    var _batchSelected = MutableLiveData<Boolean>()
 
     fun setBatchId(batchId: String) {
         _batchId.value = batchId
     }
+
+    fun onBatchSelected()
+    {
+        _batchSelected.value = true
+    }
+
+    fun onBatchNotSelected()
+    {
+        _batchSelected.value=false
+    }
+
 
     fun getProgramBatches(programId:String)
     {

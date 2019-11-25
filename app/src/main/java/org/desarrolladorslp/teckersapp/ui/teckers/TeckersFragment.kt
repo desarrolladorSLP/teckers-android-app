@@ -35,25 +35,8 @@ class TeckersFragment : Fragment(), TeckerListFragment.TeckerListListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        if (savedInstanceState != null) {
-            batchId=savedInstanceState.getString("batchId")!!
-        }
-
         var  root= inflater.inflate(R.layout.fragment_teckers, container, false)
-        /*var bundle = arguments
-        try
-        {
-            batchId = bundle!!.getString("batchId")!!
-        }
-        catch(e:Exception)
-        {
-            // Do nothing
-        }*/
-
         val teckers = TeckerListFragment()
-
-
         childFragmentManager.beginTransaction()
             .replace(R.id.content_teckers_layout, teckers)
             .commit()
@@ -61,16 +44,13 @@ class TeckersFragment : Fragment(), TeckerListFragment.TeckerListListener {
     }
 
     override fun onTeckerSelected(tecker: Tecker) {
-        /*val args = Bundle()
-        val ft = childFragmentManager.beginTransaction()
-        val deliverables =DeliverableFragment()
-            ft.replace(R.id.content_teckers_layout,deliverables)
-        args.putString("teckerId",tecker.id)
-         deliverables.arguments=args
-        ft.commit()*/
-        val deliverables =DeliverableFragment()
+        teckerId =tecker.id
+        var deliverables =DeliverableFragment()
         childFragmentManager.beginTransaction()
             .replace(R.id.content_teckers_layout, deliverables)
             .commit()
+    }
+    companion object{
+        var teckerId = ""
     }
 }

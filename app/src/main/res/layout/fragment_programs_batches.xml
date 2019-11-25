@@ -9,6 +9,21 @@
     android:id ="@+id/content_programs_batches_layout"
     tools:context=".ui.programs.ProgramBatchFragment">
 
+    <TextView
+        android:id="@+id/text_programs"
+        android:layout_width="match_parent"
+        android:layout_height="63dp"
+        android:layout_gravity="center"
+        android:paddingLeft="25dp"
+        android:paddingTop="10dp"
+        android:paddingRight="25dp"
+        android:paddingBottom="10dp"
+        android:text="@string/text_programs"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:typeface="normal"
+        android:visibility="visible"
+        tools:visibility="invisible" />
 
     <androidx.appcompat.widget.AppCompatSpinner
         android:id="@+id/spinner_programs"
@@ -19,6 +34,22 @@
         android:paddingBottom="20dp">
 
     </androidx.appcompat.widget.AppCompatSpinner>
+
+    <TextView
+        android:id="@+id/text_batches"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:paddingLeft="25dp"
+        android:paddingTop="10dp"
+        android:paddingRight="25dp"
+        android:paddingBottom="10dp"
+        android:text="@string/text_batches"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:typeface="normal"
+        android:visibility="visible"
+        tools:visibility="invisible" />
 
     <androidx.appcompat.widget.AppCompatSpinner
         android:id="@+id/spinner_batches"
@@ -36,7 +67,7 @@
     <TextView
         android:id="@+id/selected_batch"
         android:layout_width="match_parent"
-        android:layout_height="110dp"
+        android:layout_height="58dp"
         android:layout_gravity="center" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
