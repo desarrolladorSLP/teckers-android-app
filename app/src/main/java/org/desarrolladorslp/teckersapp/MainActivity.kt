@@ -48,15 +48,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
-        googleSignInClient = GoogleSignIn.getClient(this, gso);
+        googleSignInClient = GoogleSignIn.getClient(this, gso)
         auth = FirebaseAuth.getInstance()
 
         val isAuthError = intent.getBooleanExtra(AUTH_ERROR, false)
         if (isAuthError) {
             authorizationFailure()
         }
-        /*val intent = Intent(this, NavigationMenuActivity::class.java)
-        startActivity(intent)*/
+
     }
 
     override fun onStart() {
@@ -153,6 +152,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 APIEndpoint.setAccessToken(response.body()?.accessToken)
                 user = User(googleSignInAccount)
                 ROLE_PARENT=response.body()?.hasRole("ROLE_PARENT")!!
+                ROLE_TECKER=response.body()?.hasRole("ROLE_TECKER")!!
+                ROLE_MENTOR=response.body()?.hasRole("ROLE_MENTOR")!!
+                ROLE_ADMINISTRATOR=response.body()?.hasRole("ROLE_ADMINISTRATOR")!!
                 updateUI(auth.currentUser)
             }
 
@@ -177,6 +179,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         private const val RC_SIGN_IN = 9001
 
         var ROLE_PARENT = false
-        var ROLE_ADMINISTRATOR=true
+        var ROLE_MENTOR=false
+        var ROLE_ADMINISTRATOR=false
+        var ROLE_TECKER=false
     }
 }

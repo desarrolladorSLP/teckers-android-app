@@ -7,6 +7,7 @@ import org.desarrolladorslp.teckersapp.exception.ResponseException
 import org.desarrolladorslp.teckersapp.model.Tecker
 import org.desarrolladorslp.teckersapp.service.APIEndpoint
 import org.desarrolladorslp.teckersapp.service.BatchTeckersService
+import org.desarrolladorslp.teckersapp.service.MentorTeckersService
 import org.desarrolladorslp.teckersapp.service.ParentTeckersService
 import retrofit2.Call
 import retrofit2.Callback
@@ -15,6 +16,7 @@ import retrofit2.Response
 class TeckerViewModel : ViewModel() {
     var _teckers = MutableLiveData<ArrayList<Tecker>>()
     var parentTeckersService = APIEndpoint.instance().create(ParentTeckersService::class.java)
+    var mentorTeckersService = APIEndpoint.instance().create(MentorTeckersService::class.java)
     var batchTeckersService = APIEndpoint.instance().create(BatchTeckersService::class.java)
     val _responseException = MutableLiveData<ResponseException?>()
     val _authorizationException = MutableLiveData<AuthorizationException?>()
@@ -42,6 +44,10 @@ class TeckerViewModel : ViewModel() {
     fun getParentTeckers() {
         val parentTeckersCall = parentTeckersService.getTeckers()
         getTeckersList(parentTeckersCall)
+    }
+    fun getMentorTeckers() {
+        val mentorTeckersCall = mentorTeckersService.getTeckers()
+        getTeckersList(mentorTeckersCall)
     }
 
     fun getBatchTeckers(batchId:String) {

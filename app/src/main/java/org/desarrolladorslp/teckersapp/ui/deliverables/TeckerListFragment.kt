@@ -10,6 +10,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import org.desarrolladorslp.teckersapp.MainActivity.Companion.ROLE_MENTOR
+import org.desarrolladorslp.teckersapp.MainActivity.Companion.ROLE_PARENT
 
 import org.desarrolladorslp.teckersapp.R
 import org.desarrolladorslp.teckersapp.model.Tecker
@@ -65,7 +67,15 @@ class TeckerListFragment : Fragment() {
         {
             teckersViewModel.getBatchTeckers(batchId)
         }else{
-            teckersViewModel.getParentTeckers()
+            if(ROLE_PARENT)
+            {
+                teckersViewModel.getParentTeckers()
+            }
+            if(ROLE_MENTOR)
+            {
+                teckersViewModel.getMentorTeckers()
+            }
+
         }
         return root
     }

@@ -1,6 +1,7 @@
 package org.desarrolladorslp.teckersapp.model
 
 import com.google.gson.annotations.SerializedName
+import org.desarrolladorslp.teckersapp.R
 
 class LoggedUser {
 
@@ -13,7 +14,18 @@ class LoggedUser {
     var isEnabled: Boolean = false
     var roles: Array<String> = arrayOf()
 
-    fun hasRole(role:String) = roles.any { role.equals(it) }
+    fun hasRole(checkRole:String) :Boolean{
+        var isRole= false
+
+        for(role in roles)
+        {
+            if(role==checkRole)
+            {
+                isRole=true
+            }
+        }
+        return isRole
+    }
 }
 
 
