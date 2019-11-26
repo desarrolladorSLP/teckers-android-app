@@ -15,10 +15,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.content_messages.*
 import org.desarrolladorslp.teckersapp.MainActivity
-
 import org.desarrolladorslp.teckersapp.R
 
 
@@ -41,6 +38,7 @@ class PriorityholderFragment : Fragment()
         savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.content_messages, container, false)
+
         messageViewModel._inbox.observe(activity as AppCompatActivity, Observer{ inbox ->
             viewAdapter = MessageAdapter(
                 if (arguments?.getInt(ARG_SECTION_NUMBER) != MessageViewModel. LOW_PRIORITY_PAGE_INDEX) inbox.highPriority
@@ -83,6 +81,9 @@ class PriorityholderFragment : Fragment()
         return root
     }
 
+    fun onClick(view: View) {
+
+    }
     companion object {
 
         private const val ARG_SECTION_NUMBER = "section_number"
