@@ -55,6 +55,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         if (isAuthError) {
             authorizationFailure()
         }
+        if(LOG_OUT)
+        {
+            signOut()
+            updateUI(null)
+        }
 
     }
 
@@ -69,7 +74,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }
 
-    private fun signOut() {
+    fun signOut() {
         auth.signOut()
         googleSignInClient.signOut().addOnCompleteListener(this) {
             updateUI(null)
@@ -182,5 +187,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         var ROLE_MENTOR=false
         var ROLE_ADMINISTRATOR=false
         var ROLE_TECKER=false
+        var LOG_OUT=false
     }
 }

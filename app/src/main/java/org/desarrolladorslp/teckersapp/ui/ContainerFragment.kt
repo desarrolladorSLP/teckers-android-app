@@ -55,10 +55,12 @@ class ContainerFragment:Fragment() {
                         .commit()
                 }
                 else{
-                    teckerId=teckers[0].teckerId
-                    this.childFragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container_layout,DeliverableFragment())
-                        .commit()
+                    if(teckersSize!=0) {
+                        teckerId = teckers[0].teckerId
+                        this.childFragmentManager.beginTransaction()
+                            .replace(R.id.fragment_container_layout, DeliverableFragment())
+                            .commit()
+                    }
                 }
             })
             if(ROLE_PARENT)

@@ -19,12 +19,14 @@
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteY="0dp">
 
-        <ImageView
+        <ImageButton
                 android:id="@+id/logoMenu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/menu_icon" />
+                app:backgroundTint="@color/purple"
+                app:srcCompat="@drawable/menu_icon"/>
+
         <ImageView
                 android:id="@+id/logoTeckers"
                 android:layout_width="330dp"
