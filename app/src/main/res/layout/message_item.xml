@@ -25,6 +25,7 @@
         android:textStyle="bold" />
 
     <ImageView
+
         android:id="@+id/senderImage"
         android:layout_width="57dp"
         android:layout_height="56dp"
@@ -37,6 +38,7 @@
         android:layout_marginBottom="14dp"
         android:contentDescription="@string/imageDescription"
         app:srcCompat="@android:color/darker_gray" />
+
 
     <TextView
         android:id="@+id/timestamp"
