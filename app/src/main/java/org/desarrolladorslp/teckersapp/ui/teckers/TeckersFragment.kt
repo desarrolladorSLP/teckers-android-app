@@ -14,23 +14,7 @@ import org.desarrolladorslp.teckersapp.ui.programs.ProgramBatchFragment
 
 
 class TeckersFragment : Fragment(), TeckerListFragment.TeckerListListener {
-    private lateinit var recyclerView: RecyclerView
 
-    private lateinit var viewManager: RecyclerView.LayoutManager
-    private lateinit var teckersViewModel: TeckerViewModel
-    private lateinit var viewAdapter: RecyclerView.Adapter<TeckersAdapter.TeckerHolder>
-
-    private lateinit var batchId:String
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-
-        super.onCreate(savedInstanceState)
-//        teckersViewModel =
-//            ViewModelProviders.of(this).get(TeckerViewModel::class.java)
-//        teckersViewModel.selectedTecker.observe(this, Observer {
-//        })
-    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

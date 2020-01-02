@@ -42,18 +42,16 @@ class ProgramBatchFragment: Fragment() {
         batchesViewModel =
             ViewModelProviders.of(parentFragment!!).get(BatchViewModel::class.java)
     }
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
 
-        val  root= inflater.inflate(R.layout.fragment_programs_batches, container, false)
-        programSpinner = root.findViewById(R.id.spinner_programs) as Spinner
-        batchSpinner = root.findViewById(R.id.spinner_batches) as Spinner
-        programTextView = root.findViewById(R.id.text_programs) as TextView
-        batchTextView = root.findViewById(R.id.text_batches) as TextView
-        approvalButton  = root.findViewById(R.id.btn_approval)as FloatingActionButton
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        programSpinner = view.findViewById(R.id.spinner_programs) as Spinner
+        batchSpinner = view.findViewById(R.id.spinner_batches) as Spinner
+        programTextView = view.findViewById(R.id.text_programs) as TextView
+        batchTextView = view.findViewById(R.id.text_batches) as TextView
+        approvalButton  = view.findViewById(R.id.btn_approval)as FloatingActionButton
+
+
         approvalButton.isVisible=false
         batchSpinner.isVisible=false
         programTextView.isVisible=false
@@ -155,6 +153,16 @@ class ProgramBatchFragment: Fragment() {
 
 
         programsViewModel.getPrograms()
+
+    }
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+
+        val  root= inflater.inflate(R.layout.fragment_programs_batches, container, false)
+
         return root
 
     }

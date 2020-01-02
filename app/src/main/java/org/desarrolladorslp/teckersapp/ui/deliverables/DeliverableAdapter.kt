@@ -20,9 +20,7 @@ import java.time.format.FormatStyle
 
 data class DeliverableAdapter(private var deliverablesHeader: ArrayList<DeliverableHeader>) :
     RecyclerView.Adapter<DeliverableAdapter.DeliverableHeaderHolder>() {
-    private val MULTIPLE =0
     private val SINGLE =1
-    private var modo=0
     private var deliverablePosition:Int =0
 
     fun add(deliverableHeader: DeliverableHeader, position: Int = -1) {
@@ -64,24 +62,9 @@ data class DeliverableAdapter(private var deliverablesHeader: ArrayList<Delivera
 
 
     fun selected(position: Int) {
-        when (modo) {
-            SINGLE -> {
-                deliverablePosition = position
-                notifyDataSetChanged()
-            }
-            MULTIPLE -> {
-            }
-            else -> {
-            }
-        }
-    }
-
-    fun changeMode(newModo: Int) {
-        modo = newModo
-        sSelectedItems!!.clear()
+        deliverablePosition = position
         notifyDataSetChanged()
     }
-
 
     interface DeliverableHeaderClickListener {
         fun onItemClick(position: Int)
