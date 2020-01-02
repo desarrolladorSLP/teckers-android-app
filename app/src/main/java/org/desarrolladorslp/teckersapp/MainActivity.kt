@@ -18,6 +18,7 @@ import com.google.android.gms.common.api.ApiException
 import kotlinx.android.synthetic.main.activity_main.main_layout
 import kotlinx.android.synthetic.main.activity_main.signInButton
 import kotlinx.android.synthetic.main.activity_main.signOutButton
+import org.desarrolladorslp.teckersapp.data.SharedApp
 import org.desarrolladorslp.teckersapp.model.LoggedUser
 import org.desarrolladorslp.teckersapp.model.User
 import org.desarrolladorslp.teckersapp.service.APIEndpoint
@@ -55,7 +56,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         if (isAuthError) {
             authorizationFailure()
         }
-        if(LOG_OUT)
+        if(SharedApp.data.LOG_OUT)
         {
             signOut()
             updateUI(null)
@@ -156,10 +157,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             override fun onResponse(call: Call<LoggedUser>, response: Response<LoggedUser>) {
                 APIEndpoint.setAccessToken(response.body()?.accessToken)
                 user = User(googleSignInAccount)
-                ROLE_PARENT=response.body()?.hasRole("ROLE_PARENT")!!
+                /*ROLE_PARENT=response.body()?.hasRole("ROLE_PARENT")!!
                 ROLE_TECKER=response.body()?.hasRole("ROLE_TECKER")!!
                 ROLE_MENTOR=response.body()?.hasRole("ROLE_MENTOR")!!
-                ROLE_ADMINISTRATOR=response.body()?.hasRole("ROLE_ADMINISTRATOR")!!
+                ROLE_ADMINISTRATOR=response.body()?.hasRole("ROLE_ADMINISTRATOR")!!*/
                 updateUI(auth.currentUser)
             }
 
@@ -183,10 +184,5 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         private const val TAG = "GoogleActivity"
         private const val RC_SIGN_IN = 9001
 
-        var ROLE_PARENT = false
-        var ROLE_MENTOR=false
-        var ROLE_ADMINISTRATOR=false
-        var ROLE_TECKER=false
-        var LOG_OUT=false
     }
 }

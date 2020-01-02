@@ -10,7 +10,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import kotlinx.android.synthetic.main.activity_navigationmenu.*
-import org.desarrolladorslp.teckersapp.MainActivity.Companion.LOG_OUT
+import org.desarrolladorslp.teckersapp.data.SharedApp
 
 class NavigationMenuActivity : AppCompatActivity(){
 
@@ -31,16 +31,9 @@ class NavigationMenuActivity : AppCompatActivity(){
         navView.setupWithNavController(navController)
     }
 
-    override fun onClick(v: View) {
-        val i = v.id
-        when (i) {
-            R.id.logoMenu -> logOut()
-        }
-    }
-
     private fun logOut()
     {
-        LOG_OUT=true
+        SharedApp.data.LOG_OUT=true
         val intent = Intent(this,MainActivity::class.java)
         startActivity(intent)
     }
