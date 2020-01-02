@@ -157,10 +157,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             override fun onResponse(call: Call<LoggedUser>, response: Response<LoggedUser>) {
                 APIEndpoint.setAccessToken(response.body()?.accessToken)
                 user = User(googleSignInAccount)
-                /*ROLE_PARENT=response.body()?.hasRole("ROLE_PARENT")!!
-                ROLE_TECKER=response.body()?.hasRole("ROLE_TECKER")!!
-                ROLE_MENTOR=response.body()?.hasRole("ROLE_MENTOR")!!
-                ROLE_ADMINISTRATOR=response.body()?.hasRole("ROLE_ADMINISTRATOR")!!*/
+                response.body()?.assigneRole()
                 updateUI(auth.currentUser)
             }
 

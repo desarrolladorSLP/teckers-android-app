@@ -8,11 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import org.desarrolladorslp.teckersapp.MainActivity.Companion.ROLE_ADMINISTRATOR
-import org.desarrolladorslp.teckersapp.MainActivity.Companion.ROLE_MENTOR
-import org.desarrolladorslp.teckersapp.MainActivity.Companion.ROLE_PARENT
-import org.desarrolladorslp.teckersapp.MainActivity.Companion.ROLE_TECKER
 import org.desarrolladorslp.teckersapp.R
+import org.desarrolladorslp.teckersapp.data.SharedApp
 import org.desarrolladorslp.teckersapp.ui.batches.BatchesFragment
 import org.desarrolladorslp.teckersapp.ui.deliverables.DeliverableFragment
 import org.desarrolladorslp.teckersapp.ui.programs.ProgramBatchFragment
@@ -35,13 +32,13 @@ class ContainerFragment:Fragment() {
     ): View? {
          var root = inflater.inflate(R.layout.fragment_container, container, false)
 
-        if(ROLE_ADMINISTRATOR)
+        if(SharedApp.data.ROLE_ADMINISTRATOR)
         {
             this.childFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container_layout, BatchesFragment())
                 .commit()
         }
-        else if(ROLE_PARENT || ROLE_MENTOR)
+        else if(SharedApp.data.ROLE_PARENT || SharedApp.data.ROLE_MENTOR)
         {
             teckersViewModel._teckers.observe(this, Observer { teckers->
                 teckersSize = teckers.size
@@ -63,17 +60,17 @@ class ContainerFragment:Fragment() {
                     }
                 }
             })
-            if(ROLE_PARENT)
+            if(SharedApp.data.ROLE_PARENT)
             {
                 teckersViewModel.getParentTeckers()
             }
-            if(ROLE_MENTOR)
+            if(SharedApp.data.ROLE_MENTOR)
             {
                 teckersViewModel.getMentorTeckers()
             }
 
         }
-        else if(ROLE_TECKER)
+        else if(SharedApp.data.ROLE_TECKER)
         {
             this.childFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container_layout, DeliverableFragment())
