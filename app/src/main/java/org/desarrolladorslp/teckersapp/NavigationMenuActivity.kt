@@ -12,7 +12,7 @@ import androidx.navigation.ui.setupWithNavController
 import kotlinx.android.synthetic.main.activity_navigationmenu.*
 import org.desarrolladorslp.teckersapp.MainActivity.Companion.LOG_OUT
 
-class NavigationMenuActivity : AppCompatActivity(),View.OnClickListener{
+class NavigationMenuActivity : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
