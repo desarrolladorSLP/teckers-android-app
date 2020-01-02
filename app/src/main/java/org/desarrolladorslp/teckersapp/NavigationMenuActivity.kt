@@ -17,7 +17,7 @@ class NavigationMenuActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_navigationmenu)
-        logoMenu.setOnClickListener(this)
+        logoMenu.setOnClickListener { logOut() }
         setSupportActionBar(findViewById(R.id.my_toolbar))
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
