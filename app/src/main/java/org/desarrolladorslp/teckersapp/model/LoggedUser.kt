@@ -14,7 +14,7 @@ class LoggedUser {
     var isEnabled: Boolean = false
     var roles: Array<String> = arrayOf()
 
-    fun hasRole(checkRole:String) :Boolean{
+    fun hasRole(checkRole:String) = roles.fold(false) { acc, role -> acc || (checkRole == role) }
         var isRole= false
 
         for(role in roles)
@@ -27,5 +27,4 @@ class LoggedUser {
         return isRole
     }
 }
-
 
