@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import org.desarrolladorslp.teckersapp.R
+import org.desarrolladorslp.teckersapp.ui.teckers.TeckerViewModel
 import org.desarrolladorslp.teckersapp.ui.teckers.TeckersFragment.Companion.teckerId
 
 class DeliverableFragment : Fragment(),DeliverableAdapter.DeliverableHeaderClickListener {
@@ -19,12 +20,13 @@ class DeliverableFragment : Fragment(),DeliverableAdapter.DeliverableHeaderClick
     private lateinit var deliverablesViewModel: DeliverableViewModel
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<DeliverableAdapter.DeliverableHeaderHolder>
-
+    private lateinit var teckersViewModel: TeckerViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         deliverablesViewModel =
-            ViewModelProviders.of(this).get(DeliverableViewModel::class.java)
-
+        ViewModelProviders.of(this).get(DeliverableViewModel::class.java)
+        teckersViewModel =
+            ViewModelProviders.of(this).get(TeckerViewModel::class.java)
     }
 
     override fun onCreateView(

@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import org.desarrolladorslp.teckersapp.R
 import org.desarrolladorslp.teckersapp.data.SharedApp
+import org.desarrolladorslp.teckersapp.ui.batches.BatchViewModel
 import org.desarrolladorslp.teckersapp.ui.batches.BatchesFragment
 import org.desarrolladorslp.teckersapp.ui.deliverables.DeliverableFragment
 import org.desarrolladorslp.teckersapp.ui.programs.ProgramBatchFragment
@@ -19,10 +20,13 @@ import org.desarrolladorslp.teckersapp.ui.teckers.TeckersFragment.Companion.teck
 
 class ContainerFragment:Fragment() {
     private lateinit var teckersViewModel: TeckerViewModel
+    private lateinit var batchesViewModel:BatchViewModel
     private var teckersSize=0
     override fun onCreate(savedInstanceState: Bundle?) {
         teckersViewModel =
-            ViewModelProviders.of(requireActivity()).get(TeckerViewModel::class.java)
+        ViewModelProviders.of(this).get(TeckerViewModel::class.java)
+        batchesViewModel =
+            ViewModelProviders.of(this).get(BatchViewModel::class.java)
         super.onCreate(savedInstanceState)
     }
     override fun onCreateView(
@@ -32,6 +36,12 @@ class ContainerFragment:Fragment() {
     ): View? {
          var root = inflater.inflate(R.layout.fragment_container, container, false)
 
+        root=showContent(root)
+        return root
+    }
+
+    fun showContent(root:View): View
+    {
         if(SharedApp.data.ROLE_ADMINISTRATOR)
         {
             this.childFragmentManager.beginTransaction()
@@ -77,5 +87,6 @@ class ContainerFragment:Fragment() {
                 .commit()
         }
         return root
+
     }
 }

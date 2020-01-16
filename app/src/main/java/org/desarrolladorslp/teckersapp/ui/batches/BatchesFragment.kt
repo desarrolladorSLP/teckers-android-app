@@ -15,7 +15,6 @@ import org.desarrolladorslp.teckersapp.ui.teckers.TeckersFragment
 
 class BatchesFragment: Fragment(), ProgramBatchFragment.BatchSelectedListener {
     override fun onBatchSelected(batch: Batch) {
-        batchId = batch.id
         val teckers = TeckersFragment()
         childFragmentManager.beginTransaction()
             .replace(R.id.content_batches_layout, teckers)

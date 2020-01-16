@@ -54,6 +54,11 @@ class TeckerViewModel : ViewModel() {
         val batchTeckersCall = batchTeckersService.getTeckers(batchId)
         getTeckersList(batchTeckersCall)
     }
+    
+    fun getSelectedTecker():Tecker
+    {
+        return selectedTecker.value!!
+    }
 
     fun setSelectedTecker(tecker: Tecker) {
         selectedTecker.postValue(tecker)
