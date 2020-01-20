@@ -12,7 +12,9 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import kotlinx.android.synthetic.main.activity_navigationmenu.*
 import org.desarrolladorslp.teckersapp.data.SharedApp
+import org.desarrolladorslp.teckersapp.service.DeliverablesTeckerService
 import org.desarrolladorslp.teckersapp.ui.batches.BatchViewModel
+import org.desarrolladorslp.teckersapp.ui.deliverables.DeliverableViewModel
 import org.desarrolladorslp.teckersapp.ui.programs.ProgramViewModel
 import org.desarrolladorslp.teckersapp.ui.teckers.TeckerViewModel
 
@@ -28,6 +30,7 @@ class NavigationMenuActivity : AppCompatActivity(){
         var batchViewModel:BatchViewModel=ViewModelProviders.of(this).get(BatchViewModel::class.java)
         var teckersViewModel: TeckerViewModel  = ViewModelProviders.of(this).get(TeckerViewModel::class.java)
         var programsViewModel: ProgramViewModel = ViewModelProviders.of(this).get(ProgramViewModel::class.java)
+        var deliverablesViewModel :DeliverableViewModel = ViewModelProviders.of(this).get(DeliverableViewModel::class.java)
         val appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.navigation_messages, R.id.navigation_deliverables, R.id.navigation_teams, R.id.navigation_sessions

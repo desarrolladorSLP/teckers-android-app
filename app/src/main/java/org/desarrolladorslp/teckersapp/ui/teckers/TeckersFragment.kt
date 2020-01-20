@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import org.desarrolladorslp.teckersapp.R
 import org.desarrolladorslp.teckersapp.model.Tecker
+import org.desarrolladorslp.teckersapp.ui.batches.BatchViewModel
 import org.desarrolladorslp.teckersapp.ui.deliverables.DeliverableFragment
 import org.desarrolladorslp.teckersapp.ui.deliverables.TeckerListFragment
 import org.desarrolladorslp.teckersapp.ui.programs.ProgramBatchFragment
@@ -29,13 +31,11 @@ class TeckersFragment : Fragment(), TeckerListFragment.TeckerListListener {
     }
 
     override fun onTeckerSelected(tecker: Tecker) {
-        teckerId =tecker.teckerId
+        ViewModelProviders.of(activity!!).get(TeckerViewModel::class.java).setSelectedTecker(tecker)
         var deliverables =DeliverableFragment()
         childFragmentManager.beginTransaction()
             .replace(R.id.content_teckers_layout, deliverables)
             .commit()
     }
-    companion object{
-        var teckerId = ""
-    }
+
 }

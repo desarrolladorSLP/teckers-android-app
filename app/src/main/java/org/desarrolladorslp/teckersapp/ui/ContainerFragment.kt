@@ -16,7 +16,6 @@ import org.desarrolladorslp.teckersapp.ui.deliverables.DeliverableFragment
 import org.desarrolladorslp.teckersapp.ui.programs.ProgramBatchFragment
 import org.desarrolladorslp.teckersapp.ui.teckers.TeckersFragment
 import org.desarrolladorslp.teckersapp.ui.teckers.TeckerViewModel
-import org.desarrolladorslp.teckersapp.ui.teckers.TeckersFragment.Companion.teckerId
 
 class ContainerFragment:Fragment() {
     private lateinit var teckersViewModel: TeckerViewModel
@@ -63,7 +62,7 @@ class ContainerFragment:Fragment() {
                 }
                 else{
                     if(teckersSize!=0) {
-                        teckerId = teckers[0].teckerId
+                        teckersViewModel.setSelectedTecker(teckers[0])
                         this.childFragmentManager.beginTransaction()
                             .replace(R.id.fragment_container_layout, DeliverableFragment())
                             .commit()

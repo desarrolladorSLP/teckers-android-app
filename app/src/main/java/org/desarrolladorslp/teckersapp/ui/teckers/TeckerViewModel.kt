@@ -20,7 +20,7 @@ class TeckerViewModel : ViewModel() {
     var batchTeckersService = APIEndpoint.instance().create(BatchTeckersService::class.java)
     val _responseException = MutableLiveData<ResponseException?>()
     val _authorizationException = MutableLiveData<AuthorizationException?>()
-    val selectedTecker = MutableLiveData<Tecker>()
+    var _selectedTecker = MutableLiveData<Tecker>()
 
     fun getTeckersList(call : Call<ArrayList<Tecker>>?)
     {
@@ -54,13 +54,8 @@ class TeckerViewModel : ViewModel() {
         val batchTeckersCall = batchTeckersService.getTeckers(batchId)
         getTeckersList(batchTeckersCall)
     }
-    
-    fun getSelectedTecker():Tecker
-    {
-        return selectedTecker.value!!
-    }
 
     fun setSelectedTecker(tecker: Tecker) {
-        selectedTecker.postValue(tecker)
+        _selectedTecker.value =tecker
     }
 }
