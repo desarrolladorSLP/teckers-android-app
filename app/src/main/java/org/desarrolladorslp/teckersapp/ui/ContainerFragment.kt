@@ -20,7 +20,6 @@ import org.desarrolladorslp.teckersapp.ui.teckers.TeckerViewModel
 class ContainerFragment:Fragment() {
     private lateinit var teckersViewModel: TeckerViewModel
     private lateinit var batchesViewModel:BatchViewModel
-    private var teckersSize=0
     override fun onCreate(savedInstanceState: Bundle?) {
         teckersViewModel =
         ViewModelProviders.of(activity!!).get(TeckerViewModel::class.java)
@@ -50,9 +49,7 @@ class ContainerFragment:Fragment() {
         else if(SharedApp.data.ROLE_PARENT || SharedApp.data.ROLE_MENTOR)
         {
             teckersViewModel._teckers.observe(activity as AppCompatActivity, Observer { teckers->
-                teckersSize = teckers.size
-
-                if(teckersSize>1) {
+                if(teckers.size>1) {
                     this.childFragmentManager.beginTransaction()
                         .replace(
                             R.id.fragment_container_layout,
@@ -61,7 +58,7 @@ class ContainerFragment:Fragment() {
                         .commit()
                 }
                 else{
-                    if(teckersSize!=0) {
+                    if(teckers.size!=0) {
                         teckersViewModel.setSelectedTecker(teckers[0])
                         this.childFragmentManager.beginTransaction()
                             .replace(R.id.fragment_container_layout, DeliverableFragment())
