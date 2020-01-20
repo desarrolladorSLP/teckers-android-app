@@ -24,9 +24,9 @@ class ContainerFragment:Fragment() {
     private var teckersSize=0
     override fun onCreate(savedInstanceState: Bundle?) {
         teckersViewModel =
-        ViewModelProviders.of(this).get(TeckerViewModel::class.java)
+        ViewModelProviders.of(activity!!).get(TeckerViewModel::class.java)
         batchesViewModel =
-            ViewModelProviders.of(this).get(BatchViewModel::class.java)
+            ViewModelProviders.of(activity!!).get(BatchViewModel::class.java)
         super.onCreate(savedInstanceState)
     }
     override fun onCreateView(
@@ -50,7 +50,7 @@ class ContainerFragment:Fragment() {
         }
         else if(SharedApp.data.ROLE_PARENT || SharedApp.data.ROLE_MENTOR)
         {
-            teckersViewModel._teckers.observe(this, Observer { teckers->
+            teckersViewModel._teckers.observe(activity as AppCompatActivity, Observer { teckers->
                 teckersSize = teckers.size
 
                 if(teckersSize>1) {

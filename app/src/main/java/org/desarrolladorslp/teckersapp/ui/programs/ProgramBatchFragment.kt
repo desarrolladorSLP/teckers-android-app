@@ -38,9 +38,9 @@ class ProgramBatchFragment: Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         programsViewModel =
-            ViewModelProviders.of(parentFragment!!).get(ProgramViewModel::class.java)
+            ViewModelProviders.of(activity!!).get(ProgramViewModel::class.java)
         batchesViewModel =
-            ViewModelProviders.of(parentFragment!!).get(BatchViewModel::class.java)
+            ViewModelProviders.of(activity!!).get(BatchViewModel::class.java)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -127,7 +127,6 @@ class ProgramBatchFragment: Fragment() {
                     {
 
                         selectedBatch=batches[position]
-                        batchesViewModel.setBatchId(selectedBatch!!.id)
                         approvalButton.isVisible=true
                         batchTextView.isVisible=true
 
@@ -147,7 +146,6 @@ class ProgramBatchFragment: Fragment() {
 
         })
         approvalButton.setOnClickListener {
-            batchesViewModel.onBatchSelected()
             listener.onBatchSelected(selectedBatch!!)
         }
 

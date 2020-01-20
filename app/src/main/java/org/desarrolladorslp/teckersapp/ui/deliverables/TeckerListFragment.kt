@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
@@ -14,28 +15,24 @@ import org.desarrolladorslp.teckersapp.R
 import org.desarrolladorslp.teckersapp.data.SharedApp
 import org.desarrolladorslp.teckersapp.model.Tecker
 import org.desarrolladorslp.teckersapp.ui.batches.BatchViewModel
-import org.desarrolladorslp.teckersapp.ui.batches.BatchesFragment.Companion.batchId
 import org.desarrolladorslp.teckersapp.ui.teckers.TeckersAdapter
 import org.desarrolladorslp.teckersapp.ui.teckers.TeckerViewModel
 import java.lang.IllegalStateException
 
 class TeckerListFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
-
     private lateinit var viewManager: RecyclerView.LayoutManager
     private lateinit var teckersViewModel: TeckerViewModel
     private lateinit var viewAdapter: RecyclerView.Adapter<TeckersAdapter.TeckerHolder>
     private var listener: TeckerListListener? = null
     private lateinit var batchViewModel:BatchViewModel
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        teckersViewModel =
-            ViewModelProviders.of(parentFragment!!).get(TeckerViewModel::class.java)
         batchViewModel =
-            ViewModelProviders.of(parentFragment!!).get(BatchViewModel::class.java)
+            ViewModelProviders.of(activity!!).get(BatchViewModel::class.java)
+        teckersViewModel =
+            ViewModelProviders.of(activity!!).get(TeckerViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -46,11 +43,24 @@ class TeckerListFragment : Fragment() {
         var root = inflater.inflate(R.layout.fragment_tecker_list, container, false)
         viewManager = GridLayoutManager(context, 2)
 
-        batchViewModel._batchId.observe(parentFragment!!, Observer {selectedBatchId ->
-            batchId =selectedBatchId
+        batchViewModel._batchSelected.observe(activity as AppCompatActivity, Observer { selectedBatch ->
+            if(selectedBatch.id!="")
+            {
+                teckersViewModel.getBatchTeckers(selectedBatch.id)
+            }else{
+                if(SharedApp.data.ROLE_PARENT)
+                {
+                    teckersViewModel.getParentTeckers()
+                }
+                if(SharedApp.data.ROLE_MENTOR)
+                {
+                    teckersViewModel.getMentorTeckers()
+                }
+
+            }
         })
 
-        teckersViewModel._teckers.observe(parentFragment!!, Observer { teckers ->
+        teckersViewModel._teckers.observe(activity as AppCompatActivity, Observer { teckers ->
 
             viewAdapter = TeckersAdapter(
                 teckers,
@@ -67,20 +77,6 @@ class TeckerListFragment : Fragment() {
 
         })
 
-        if(batchId!="")
-        {
-            teckersViewModel.getBatchTeckers(batchId)
-        }else{
-            if(SharedApp.data.ROLE_PARENT)
-            {
-                teckersViewModel.getParentTeckers()
-            }
-            if(SharedApp.data.ROLE_MENTOR)
-            {
-                teckersViewModel.getMentorTeckers()
-            }
-
-        }
         return root
     }
 
