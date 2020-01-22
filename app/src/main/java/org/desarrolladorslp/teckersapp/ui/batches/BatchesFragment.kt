@@ -5,21 +5,37 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import org.desarrolladorslp.teckersapp.R
 import org.desarrolladorslp.teckersapp.model.Batch
+import org.desarrolladorslp.teckersapp.ui.deliverables.DeliverableFragment
 import org.desarrolladorslp.teckersapp.ui.programs.ProgramBatchFragment
+import org.desarrolladorslp.teckersapp.ui.teckers.TeckerViewModel
 import org.desarrolladorslp.teckersapp.ui.teckers.TeckersFragment
 
 class BatchesFragment: Fragment(), ProgramBatchFragment.BatchSelectedListener {
     override fun onBatchSelected(batch: Batch) {
         ViewModelProviders.of(activity!!).get(BatchViewModel::class.java).setBatchSelected(batch)
-        val teckers = TeckersFragment()
-        childFragmentManager.beginTransaction()
-            .replace(R.id.content_batches_layout, teckers)
-            .commit()
+        ViewModelProviders.of(activity!!).get(TeckerViewModel::class.java)._teckers.observe(activity as AppCompatActivity, Observer { teckers->
+            if(teckers.size>1) {
+                val teckers = TeckersFragment()
+                childFragmentManager.beginTransaction()
+                    .replace(R.id.content_batches_layout, teckers)
+                    .commit()
+            }
+            else{
+                if(teckers.size!=0) {
+                    ViewModelProviders.of(activity!!).get(TeckerViewModel::class.java).setSelectedTecker(teckers[0])
+                    this.childFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container_layout, DeliverableFragment())
+                        .commit()
+                }
+            }
+        })
+
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
